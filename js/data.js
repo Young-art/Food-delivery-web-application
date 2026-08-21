@@ -1488,7 +1488,7 @@ const FoodData = {
   defaultUser: {
     name: "Thanush Masika",
     email: "thanushmasika@gmail.com",
-    phone: "+91 8328247714",
+    phone: "8328247714",
     password: "Thanush@123",
     avatar: "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=200&q=80",
     role: "customer"
@@ -1586,7 +1586,13 @@ const FoodAppStorage = {
       localStorage.setItem("food_app_user", JSON.stringify(FoodData.defaultUser));
       return FoodData.defaultUser;
     }
-    return JSON.parse(saved);
+    const user = JSON.parse(saved);
+    if (!user.email || user.email.includes("example.com") || user.phone === "+91 98765 43210" || !user.phone.includes("8328247714")) {
+      const updated = { ...FoodData.defaultUser, ...user, name: "Thanush Masika", email: "thanushmasika@gmail.com", phone: "8328247714", password: "Thanush@123" };
+      localStorage.setItem("food_app_user", JSON.stringify(updated));
+      return updated;
+    }
+    return user;
   },
 
   saveUser: function(user) {
@@ -1634,6 +1640,12 @@ const FoodAppStorage = {
 
 // Initialize Storage on first load
 (function initStorage() {
+  // Sync Thanush user profile in localStorage
+  const savedUser = localStorage.getItem("food_app_user");
+  if (!savedUser || JSON.parse(savedUser).email === "rahul.sharma@example.com" || JSON.parse(savedUser).phone === "+91 98765 43210" || JSON.parse(savedUser).phone !== "8328247714") {
+    localStorage.setItem("food_app_user", JSON.stringify(FoodData.defaultUser));
+  }
+
   FoodAppStorage.getFoodItems();
   FoodAppStorage.getRestaurants();
   FoodAppStorage.getCoupons();
