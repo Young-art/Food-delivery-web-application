@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>User Profile & Addresses — Foodiez</title>
+  <meta name="description" content="Manage your account profile, delivery addresses, payment preferences, and account settings.">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/responsive.css">
+  <link rel="stylesheet" href="../css/checkout.css">
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="site-header">
+    <div class="container header-container">
+      <div class="header-left">
+        <a href="../index.html" class="brand-logo">
+          <div class="logo-icon">🍔</div>
+          <span>Food<span>iez</span></span>
+        </a>
+        <div class="location-selector">
+          <span style="font-size: 1.1rem;">📍</span>
+          <span class="current-location-text">Bangalore, Indiranagar</span>
+          <span class="loc-arrow">▼</span>
+        </div>
+      </div>
+
+      <div class="header-search">
+        <span class="search-icon">🔍</span>
+        <input type="text" class="global-search-input" placeholder="Search dishes & restaurants...">
+      </div>
+
+      <nav class="header-nav">
+        <a href="../index.html" class="nav-link">Home</a>
+        <a href="restaurants.html" class="nav-link">Restaurants</a>
+        <a href="pizza.html" class="nav-link">Categories</a>
+        <a href="favorites.html" class="nav-link">Favorites</a>
+        <a href="order-history.html" class="nav-link">Orders</a>
+      </nav>
+
+      <div style="display: flex; align-items: center; gap: 14px;">
+        <a href="cart.html" class="cart-nav-btn">
+          <span>🛒</span>
+          <span>Cart</span>
+          <span class="cart-count">0</span>
+        </a>
+
+        <div class="user-nav-dropdown">
+          <button class="user-avatar-btn">
+            <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=200&q=80" alt="Avatar" class="user-avatar-img">
+            <span class="user-name-text">Rahul</span>
+            <span style="font-size: 0.75rem; color: var(--text-muted);">▼</span>
+          </button>
+          <div class="dropdown-menu">
+            <a href="profile.html" class="dropdown-item">👤 My Profile</a>
+            <a href="order-history.html" class="dropdown-item">📦 Order History</a>
+            <a href="favorites.html" class="dropdown-item">❤️ Saved Items</a>
+            <div class="dropdown-divider"></div>
+            <a href="login.html" class="dropdown-item">🔑 Login / Signup</a>
+          </div>
+        </div>
+
+        <button class="mobile-menu-btn">☰</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Profile Page -->
+  <main class="container" style="padding-top: 30px; padding-bottom: 70px; max-width: 960px;">
+    
+    <div class="breadcrumb-nav">
+      <a href="../index.html">Home</a>
+      <span class="breadcrumb-separator">/</span>
+      <span style="color: var(--text-main); font-weight: 700;">Account Profile</span>
+    </div>
+
+    <!-- Profile Hero Card -->
+    <div style="background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-xl); padding: 30px; margin: 24px 0 30px; box-shadow: var(--shadow-sm); display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 20px;">
+      <div style="display: flex; align-items: center; gap: 20px;">
+        <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=200&q=80" alt="Profile Avatar" style="width: 84px; height: 84px; border-radius: 50%; object-fit: cover; border: 3px solid var(--primary-light);">
+        <div>
+          <h1 style="font-size: 1.8rem; font-weight: 800;" id="profile-display-name">Rahul Sharma</h1>
+          <p style="color: var(--text-muted); font-size: 0.9rem;" id="profile-display-email">rahul.sharma@example.com</p>
+          <span class="chip" style="font-size: 0.75rem; padding: 2px 8px; margin-top: 6px; background: var(--primary-light); color: var(--primary); border: none;">
+            ⭐ Gold Member
+          </span>
+        </div>
+      </div>
+
+      <div style="display: flex; gap: 20px;">
+        <div style="text-align: center; background: var(--surface-subtle); padding: 12px 20px; border-radius: var(--radius-md); border: 1px solid var(--border);">
+          <div style="font-size: 1.5rem; font-weight: 800; color: var(--primary);" id="profile-stat-orders">2</div>
+          <div style="font-size: 0.8rem; color: var(--text-muted); font-weight: 600;">Total Orders</div>
+        </div>
+        <div style="text-align: center; background: var(--surface-subtle); padding: 12px 20px; border-radius: var(--radius-md); border: 1px solid var(--border);">
+          <div style="font-size: 1.5rem; font-weight: 800; color: #EF4444;" id="profile-stat-favs">5</div>
+          <div style="font-size: 0.8rem; color: var(--text-muted); font-weight: 600;">Saved Favorites</div>
+        </div>
+      </div>
+    </div>
+
+    <div style="display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 30px;">
+      
+      <!-- Personal Info & Addresses Left -->
+      <div>
+        
+        <!-- Edit Profile Form -->
+        <div class="checkout-step-card">
+          <h3 style="font-size: 1.2rem; font-weight: 800; margin-bottom: 16px; border-bottom: 1px solid var(--border); padding-bottom: 10px;">
+            Personal Information
+          </h3>
+
+          <div style="margin-bottom: 14px;">
+            <label style="display:block; font-size:0.85rem; font-weight:700; margin-bottom:4px;">Full Name</label>
+            <input type="text" id="profile-name-input" style="width:100%; padding:10px 14px; border:1px solid var(--border); border-radius:var(--radius-sm); outline:none;">
+          </div>
+
+          <div style="margin-bottom: 14px;">
+            <label style="display:block; font-size:0.85rem; font-weight:700; margin-bottom:4px;">Email Address</label>
+            <input type="email" id="profile-email-input" style="width:100%; padding:10px 14px; border:1px solid var(--border); border-radius:var(--radius-sm); outline:none;">
+          </div>
+
+          <div style="margin-bottom: 18px;">
+            <label style="display:block; font-size:0.85rem; font-weight:700; margin-bottom:4px;">Phone Number</label>
+            <input type="tel" id="profile-phone-input" style="width:100%; padding:10px 14px; border:1px solid var(--border); border-radius:var(--radius-sm); outline:none;">
+          </div>
+
+          <button class="btn btn-primary btn-sm" onclick="Auth.saveProfileChanges()">
+            Save Changes ✅
+          </button>
+        </div>
+
+        <!-- Saved Delivery Addresses -->
+        <div class="checkout-step-card">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; border-bottom: 1px solid var(--border); padding-bottom: 10px;">
+            <h3 style="font-size: 1.2rem; font-weight: 800;">Saved Delivery Addresses</h3>
+            <button class="btn btn-secondary btn-sm" onclick="Checkout.openAddAddressModal()">+ Add New</button>
+          </div>
+
+          <div id="profile-addresses-container">
+            <!-- Populated via JavaScript -->
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Security & Actions Right -->
+      <div>
+        
+        <!-- Password Settings -->
+        <div class="checkout-step-card">
+          <h3 style="font-size: 1.2rem; font-weight: 800; margin-bottom: 16px; border-bottom: 1px solid var(--border); padding-bottom: 10px;">
+            Account Security
+          </h3>
+
+          <div style="margin-bottom: 12px;">
+            <label style="display:block; font-size:0.85rem; font-weight:700; margin-bottom:4px;">Current Password</label>
+            <input type="password" value="••••••••" style="width:100%; padding:10px 14px; border:1px solid var(--border); border-radius:var(--radius-sm); outline:none;">
+          </div>
+
+          <div style="margin-bottom: 12px;">
+            <label style="display:block; font-size:0.85rem; font-weight:700; margin-bottom:4px;">New Password</label>
+            <input type="password" placeholder="Enter new password" style="width:100%; padding:10px 14px; border:1px solid var(--border); border-radius:var(--radius-sm); outline:none;">
+          </div>
+
+          <button class="btn btn-secondary btn-sm" onclick="FoodApp.showToast('Password updated successfully!', 'success')">
+            Update Password 🔒
+          </button>
+        </div>
+
+        <!-- Account Actions -->
+        <div class="checkout-step-card">
+          <h3 style="font-size: 1.2rem; font-weight: 800; margin-bottom: 16px; border-bottom: 1px solid var(--border); padding-bottom: 10px;">
+            Account Actions
+          </h3>
+
+          <div style="display: flex; flex-direction: column; gap: 10px;">
+            <button class="btn btn-secondary" onclick="Auth.logout()" style="width: 100%; justify-content: flex-start; gap: 10px;">
+              🚪 Logout of Account
+            </button>
+            <button class="btn btn-secondary" onclick="if(confirm('Are you sure you want to reset all temporary demo data?')) { FoodAppStorage.resetDatabase(); location.reload(); }" style="width: 100%; justify-content: flex-start; gap: 10px; color: var(--primary);">
+              🔄 Reset Demo Database Seeds
+            </button>
+            <button class="btn btn-secondary" onclick="if(confirm('Delete account permanently?')) { FoodApp.showToast('Account deleted', 'info'); Auth.logout(); }" style="width: 100%; justify-content: flex-start; gap: 10px; color: var(--nonveg-color);">
+              🗑️ Delete Account
+            </button>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-bottom">
+        <div>&copy; 2026 Foodiez Technologies Inc. All rights reserved.</div>
+        <div style="display: flex; gap: 20px;">
+          <span>🔒 256-Bit SSL Encrypted</span>
+          <span>⚡ 30-Min Delivery Promise</span>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../js/data.js"></script>
+  <script src="../js/cart.js"></script>
+  <script src="../js/main.js"></script>
+  <script src="../js/search.js"></script>
+  <script src="../js/checkout.js"></script>
+  <script src="../js/auth.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => Auth.initProfile());
+  </script>
+</body>
+</html>

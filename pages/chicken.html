@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chicken Delights — Foodiez</title>
+  <meta name="description" content="Butter chicken, crispy wings, tandoori tikka, and sizzling chicken kebabs delivered hot to your doorstep.">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/responsive.css">
+  <link rel="stylesheet" href="../css/category.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-container">
+      <div class="header-left">
+        <a href="../index.html" class="brand-logo">
+          <div class="logo-icon">🍔</div>
+          <span>Food<span>iez</span></span>
+        </a>
+        <div class="location-selector">
+          <span style="font-size: 1.1rem;">📍</span>
+          <span class="current-location-text">Bangalore, Indiranagar</span>
+          <span class="loc-arrow">▼</span>
+        </div>
+      </div>
+      <div class="header-search">
+        <span class="search-icon">🔍</span>
+        <input type="text" class="global-search-input" placeholder="Search dishes & restaurants...">
+      </div>
+      <nav class="header-nav">
+        <a href="../index.html" class="nav-link">Home</a>
+        <a href="restaurants.html" class="nav-link">Restaurants</a>
+        <a href="chicken.html" class="nav-link active">Categories</a>
+        <a href="favorites.html" class="nav-link">Favorites</a>
+        <a href="order-history.html" class="nav-link">Orders</a>
+      </nav>
+      <div style="display: flex; align-items: center; gap: 14px;">
+        <a href="cart.html" class="cart-nav-btn">
+          <span>🛒</span>
+          <span>Cart</span>
+          <span class="cart-count">0</span>
+        </a>
+        <div class="user-nav-dropdown">
+          <button class="user-avatar-btn">
+            <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=200&q=80" alt="Avatar" class="user-avatar-img">
+            <span class="user-name-text">Rahul</span>
+            <span style="font-size: 0.75rem; color: var(--text-muted);">▼</span>
+          </button>
+          <div class="dropdown-menu">
+            <a href="profile.html" class="dropdown-item">👤 My Profile</a>
+            <a href="order-history.html" class="dropdown-item">📦 Order History</a>
+            <a href="favorites.html" class="dropdown-item">❤️ Saved Items</a>
+            <div class="dropdown-divider"></div>
+            <a href="login.html" class="dropdown-item">🔑 Login / Signup</a>
+          </div>
+        </div>
+        <button class="mobile-menu-btn">☰</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="breadcrumb-nav">
+      <a href="../index.html">Home</a>
+      <span class="breadcrumb-separator">/</span>
+      <span>Categories</span>
+      <span class="breadcrumb-separator">/</span>
+      <span style="color: var(--text-main); font-weight: 700;">Chicken</span>
+    </div>
+
+    <div class="category-nav-pills">
+      <a href="pizza.html" class="category-nav-pill">🍕 Pizza</a>
+      <a href="burgers.html" class="category-nav-pill">🍔 Burgers</a>
+      <a href="biryani.html" class="category-nav-pill">🍚 Biryani</a>
+      <a href="chicken.html" class="category-nav-pill active">🍗 Chicken</a>
+      <a href="chinese.html" class="category-nav-pill">🥡 Chinese</a>
+      <a href="mexican.html" class="category-nav-pill">🌮 Mexican</a>
+      <a href="healthy-food.html" class="category-nav-pill">🥗 Healthy Food</a>
+      <a href="desserts.html" class="category-nav-pill">🍰 Desserts</a>
+      <a href="beverages.html" class="category-nav-pill">🥤 Beverages</a>
+      <a href="ice-cream.html" class="category-nav-pill">🍨 Ice Cream</a>
+    </div>
+
+    <div class="category-hero-banner" style="background-image: url('https://images.unsplash.com/photo-1532550907401-a500c9a57435?auto=format&fit=crop&w=1200&q=80');">
+      <div class="category-hero-overlay"></div>
+      <div class="category-hero-content">
+        <div>
+          <h1 class="category-hero-title">🍗 Chicken Delights</h1>
+          <p class="category-hero-tagline">Crispy glazed wings, sizzling clay-oven tikkas, seekh kebabs & rich butter chicken.</p>
+        </div>
+        <div id="category-items-count" style="font-weight: 700; background: rgba(0,0,0,0.5); padding: 8px 16px; border-radius: var(--radius-full);">
+          6 dishes available
+        </div>
+      </div>
+    </div>
+
+    <div class="category-controls-bar">
+      <div class="category-search-box">
+        <span class="cat-search-icon">🔍</span>
+        <input type="text" id="cat-search-input" placeholder="Search within chicken...">
+      </div>
+      <div class="filter-chips-group">
+        <button class="chip filter-chip-btn" data-filter="rating4">★ 4.7+ Rating</button>
+        <button class="chip filter-chip-btn" data-filter="under250">Under ₹250</button>
+        <button class="chip filter-chip-btn" data-filter="discount">Special Discounts %</button>
+      </div>
+      <div class="sort-select-wrap">
+        <label for="cat-sort-select" style="font-size: 0.85rem; color: var(--text-muted); font-weight: 600;">Sort By:</label>
+        <select id="cat-sort-select">
+          <option value="recommended">Recommended</option>
+          <option value="rating">Top Rated</option>
+          <option value="price-low">Price: Low to High</option>
+          <option value="price-high">Price: High to Low</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="food-grid" id="category-food-grid" style="margin-bottom: 60px;"></div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-bottom">
+        <div>&copy; 2026 Foodiez Technologies Inc. All rights reserved.</div>
+        <div style="display: flex; gap: 20px;">
+          <span>🔒 256-Bit SSL Encrypted</span>
+          <span>⚡ 30-Min Delivery Promise</span>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../js/data.js"></script>
+  <script src="../js/cart.js"></script>
+  <script src="../js/main.js"></script>
+  <script src="../js/search.js"></script>
+  <script src="../js/categories.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      CategoryPage.init("chicken");
+    });
+  </script>
+</body>
+</html>

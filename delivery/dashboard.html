@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Delivery Partner Portal — Foodiez</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/responsive.css">
+  <link rel="stylesheet" href="../css/dashboard.css">
+</head>
+<body>
+
+  <div class="dashboard-layout">
+    
+    <!-- Sidebar -->
+    <aside class="dashboard-sidebar">
+      <a href="../index.html" class="brand-logo">
+        <div class="logo-icon">🍔</div>
+        <span>Food<span>iez</span></span>
+      </a>
+
+      <span class="portal-role-tag delivery">🛵 Delivery Partner Portal</span>
+
+      <ul class="sidebar-menu">
+        <li class="sidebar-menu-item active"><a href="dashboard.html">📊 Deliveries & Earnings</a></li>
+        <li class="sidebar-menu-item"><a href="../index.html">🏠 Customer Storefront</a></li>
+        <li class="sidebar-menu-item"><a href="../pages/order-history.html">📦 All Orders</a></li>
+      </ul>
+
+      <div class="sidebar-footer-box">
+        <div style="font-size: 0.85rem; color: #94A3B8; margin-bottom: 8px;">Logged in Rider:</div>
+        <div style="font-weight: 700; color: #FFFFFF; font-size: 0.95rem;">Vikram Singh (ID: DL-884)</div>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="dashboard-main">
+      
+      <div class="dashboard-topbar">
+        <div>
+          <h1 class="dashboard-page-title">Delivery Dashboard</h1>
+          <p style="color: var(--text-muted); font-size: 0.9rem;">Accept pickup requests, navigate to customers, and track daily earnings.</p>
+        </div>
+        <div>
+          <button class="status-badge success" id="rider-status-pill" style="cursor: pointer; padding: 8px 16px; font-size: 0.9rem;" onclick="DeliveryPortal.toggleOnlineStatus()">
+            🟢 Online & Receiving Orders
+          </button>
+        </div>
+      </div>
+
+      <!-- KPI Cards -->
+      <div class="kpi-grid">
+        <div class="kpi-card">
+          <div class="kpi-icon-wrap" style="background: var(--veg-bg); color: var(--veg-color);">💰</div>
+          <div>
+            <div class="kpi-value" id="rider-kpi-earnings">₹480</div>
+            <div class="kpi-label">Today's Total Payout</div>
+          </div>
+        </div>
+
+        <div class="kpi-card">
+          <div class="kpi-icon-wrap" style="background: var(--primary-light); color: var(--primary);">📦</div>
+          <div>
+            <div class="kpi-value" id="rider-kpi-completed">2</div>
+            <div class="kpi-label">Completed Deliveries</div>
+          </div>
+        </div>
+
+        <div class="kpi-card">
+          <div class="kpi-icon-wrap" style="background: #FEF3C7; color: #D97706;">⭐</div>
+          <div>
+            <div class="kpi-value" id="rider-kpi-rating" style="font-size: 1.25rem;">4.9 ★</div>
+            <div class="kpi-label">Customer Rating</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Active Delivery Section -->
+      <div style="margin-bottom: 32px;">
+        <h2 style="font-size: 1.3rem; font-weight: 800; margin-bottom: 14px;">Active Order In Progress</h2>
+        <div id="rider-active-delivery-container">
+          <!-- Populated via JavaScript -->
+        </div>
+      </div>
+
+      <!-- Available Orders to Accept -->
+      <div>
+        <h2 style="font-size: 1.3rem; font-weight: 800; margin-bottom: 14px;">Nearby Pickup Requests</h2>
+        <div id="rider-available-orders-container">
+          <!-- Populated via JavaScript -->
+        </div>
+      </div>
+
+    </main>
+
+  </div>
+
+  <script src="../js/data.js"></script>
+  <script src="../js/cart.js"></script>
+  <script src="../js/main.js"></script>
+  <script src="../js/delivery.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => DeliveryPortal.init());
+  </script>
+</body>
+</html>

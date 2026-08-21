@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Platform Analytics & Reports — Super Admin</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/responsive.css">
+  <link rel="stylesheet" href="../css/dashboard.css">
+</head>
+<body>
+
+  <div class="dashboard-layout">
+    
+    <aside class="dashboard-sidebar">
+      <a href="../index.html" class="brand-logo">
+        <div class="logo-icon">🍔</div>
+        <span>Food<span>iez</span></span>
+      </a>
+
+      <span class="portal-role-tag admin">⚡ Master Admin Portal</span>
+
+      <ul class="sidebar-menu">
+        <li class="sidebar-menu-item"><a href="dashboard.html">📊 Platform Overview</a></li>
+        <li class="sidebar-menu-item"><a href="users.html">👥 User Management</a></li>
+        <li class="sidebar-menu-item"><a href="restaurants.html">🍽️ Restaurants</a></li>
+        <li class="sidebar-menu-item"><a href="food.html">🍕 Food Catalog</a></li>
+        <li class="sidebar-menu-item"><a href="orders.html">📦 All Orders</a></li>
+        <li class="sidebar-menu-item"><a href="delivery.html">🛵 Delivery Fleet</a></li>
+        <li class="sidebar-menu-item"><a href="coupons.html">🏷️ Coupons</a></li>
+        <li class="sidebar-menu-item active"><a href="reports.html">📈 Analytics & Reports</a></li>
+        <li class="sidebar-menu-item"><a href="../index.html">🏠 Customer Storefront</a></li>
+      </ul>
+    </aside>
+
+    <main class="dashboard-main">
+      <div class="dashboard-topbar">
+        <div>
+          <h1 class="dashboard-page-title">Analytics & Intelligence</h1>
+          <p style="color: var(--text-muted); font-size: 0.9rem;">Visual performance breakdown for sales, popular categories, and order velocity.</p>
+        </div>
+      </div>
+
+      <!-- Charts Two-Column Grid -->
+      <div style="display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 24px; margin-bottom: 30px;">
+        
+        <!-- Revenue Bar Chart -->
+        <div class="table-card" style="padding: 24px; margin-bottom: 0;">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+            <h3 style="font-size: 1.15rem; font-weight: 800;">Weekly Gross Revenue (₹)</h3>
+            <span class="chip active" style="font-size: 0.75rem;">This Week</span>
+          </div>
+
+          <div style="position: relative; width: 100%; display: flex; justify-content: center;">
+            <canvas id="revenue-chart-canvas" width="500" height="260" style="max-width: 100%;"></canvas>
+          </div>
+        </div>
+
+        <!-- Category Breakdown Donut Chart -->
+        <div class="table-card" style="padding: 24px; margin-bottom: 0;">
+          <div style="margin-bottom: 16px;">
+            <h3 style="font-size: 1.15rem; font-weight: 800;">Top Food Categories</h3>
+            <p style="color: var(--text-muted); font-size: 0.8rem;">Share of total order volume</p>
+          </div>
+
+          <div style="display: flex; flex-direction: column; align-items: center; gap: 16px;">
+            <canvas id="categories-chart-canvas" width="220" height="180"></canvas>
+            <div id="categories-chart-legend" style="display: flex; flex-wrap: wrap; gap: 10px; justify-content: center;">
+              <!-- Populated via JavaScript -->
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Platform Highlights Summary -->
+      <div class="kpi-grid">
+        <div class="kpi-card">
+          <div class="kpi-icon-wrap" style="background: #FEF3C7; color: #D97706;">⚡</div>
+          <div>
+            <div class="kpi-value">26 Mins</div>
+            <div class="kpi-label">Average Delivery Time</div>
+          </div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-icon-wrap" style="background: #ECFDF5; color: #10B981;">🔁</div>
+          <div>
+            <div class="kpi-value">68%</div>
+            <div class="kpi-label">Customer Repeat Rate</div>
+          </div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-icon-wrap" style="background: #EFF6FF; color: #3B82F6;">⭐</div>
+          <div>
+            <div class="kpi-value">4.8 / 5</div>
+            <div class="kpi-label">Average Food Satisfaction</div>
+          </div>
+        </div>
+      </div>
+
+    </main>
+
+  </div>
+
+  <script src="../js/data.js"></script>
+  <script src="../js/cart.js"></script>
+  <script src="../js/main.js"></script>
+  <script src="../js/admin.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => AdminPortal.initReports());
+  </script>
+</body>
+</html>

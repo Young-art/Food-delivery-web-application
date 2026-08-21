@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dish Details & Customization — Foodiez</title>
+  <meta name="description" content="Customize your favorite dish with gourmet toppings, extra cheese, sauces, and add directly to your cart.">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/responsive.css">
+  <style>
+    .food-detail-wrapper {
+      display: grid;
+      grid-template-columns: 1fr 1.15fr;
+      gap: 40px;
+      margin: 30px 0 60px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-xl);
+      padding: 36px;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .food-detail-img-box {
+      position: relative;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      height: 380px;
+    }
+
+    .food-detail-img-box img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .food-detail-title {
+      font-size: 2.2rem;
+      font-weight: 800;
+      line-height: 1.2;
+      margin-bottom: 8px;
+    }
+
+    .ingredient-tag {
+      display: inline-block;
+      padding: 4px 10px;
+      background: var(--surface-subtle);
+      border-radius: 6px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      margin-right: 6px;
+      margin-bottom: 6px;
+    }
+
+    .customizer-box {
+      background: var(--surface-subtle);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 20px;
+      margin: 24px 0;
+    }
+
+    @media (max-width: 860px) {
+      .food-detail-wrapper {
+        grid-template-columns: 1fr;
+        padding: 20px;
+      }
+      .food-detail-img-box {
+        height: 260px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="site-header">
+    <div class="container header-container">
+      <div class="header-left">
+        <a href="../index.html" class="brand-logo">
+          <div class="logo-icon">🍔</div>
+          <span>Food<span>iez</span></span>
+        </a>
+        <div class="location-selector">
+          <span style="font-size: 1.1rem;">📍</span>
+          <span class="current-location-text">Bangalore, Indiranagar</span>
+          <span class="loc-arrow">▼</span>
+        </div>
+      </div>
+
+      <div class="header-search">
+        <span class="search-icon">🔍</span>
+        <input type="text" class="global-search-input" placeholder="Search dishes & restaurants...">
+      </div>
+
+      <nav class="header-nav">
+        <a href="../index.html" class="nav-link">Home</a>
+        <a href="restaurants.html" class="nav-link">Restaurants</a>
+        <a href="pizza.html" class="nav-link">Categories</a>
+        <a href="favorites.html" class="nav-link">Favorites</a>
+        <a href="order-history.html" class="nav-link">Orders</a>
+      </nav>
+
+      <div style="display: flex; align-items: center; gap: 14px;">
+        <a href="cart.html" class="cart-nav-btn">
+          <span>🛒</span>
+          <span>Cart</span>
+          <span class="cart-count">0</span>
+        </a>
+
+        <div class="user-nav-dropdown">
+          <button class="user-avatar-btn">
+            <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=200&q=80" alt="Avatar" class="user-avatar-img">
+            <span class="user-name-text">Rahul</span>
+            <span style="font-size: 0.75rem; color: var(--text-muted);">▼</span>
+          </button>
+          <div class="dropdown-menu">
+            <a href="profile.html" class="dropdown-item">👤 My Profile</a>
+            <a href="order-history.html" class="dropdown-item">📦 Order History</a>
+            <a href="favorites.html" class="dropdown-item">❤️ Saved Items</a>
+            <div class="dropdown-divider"></div>
+            <a href="login.html" class="dropdown-item">🔑 Login / Signup</a>
+          </div>
+        </div>
+
+        <button class="mobile-menu-btn">☰</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="container">
+    
+    <div class="breadcrumb-nav">
+      <a href="../index.html">Home</a>
+      <span class="breadcrumb-separator">/</span>
+      <a href="pizza.html" id="breadcrumb-category-link">Category</a>
+      <span class="breadcrumb-separator">/</span>
+      <span id="breadcrumb-food-name" style="color: var(--text-main); font-weight: 700;">Dish Details</span>
+    </div>
+
+    <div class="food-detail-wrapper" id="food-detail-container">
+      <!-- Injected via JavaScript -->
+    </div>
+
+    <!-- Related Dishes in this Category -->
+    <div style="margin-bottom: 60px;">
+      <h3 style="font-size: 1.6rem; font-weight: 800; margin-bottom: 20px;">You Might Also Like</h3>
+      <div class="food-grid" id="related-food-grid">
+        <!-- Injected via JavaScript -->
+      </div>
+    </div>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-bottom">
+        <div>&copy; 2026 Foodiez Technologies Inc. All rights reserved.</div>
+        <div style="display: flex; gap: 20px;">
+          <span>🔒 256-Bit SSL Encrypted</span>
+          <span>⚡ 30-Min Delivery Promise</span>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../js/data.js"></script>
+  <script src="../js/cart.js"></script>
+  <script src="../js/main.js"></script>
+  <script src="../js/search.js"></script>
+  <script>
+    const FoodDetailsPage = {
+      food: null,
+      quantity: 1,
+
+      init: function() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const foodId = urlParams.get("id") || "piz-1";
+        
+        const allItems = FoodAppStorage.getFoodItems();
+        this.food = allItems.find(f => f.id === foodId) || allItems[0];
+
+        this.renderDetails();
+        this.renderRelated();
+      },
+
+      renderDetails: function() {
+        const f = this.food;
+        const bcCat = document.getElementById("breadcrumb-category-link");
+        if (bcCat) {
+          bcCat.textContent = f.category.toUpperCase();
+          bcCat.href = `${f.category}.html`;
+        }
+
+        const bcName = document.getElementById("breadcrumb-food-name");
+        if (bcName) bcName.textContent = f.name;
+
+        const container = document.getElementById("food-detail-container");
+        const favs = FoodAppStorage.getFavorites();
+        const originalPrice = Math.round(f.price * (1 + (f.discount / 100)));
+
+        container.innerHTML = `
+          <div class="food-detail-img-box">
+            <img src="${f.image}" alt="${f.name}">
+            ${f.discount > 0 ? `<div class="food-discount-badge" style="font-size:0.9rem; padding:6px 14px;">${f.discount}% OFF</div>` : ''}
+            <button class="food-fav-btn ${favs.foodIds.includes(f.id) ? 'active' : ''}" 
+              onclick="FoodApp.toggleFavoriteFood('${f.id}', this)" style="top:16px; right:16px; width:40px; height:40px; font-size:1.1rem;" aria-label="Favorite dish">
+              ❤️
+            </button>
+          </div>
+
+          <div>
+            <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 8px;">
+              <span class="badge-diet ${f.veg ? 'veg' : 'non-veg'}" style="width:22px; height:22px;"></span>
+              <span style="font-size: 0.85rem; font-weight: 700; text-transform: uppercase; color: var(--text-muted);">${f.veg ? 'Vegetarian' : 'Non-Vegetarian'}</span>
+              <span class="rating-pill">★ ${f.rating} (${f.ratingCount} reviews)</span>
+            </div>
+
+            <h1 class="food-detail-title">${f.name}</h1>
+            <p style="font-size: 1rem; color: var(--text-muted); line-height: 1.6; margin-bottom: 18px;">
+              ${f.description}
+            </p>
+
+            <div style="display: flex; align-items: baseline; gap: 10px; margin-bottom: 20px;">
+              <span style="font-size: 2rem; font-weight: 800; color: var(--primary); font-family: 'Outfit', sans-serif;" id="detail-total-price">₹${f.price}</span>
+              ${f.discount > 0 ? `<span style="font-size: 1.1rem; color: var(--text-subtle); text-decoration: line-through;">₹${originalPrice}</span>` : ''}
+            </div>
+
+            ${f.ingredients && f.ingredients.length > 0 ? `
+              <div style="margin-bottom: 20px;">
+                <div style="font-size: 0.85rem; font-weight: 700; color: var(--text-main); margin-bottom: 8px;">Key Ingredients & Flavors:</div>
+                <div>
+                  ${f.ingredients.map(ing => `<span class="ingredient-tag">🌿 ${ing}</span>`).join('')}
+                </div>
+              </div>
+            ` : ''}
+
+            <!-- Customizer Add-ons section -->
+            <div class="customizer-box">
+              <div style="font-size: 0.95rem; font-weight: 700; margin-bottom: 12px; display: flex; justify-content: space-between;">
+                <span>Choose Add-ons</span>
+                <span style="font-size: 0.8rem; color: var(--text-muted);">Optional</span>
+              </div>
+              <div id="detail-addon-list">
+                ${f.addOns && f.addOns.length > 0 ? f.addOns.map((addon, idx) => `
+                  <label class="addon-item" for="detail-addon-${idx}">
+                    <div class="addon-label">
+                      <input type="checkbox" id="detail-addon-${idx}" value="${addon.price}" data-name="${addon.name}" onchange="FoodDetailsPage.recalcPrice()">
+                      <span>${addon.name}</span>
+                    </div>
+                    <span class="addon-price">+₹${addon.price}</span>
+                  </label>
+                `).join('') : '<p style="color:var(--text-muted); font-size:0.88rem;">No extra add-ons required. Standard recipe applied.</p>'}
+              </div>
+
+              <div style="margin-top: 14px;">
+                <label style="display:block; font-size:0.85rem; font-weight:700; margin-bottom:4px;">Chef Note:</label>
+                <input type="text" id="detail-instructions" placeholder="e.g. Extra napkins, less spicy, no onion..." 
+                  style="width:100%; padding:8px 12px; border:1px solid var(--border); border-radius:var(--radius-sm); font-size:0.88rem; outline:none; background:var(--surface);">
+              </div>
+            </div>
+
+            <!-- Quantity and Add Button -->
+            <div style="display: flex; align-items: center; gap: 16px; flex-wrap: wrap;">
+              <div class="qty-controller" style="padding: 8px 16px; font-size: 1.1rem;">
+                <button class="qty-btn" onclick="FoodDetailsPage.changeQty(-1)">-</button>
+                <span id="detail-qty-display" style="min-width: 28px; text-align: center;">1</span>
+                <button class="qty-btn" onclick="FoodDetailsPage.changeQty(1)">+</button>
+              </div>
+
+              <button class="btn btn-primary btn-lg" onclick="FoodDetailsPage.addToCart()" style="flex: 1;">
+                Add To Cart 🛒
+              </button>
+            </div>
+
+          </div>
+        `;
+      },
+
+      changeQty: function(delta) {
+        this.quantity = Math.max(1, this.quantity + delta);
+        const qtyEl = document.getElementById("detail-qty-display");
+        if (qtyEl) qtyEl.textContent = this.quantity;
+        this.recalcPrice();
+      },
+
+      recalcPrice: function() {
+        const checkboxes = document.querySelectorAll("#detail-addon-list input[type='checkbox']:checked");
+        let unitTotal = Number(this.food.price);
+        checkboxes.forEach(cb => {
+          unitTotal += Number(cb.value);
+        });
+
+        const grandTotal = unitTotal * this.quantity;
+        const totalEl = document.getElementById("detail-total-price");
+        if (totalEl) totalEl.textContent = `₹${grandTotal}`;
+      },
+
+      addToCart: function() {
+        const checkboxes = document.querySelectorAll("#detail-addon-list input[type='checkbox']:checked");
+        const selectedAddOns = [];
+        checkboxes.forEach(cb => {
+          selectedAddOns.push({
+            name: cb.getAttribute("data-name"),
+            price: Number(cb.value)
+          });
+        });
+
+        const noteEl = document.getElementById("detail-instructions");
+        const note = noteEl ? noteEl.value.trim() : "";
+
+        Cart.addItem(this.food, this.quantity, selectedAddOns, note);
+      },
+
+      renderRelated: function() {
+        const allItems = FoodAppStorage.getFoodItems();
+        const related = allItems.filter(f => f.category === this.food.category && f.id !== this.food.id).slice(0, 4);
+        const container = document.getElementById("related-food-grid");
+        const favs = FoodAppStorage.getFavorites();
+
+        if (container) {
+          container.innerHTML = related.map(food => {
+            const originalPrice = Math.round(food.price * (1 + (food.discount / 100)));
+            return `
+              <div class="food-card" id="food-card-${food.id}">
+                <div class="food-card-img-wrapper" onclick="window.location.href='food-details.html?id=${food.id}'" style="cursor: pointer;">
+                  <img src="${food.image}" alt="${food.name}" class="food-card-img">
+                  ${food.discount > 0 ? `<div class="food-discount-badge">${food.discount}% OFF</div>` : ''}
+                  <button class="food-fav-btn ${favs.foodIds.includes(food.id) ? 'active' : ''}" 
+                    onclick="event.stopPropagation(); FoodApp.toggleFavoriteFood('${food.id}', this)" aria-label="Favorite dish">
+                    ❤️
+                  </button>
+                </div>
+                <div class="food-card-content">
+                  <div class="food-card-header">
+                    <div style="display:flex; align-items:center; gap:8px;">
+                      <span class="badge-diet ${food.veg ? 'veg' : 'non-veg'}"></span>
+                      <h4 class="food-card-title" onclick="window.location.href='food-details.html?id=${food.id}'" style="cursor:pointer;">${food.name}</h4>
+                    </div>
+                    <span class="rating-pill" style="font-size:0.75rem;">★ ${food.rating}</span>
+                  </div>
+                  <p class="food-card-desc">${food.description}</p>
+                  <div class="food-card-footer">
+                    <div class="food-price-box">
+                      <span class="food-current-price">₹${food.price}</span>
+                      ${food.discount > 0 ? `<span class="food-original-price">₹${originalPrice}</span>` : ''}
+                    </div>
+                    <button class="food-add-btn" onclick="FoodApp.openCustomizerModal('${food.id}')">
+                      Add +
+                    </button>
+                  </div>
+                </div>
+              </div>
+            `;
+          }).join('');
+        }
+      }
+    };
+
+    document.addEventListener("DOMContentLoaded", () => FoodDetailsPage.init());
+  </script>
+</body>
+</html>

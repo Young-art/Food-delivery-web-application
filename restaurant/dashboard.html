@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Restaurant Partner Dashboard — Foodiez</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/responsive.css">
+  <link rel="stylesheet" href="../css/dashboard.css">
+</head>
+<body>
+
+  <div class="dashboard-layout">
+    
+    <!-- Sidebar -->
+    <aside class="dashboard-sidebar">
+      <a href="../index.html" class="brand-logo">
+        <div class="logo-icon">🍔</div>
+        <span>Food<span>iez</span></span>
+      </a>
+
+      <span class="portal-role-tag restaurant">👨‍🍳 Restaurant Portal</span>
+
+      <ul class="sidebar-menu">
+        <li class="sidebar-menu-item active"><a href="dashboard.html">📊 Dashboard</a></li>
+        <li class="sidebar-menu-item"><a href="orders.html">📦 Live Kitchen Orders</a></li>
+        <li class="sidebar-menu-item"><a href="menu.html">🍴 Menu Management</a></li>
+        <li class="sidebar-menu-item"><a href="../index.html">🏠 Customer Storefront</a></li>
+      </ul>
+
+      <div class="sidebar-footer-box">
+        <div style="font-size: 0.85rem; color: #94A3B8; margin-bottom: 8px;">Logged in as:</div>
+        <div style="font-weight: 700; color: #FFFFFF; font-size: 0.95rem;">Bella Italia Artisan</div>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="dashboard-main">
+      
+      <div class="dashboard-topbar">
+        <div>
+          <h1 class="dashboard-page-title">Restaurant Overview</h1>
+          <p style="color: var(--text-muted); font-size: 0.9rem;">Track live orders, kitchen fulfillment, and daily restaurant revenue.</p>
+        </div>
+        <div>
+          <a href="orders.html" class="btn btn-primary btn-sm">View Live Orders &rarr;</a>
+        </div>
+      </div>
+
+      <!-- KPI Metrics -->
+      <div class="kpi-grid">
+        <div class="kpi-card">
+          <div class="kpi-icon-wrap" style="background: var(--primary-light); color: var(--primary);">⏳</div>
+          <div>
+            <div class="kpi-value" id="rest-kpi-pending">0</div>
+            <div class="kpi-label">Pending / In Kitchen</div>
+          </div>
+        </div>
+
+        <div class="kpi-card">
+          <div class="kpi-icon-wrap" style="background: var(--veg-bg); color: var(--veg-color);">✅</div>
+          <div>
+            <div class="kpi-value" id="rest-kpi-completed">0</div>
+            <div class="kpi-label">Completed Deliveries</div>
+          </div>
+        </div>
+
+        <div class="kpi-card">
+          <div class="kpi-icon-wrap" style="background: #FEF3C7; color: #D97706;">💰</div>
+          <div>
+            <div class="kpi-value" id="rest-kpi-revenue">₹0</div>
+            <div class="kpi-label">Total Revenue</div>
+          </div>
+        </div>
+
+        <div class="kpi-card">
+          <div class="kpi-icon-wrap" style="background: #E0E7FF; color: #4F46E5;">📦</div>
+          <div>
+            <div class="kpi-value" id="rest-kpi-total">0</div>
+            <div class="kpi-label">All Time Orders</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Recent Orders Table -->
+      <div class="table-card">
+        <div class="table-header-box">
+          <h3 style="font-size: 1.2rem; font-weight: 800;">Recent Incoming Orders</h3>
+          <a href="orders.html" style="color: var(--primary); font-size: 0.88rem; font-weight: 700;">View All Orders &rarr;</a>
+        </div>
+
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>Order ID</th>
+              <th>Dishes</th>
+              <th>Amount</th>
+              <th>Status</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody id="rest-recent-orders-tbody">
+            <!-- Injected via JavaScript -->
+          </tbody>
+        </table>
+      </div>
+
+    </main>
+
+  </div>
+
+  <script src="../js/data.js"></script>
+  <script src="../js/cart.js"></script>
+  <script src="../js/main.js"></script>
+  <script src="../js/restaurant.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => RestaurantPortal.initDashboard());
+  </script>
+</body>
+</html>

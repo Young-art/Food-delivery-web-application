@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>All Platform Orders — Super Admin</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/responsive.css">
+  <link rel="stylesheet" href="../css/dashboard.css">
+</head>
+<body>
+
+  <div class="dashboard-layout">
+    
+    <aside class="dashboard-sidebar">
+      <a href="../index.html" class="brand-logo">
+        <div class="logo-icon">🍔</div>
+        <span>Food<span>iez</span></span>
+      </a>
+
+      <span class="portal-role-tag admin">⚡ Master Admin Portal</span>
+
+      <ul class="sidebar-menu">
+        <li class="sidebar-menu-item"><a href="dashboard.html">📊 Platform Overview</a></li>
+        <li class="sidebar-menu-item"><a href="users.html">👥 User Management</a></li>
+        <li class="sidebar-menu-item"><a href="restaurants.html">🍽️ Restaurants</a></li>
+        <li class="sidebar-menu-item"><a href="food.html">🍕 Food Catalog</a></li>
+        <li class="sidebar-menu-item active"><a href="orders.html">📦 All Orders</a></li>
+        <li class="sidebar-menu-item"><a href="delivery.html">🛵 Delivery Fleet</a></li>
+        <li class="sidebar-menu-item"><a href="coupons.html">🏷️ Coupons</a></li>
+        <li class="sidebar-menu-item"><a href="reports.html">📈 Analytics & Reports</a></li>
+        <li class="sidebar-menu-item"><a href="../index.html">🏠 Customer Storefront</a></li>
+      </ul>
+    </aside>
+
+    <main class="dashboard-main">
+      <div class="dashboard-topbar">
+        <div>
+          <h1 class="dashboard-page-title">Platform-Wide Orders</h1>
+          <p style="color: var(--text-muted); font-size: 0.9rem;">View, track, process refunds, and manage order statuses across all vendors.</p>
+        </div>
+      </div>
+
+      <div class="table-card">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>Order ID</th>
+              <th>Date</th>
+              <th>Restaurant</th>
+              <th>Customer Address</th>
+              <th>Total Amount</th>
+              <th>Payment</th>
+              <th>Status</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody id="admin-orders-list-tbody">
+            <!-- Populated via JavaScript -->
+          </tbody>
+        </table>
+      </div>
+    </main>
+
+  </div>
+
+  <script src="../js/data.js"></script>
+  <script src="../js/cart.js"></script>
+  <script src="../js/main.js"></script>
+  <script src="../js/admin.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const orders = FoodAppStorage.getOrders();
+      const tbody = document.getElementById("admin-orders-list-tbody");
+      if (tbody) {
+        tbody.innerHTML = orders.map(order => `
+          <tr>
+            <td><strong>${order.id}</strong></td>
+            <td>${order.date}</td>
+            <td>${order.restaurantName}</td>
+            <td style="font-size:0.8rem; color:var(--text-muted);">${order.address}</td>
+            <td><strong>₹${order.total}</strong></td>
+            <td>${order.paymentMethod || 'UPI'}</td>
+            <td><span class="status-badge ${order.status === 'Delivered' ? 'success' : 'info'}">${order.status}</span></td>
+            <td>
+              <a href="../pages/order-tracking.html?id=${order.id}" class="btn btn-secondary btn-sm" style="padding:4px 8px; font-size:0.8rem;">
+                Track Live
+              </a>
+            </td>
+          </tr>
+        `).join('');
+      }
+    });
+  </script>
+</body>
+</html>

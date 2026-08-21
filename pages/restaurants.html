@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Top Restaurants Near You — Foodiez</title>
+  <meta name="description" content="Discover the best dining spots and fast delivery restaurants in your city. Read ratings, explore menus, and order online.">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/responsive.css">
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="site-header">
+    <div class="container header-container">
+      <div class="header-left">
+        <a href="../index.html" class="brand-logo">
+          <div class="logo-icon">🍔</div>
+          <span>Food<span>iez</span></span>
+        </a>
+        <div class="location-selector">
+          <span style="font-size: 1.1rem;">📍</span>
+          <span class="current-location-text">Bangalore, Indiranagar</span>
+          <span class="loc-arrow">▼</span>
+        </div>
+      </div>
+
+      <div class="header-search">
+        <span class="search-icon">🔍</span>
+        <input type="text" class="global-search-input" placeholder="Search dishes & restaurants...">
+      </div>
+
+      <nav class="header-nav">
+        <a href="../index.html" class="nav-link">Home</a>
+        <a href="restaurants.html" class="nav-link active">Restaurants</a>
+        <a href="pizza.html" class="nav-link">Categories</a>
+        <a href="favorites.html" class="nav-link">Favorites</a>
+        <a href="order-history.html" class="nav-link">Orders</a>
+      </nav>
+
+      <div style="display: flex; align-items: center; gap: 14px;">
+        <a href="cart.html" class="cart-nav-btn">
+          <span>🛒</span>
+          <span>Cart</span>
+          <span class="cart-count">0</span>
+        </a>
+
+        <div class="user-nav-dropdown">
+          <button class="user-avatar-btn">
+            <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=200&q=80" alt="Avatar" class="user-avatar-img">
+            <span class="user-name-text">Rahul</span>
+            <span style="font-size: 0.75rem; color: var(--text-muted);">▼</span>
+          </button>
+          <div class="dropdown-menu">
+            <a href="profile.html" class="dropdown-item">👤 My Profile</a>
+            <a href="order-history.html" class="dropdown-item">📦 Order History</a>
+            <a href="favorites.html" class="dropdown-item">❤️ Saved Items</a>
+            <div class="dropdown-divider"></div>
+            <a href="login.html" class="dropdown-item">🔑 Login / Signup</a>
+          </div>
+        </div>
+
+        <button class="mobile-menu-btn">☰</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="container" style="padding-top: 30px; padding-bottom: 60px;">
+    
+    <div style="margin-bottom: 24px;">
+      <h1 style="font-size: 2.2rem; font-weight: 800; margin-bottom: 6px;">All Restaurants in <span class="current-location-text" style="color: var(--primary);">Bangalore</span></h1>
+      <p style="color: var(--text-muted); font-size: 0.95rem;">Order from top-rated dining spots with guaranteed 30-minute delivery.</p>
+    </div>
+
+    <!-- Filters & Sort Bar -->
+    <div style="background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 16px 20px; margin-bottom: 30px; display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap;">
+      
+      <div style="position: relative; flex: 1; min-width: 240px;">
+        <span style="position: absolute; left: 12px; top: 50%; transform: translateY(-50%); color: var(--text-muted);">🔍</span>
+        <input type="text" id="rest-search-input" placeholder="Search by restaurant name or cuisine..." 
+          style="width: 100%; padding: 10px 16px 10px 38px; border-radius: var(--radius-full); border: 1px solid var(--border); background: var(--surface-subtle); font-size: 0.9rem; outline: none;">
+      </div>
+
+      <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;" id="cuisine-filter-chips">
+        <button class="chip active" data-cuisine="all">All Cuisines</button>
+        <button class="chip" data-cuisine="pizza">Pizza</button>
+        <button class="chip" data-cuisine="burgers">Burgers</button>
+        <button class="chip" data-cuisine="biryani">Biryani</button>
+        <button class="chip" data-cuisine="chinese">Chinese</button>
+        <button class="chip" data-cuisine="mexican">Mexican</button>
+        <button class="chip" data-cuisine="healthy-food">Healthy</button>
+        <button class="chip" data-cuisine="desserts">Desserts</button>
+      </div>
+
+      <div style="display: flex; align-items: center; gap: 8px;">
+        <label for="rest-sort-select" style="font-size: 0.85rem; color: var(--text-muted); font-weight: 600;">Sort:</label>
+        <select id="rest-sort-select" style="padding: 9px 16px; border-radius: var(--radius-full); border: 1px solid var(--border); background: var(--surface); font-size: 0.88rem; font-weight: 600; cursor: pointer; outline: none;">
+          <option value="recommended">Recommended</option>
+          <option value="rating">Top Rated (⭐)</option>
+          <option value="fastest">Fastest Delivery (⏱️)</option>
+        </select>
+      </div>
+
+    </div>
+
+    <!-- Restaurants Grid -->
+    <div class="restaurant-grid" id="restaurants-list-grid">
+      <!-- Populated via JavaScript -->
+    </div>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-bottom">
+        <div>&copy; 2026 Foodiez Technologies Inc. All rights reserved.</div>
+        <div style="display: flex; gap: 20px;">
+          <span>🔒 256-Bit SSL Encrypted</span>
+          <span>⚡ 30-Min Delivery Promise</span>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../js/data.js"></script>
+  <script src="../js/cart.js"></script>
+  <script src="../js/main.js"></script>
+  <script src="../js/search.js"></script>
+  <script>
+    const RestaurantsPage = {
+      activeCuisine: "all",
+      searchQuery: "",
+      sortBy: "recommended",
+
+      init: function() {
+        this.bindEvents();
+        this.render();
+      },
+
+      bindEvents: function() {
+        const searchInput = document.getElementById("rest-search-input");
+        if (searchInput) {
+          searchInput.addEventListener("input", (e) => {
+            this.searchQuery = e.target.value.trim().toLowerCase();
+            this.render();
+          });
+        }
+
+        const sortSelect = document.getElementById("rest-sort-select");
+        if (sortSelect) {
+          sortSelect.addEventListener("change", (e) => {
+            this.sortBy = e.target.value;
+            this.render();
+          });
+        }
+
+        const cuisineChips = document.querySelectorAll("#cuisine-filter-chips .chip");
+        cuisineChips.forEach(chip => {
+          chip.addEventListener("click", () => {
+            cuisineChips.forEach(c => c.classList.remove("active"));
+            chip.classList.add("active");
+            this.activeCuisine = chip.getAttribute("data-cuisine");
+            this.render();
+          });
+        });
+      },
+
+      render: function() {
+        const grid = document.getElementById("restaurants-list-grid");
+        if (!grid) return;
+
+        let list = FoodAppStorage.getRestaurants();
+
+        // Filter Cuisine
+        if (this.activeCuisine !== "all") {
+          list = list.filter(r => r.categories && r.categories.includes(this.activeCuisine));
+        }
+
+        // Filter Search
+        if (this.searchQuery) {
+          list = list.filter(r => 
+            r.name.toLowerCase().includes(this.searchQuery) ||
+            r.cuisine.toLowerCase().includes(this.searchQuery) ||
+            r.address.toLowerCase().includes(this.searchQuery)
+          );
+        }
+
+        // Sorting
+        if (this.sortBy === "rating") {
+          list.sort((a, b) => b.rating - a.rating);
+        } else if (this.sortBy === "fastest") {
+          list.sort((a, b) => parseInt(a.deliveryTime) - parseInt(b.deliveryTime));
+        }
+
+        if (list.length === 0) {
+          grid.innerHTML = `
+            <div style="grid-column: 1 / -1; padding: 60px 20px; text-align: center; background: var(--surface); border-radius: var(--radius-lg); border: 1px solid var(--border);">
+              <div style="font-size: 3rem; margin-bottom: 12px;">🍽️</div>
+              <h3 style="font-size: 1.3rem; font-weight: 700; margin-bottom: 6px;">No restaurants found</h3>
+              <p style="color: var(--text-muted); font-size: 0.9rem;">Try adjusting your filters or search keywords.</p>
+            </div>
+          `;
+          return;
+        }
+
+        const favs = FoodAppStorage.getFavorites();
+
+        grid.innerHTML = list.map(r => `
+          <div class="restaurant-card" onclick="window.location.href='restaurant-menu.html?id=${r.id}'" style="cursor: pointer;">
+            <div class="restaurant-img-wrap">
+              <img src="${r.image}" alt="${r.name}" class="restaurant-img">
+              <div class="restaurant-offer-tag">🏷️ ${r.offer}</div>
+              <button class="food-fav-btn ${favs.restaurantIds.includes(r.id) ? 'active' : ''}" 
+                onclick="event.stopPropagation(); FoodApp.toggleFavoriteRestaurant('${r.id}', this)" aria-label="Favorite Restaurant">
+                ❤️
+              </button>
+            </div>
+            <div class="restaurant-content">
+              <div class="restaurant-title-row">
+                <h3 class="restaurant-name">${r.name}</h3>
+                <span class="rating-pill">★ ${r.rating}</span>
+              </div>
+              <div class="restaurant-cuisine">${r.cuisine}</div>
+              <div class="restaurant-meta">
+                <span class="restaurant-meta-item">⏱️ ${r.deliveryTime}</span>
+                <span class="restaurant-meta-item">📍 ${r.distance}</span>
+                <span class="restaurant-meta-item">💰 ${r.priceForTwo}</span>
+              </div>
+              <div style="margin-top: 10px; font-size: 0.8rem; color: var(--text-subtle);">
+                📍 ${r.address}
+              </div>
+            </div>
+          </div>
+        `).join('');
+      }
+    };
+
+    document.addEventListener("DOMContentLoaded", () => RestaurantsPage.init());
+  </script>
+</body>
+</html>

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Live Kitchen Orders — Restaurant Partner</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/responsive.css">
+  <link rel="stylesheet" href="../css/dashboard.css">
+</head>
+<body>
+
+  <div class="dashboard-layout">
+    
+    <!-- Sidebar -->
+    <aside class="dashboard-sidebar">
+      <a href="../index.html" class="brand-logo">
+        <div class="logo-icon">🍔</div>
+        <span>Food<span>iez</span></span>
+      </a>
+
+      <span class="portal-role-tag restaurant">👨‍🍳 Restaurant Portal</span>
+
+      <ul class="sidebar-menu">
+        <li class="sidebar-menu-item"><a href="dashboard.html">📊 Dashboard</a></li>
+        <li class="sidebar-menu-item active"><a href="orders.html">📦 Live Kitchen Orders</a></li>
+        <li class="sidebar-menu-item"><a href="menu.html">🍴 Menu Management</a></li>
+        <li class="sidebar-menu-item"><a href="../index.html">🏠 Customer Storefront</a></li>
+      </ul>
+
+      <div class="sidebar-footer-box">
+        <div style="font-size: 0.85rem; color: #94A3B8; margin-bottom: 8px;">Logged in as:</div>
+        <div style="font-weight: 700; color: #FFFFFF; font-size: 0.95rem;">Bella Italia Artisan</div>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="dashboard-main">
+      
+      <div class="dashboard-topbar">
+        <div>
+          <h1 class="dashboard-page-title">Live Kitchen Orders</h1>
+          <p style="color: var(--text-muted); font-size: 0.9rem;">Accept new orders, move to preparation, and handover to delivery riders.</p>
+        </div>
+      </div>
+
+      <!-- Live Orders List -->
+      <div id="rest-live-orders-container" style="max-width: 900px;">
+        <!-- Injected via JavaScript -->
+      </div>
+
+    </main>
+
+  </div>
+
+  <script src="../js/data.js"></script>
+  <script src="../js/cart.js"></script>
+  <script src="../js/main.js"></script>
+  <script src="../js/restaurant.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => RestaurantPortal.initOrders());
+  </script>
+</body>
+</html>

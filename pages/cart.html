@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shopping Cart — Foodiez</title>
+  <meta name="description" content="Review your food order, modify item quantities, apply promo discount coupons, and proceed to secure checkout.">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/responsive.css">
+  <link rel="stylesheet" href="../css/cart.css">
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="site-header">
+    <div class="container header-container">
+      <div class="header-left">
+        <a href="../index.html" class="brand-logo">
+          <div class="logo-icon">🍔</div>
+          <span>Food<span>iez</span></span>
+        </a>
+        <div class="location-selector">
+          <span style="font-size: 1.1rem;">📍</span>
+          <span class="current-location-text">Bangalore, Indiranagar</span>
+          <span class="loc-arrow">▼</span>
+        </div>
+      </div>
+
+      <div class="header-search">
+        <span class="search-icon">🔍</span>
+        <input type="text" class="global-search-input" placeholder="Search dishes & restaurants...">
+      </div>
+
+      <nav class="header-nav">
+        <a href="../index.html" class="nav-link">Home</a>
+        <a href="restaurants.html" class="nav-link">Restaurants</a>
+        <a href="pizza.html" class="nav-link">Categories</a>
+        <a href="favorites.html" class="nav-link">Favorites</a>
+        <a href="order-history.html" class="nav-link">Orders</a>
+      </nav>
+
+      <div style="display: flex; align-items: center; gap: 14px;">
+        <a href="cart.html" class="cart-nav-btn active" style="background: var(--primary); color: #FFF;">
+          <span>🛒</span>
+          <span>Cart</span>
+          <span class="cart-count" style="background: #FFF; color: var(--primary);">0</span>
+        </a>
+
+        <div class="user-nav-dropdown">
+          <button class="user-avatar-btn">
+            <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=200&q=80" alt="Avatar" class="user-avatar-img">
+            <span class="user-name-text">Rahul</span>
+            <span style="font-size: 0.75rem; color: var(--text-muted);">▼</span>
+          </button>
+          <div class="dropdown-menu">
+            <a href="profile.html" class="dropdown-item">👤 My Profile</a>
+            <a href="order-history.html" class="dropdown-item">📦 Order History</a>
+            <a href="favorites.html" class="dropdown-item">❤️ Saved Items</a>
+            <div class="dropdown-divider"></div>
+            <a href="login.html" class="dropdown-item">🔑 Login / Signup</a>
+          </div>
+        </div>
+
+        <button class="mobile-menu-btn">☰</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Cart Content -->
+  <main class="container">
+    
+    <div class="breadcrumb-nav">
+      <a href="../index.html">Home</a>
+      <span class="breadcrumb-separator">/</span>
+      <span style="color: var(--text-main); font-weight: 700;">Shopping Cart</span>
+    </div>
+
+    <!-- Active Cart View -->
+    <div id="cart-active-view" class="cart-page-layout">
+      
+      <!-- Cart Items Left Column -->
+      <div>
+        <div class="cart-items-card">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; padding-bottom: 12px; border-bottom: 1px solid var(--border);">
+            <h2 style="font-size: 1.3rem; font-weight: 800;">Items in Cart (<span id="cart-items-count-text">0</span>)</h2>
+            <button class="btn btn-secondary btn-sm" onclick="CartPage.clearAll()" style="color: var(--nonveg-color);">Clear Cart</button>
+          </div>
+
+          <div id="cart-items-list-container">
+            <!-- Populated via JavaScript -->
+          </div>
+        </div>
+
+        <!-- Suggestion Promo Strip -->
+        <div style="margin-top: 20px; background: var(--primary-light); border: 1px dashed var(--primary); border-radius: var(--radius-md); padding: 14px 20px; display: flex; align-items: center; justify-content: space-between;">
+          <div style="display: flex; align-items: center; gap: 10px;">
+            <span style="font-size: 1.3rem;">⚡</span>
+            <span style="font-size: 0.9rem; font-weight: 600; color: var(--primary-hover);">Add ₹500+ worth of items to unlock FREE Delivery!</span>
+          </div>
+          <a href="pizza.html" style="font-size: 0.85rem; font-weight: 700; color: var(--primary); text-decoration: underline;">Browse More</a>
+        </div>
+      </div>
+
+      <!-- Bill Breakdown & Coupons Right Column -->
+      <div>
+        
+        <!-- Coupon Code Card -->
+        <div class="coupon-box">
+          <div style="font-size: 0.95rem; font-weight: 700; margin-bottom: 8px; display: flex; justify-content: space-between;">
+            <span>🏷️ Apply Discount Coupon</span>
+          </div>
+          <div class="coupon-input-group">
+            <input type="text" id="coupon-code-input" placeholder="Enter coupon (e.g. WELCOME50)">
+            <button class="btn btn-primary btn-sm" onclick="CartPage.applyCoupon()">Apply</button>
+          </div>
+          <div id="coupon-alert-msg" style="font-size: 0.85rem; margin-top: 8px; font-weight: 600; display: none;"></div>
+
+          <!-- Quick Coupon Pills -->
+          <div style="margin-top: 14px; display: flex; flex-wrap: wrap; gap: 6px;">
+            <span class="chip" style="font-size: 0.75rem; padding: 4px 10px;" onclick="CartPage.quickApplyCoupon('WELCOME50')">WELCOME50 (50% OFF)</span>
+            <span class="chip" style="font-size: 0.75rem; padding: 4px 10px;" onclick="CartPage.quickApplyCoupon('SAVE100')">SAVE100 (₹100 OFF)</span>
+            <span class="chip" style="font-size: 0.75rem; padding: 4px 10px;" onclick="CartPage.quickApplyCoupon('FREEDELIVERY')">FREEDELIVERY</span>
+          </div>
+        </div>
+
+        <!-- Bill Details Card -->
+        <div class="bill-summary-card">
+          <h3 class="bill-card-title">Order Summary</h3>
+
+          <div class="bill-row">
+            <span>Item Subtotal</span>
+            <span id="bill-subtotal" style="font-weight: 700; color: var(--text-main);">₹0</span>
+          </div>
+
+          <div class="bill-row">
+            <span>Delivery Partner Fee</span>
+            <span id="bill-delivery-fee" style="font-weight: 700; color: var(--text-main);">₹30</span>
+          </div>
+
+          <div class="bill-row">
+            <span>Govt. Taxes & Restaurant Charges (5%)</span>
+            <span id="bill-tax" style="font-weight: 700; color: var(--text-main);">₹0</span>
+          </div>
+
+          <div class="bill-row" id="bill-discount-row" style="display: none; color: var(--veg-color); font-weight: 700;">
+            <span id="bill-discount-label">Coupon Discount</span>
+            <span id="bill-discount-amount">-₹0</span>
+          </div>
+
+          <div class="bill-row total-row">
+            <span>To Pay</span>
+            <span id="bill-grand-total" style="color: var(--primary); font-family: 'Outfit', sans-serif;">₹0</span>
+          </div>
+
+          <button class="btn btn-primary btn-lg" onclick="CartPage.proceedToCheckout()" style="width: 100%; margin-top: 20px;">
+            Proceed to Checkout &rarr;
+          </button>
+
+          <p style="font-size: 0.75rem; color: var(--text-subtle); text-align: center; margin-top: 14px;">
+            🔒 Safe & Secure 256-Bit Payments with 100% Refund Guarantee
+          </p>
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- Empty Cart Fallback View -->
+    <div id="cart-empty-view" class="empty-cart-state" style="display: none;">
+      <div style="font-size: 4.5rem; margin-bottom: 16px;">🛒</div>
+      <h2 style="font-size: 1.8rem; font-weight: 800; margin-bottom: 8px;">Your Cart is Empty</h2>
+      <p style="color: var(--text-muted); font-size: 1rem; margin-bottom: 24px;">
+        Looks like you haven't added anything to your cart yet. Explore our delicious categories!
+      </p>
+      <div style="display: flex; justify-content: center; gap: 14px;">
+        <a href="../index.html" class="btn btn-primary btn-lg">Explore Top Food 🍕</a>
+        <a href="restaurants.html" class="btn btn-secondary btn-lg">View Restaurants 🍽️</a>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-bottom">
+        <div>&copy; 2026 Foodiez Technologies Inc. All rights reserved.</div>
+        <div style="display: flex; gap: 20px;">
+          <span>🔒 256-Bit SSL Encrypted</span>
+          <span>⚡ 30-Min Delivery Promise</span>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../js/data.js"></script>
+  <script src="../js/cart.js"></script>
+  <script src="../js/main.js"></script>
+  <script src="../js/search.js"></script>
+  <script>
+    const CartPage = {
+      appliedCoupon: localStorage.getItem("food_app_active_coupon") || null,
+
+      init: function() {
+        this.render();
+      },
+
+      render: function() {
+        const cart = Cart.getCart();
+        const activeView = document.getElementById("cart-active-view");
+        const emptyView = document.getElementById("cart-empty-view");
+
+        if (cart.length === 0) {
+          if (activeView) activeView.style.display = "none";
+          if (emptyView) emptyView.style.display = "block";
+          return;
+        }
+
+        if (activeView) activeView.style.display = "grid";
+        if (emptyView) emptyView.style.display = "none";
+
+        const countEl = document.getElementById("cart-items-count-text");
+        if (countEl) countEl.textContent = cart.length;
+
+        // Render Cart Items
+        const listContainer = document.getElementById("cart-items-list-container");
+        if (listContainer) {
+          listContainer.innerHTML = cart.map(item => {
+            const addOnsText = item.addOns && item.addOns.length > 0 
+              ? `Add-ons: ${item.addOns.map(a => `${a.name} (+₹${a.price})`).join(', ')}` 
+              : '';
+            
+            return `
+              <div class="cart-item-row" id="item-${item.cartItemId}">
+                <img src="${item.image}" alt="${item.name}" class="cart-item-img">
+                <div class="cart-item-info">
+                  <div style="display: flex; align-items: center; gap: 8px;">
+                    <span class="badge-diet ${item.veg ? 'veg' : 'non-veg'}"></span>
+                    <h4 class="cart-item-name">${item.name}</h4>
+                  </div>
+                  ${addOnsText ? `<div class="cart-item-addons">${addOnsText}</div>` : ''}
+                  ${item.specialInstructions ? `<div style="font-size:0.75rem; color:var(--text-subtle); font-style:italic;">Note: "${item.specialInstructions}"</div>` : ''}
+                  <div class="cart-item-price">₹${item.unitPrice} each</div>
+                </div>
+
+                <div class="qty-controller">
+                  <button class="qty-btn" onclick="CartPage.updateQty('${item.cartItemId}', -1)">-</button>
+                  <span style="min-width: 20px; text-align: center;">${item.quantity}</span>
+                  <button class="qty-btn" onclick="CartPage.updateQty('${item.cartItemId}', 1)">+</button>
+                </div>
+
+                <div style="font-size: 1.15rem; font-weight: 800; font-family: 'Outfit', sans-serif; min-width: 70px; text-align: right;">
+                  ₹${item.unitPrice * item.quantity}
+                </div>
+
+                <button class="cart-delete-btn" onclick="CartPage.removeItem('${item.cartItemId}')" title="Remove item">
+                  🗑️
+                </button>
+              </div>
+            `;
+          }).join('');
+        }
+
+        // Render Bill Totals
+        const totals = Cart.getTotals(this.appliedCoupon);
+        
+        document.getElementById("bill-subtotal").textContent = `₹${totals.subtotal}`;
+        document.getElementById("bill-delivery-fee").textContent = totals.deliveryFee === 0 ? "FREE" : `₹${totals.deliveryFee}`;
+        document.getElementById("bill-tax").textContent = `₹${totals.tax}`;
+        
+        const discRow = document.getElementById("bill-discount-row");
+        if (totals.discount > 0) {
+          discRow.style.display = "flex";
+          document.getElementById("bill-discount-amount").textContent = `-₹${totals.discount}`;
+          document.getElementById("bill-discount-label").textContent = `Coupon (${this.appliedCoupon})`;
+        } else {
+          discRow.style.display = "none";
+        }
+
+        document.getElementById("bill-grand-total").textContent = `₹${totals.total}`;
+
+        // Coupon input and message
+        const couponInput = document.getElementById("coupon-code-input");
+        const alertMsg = document.getElementById("coupon-alert-msg");
+        
+        if (this.appliedCoupon && totals.isCouponValid) {
+          couponInput.value = this.appliedCoupon;
+          alertMsg.style.display = "block";
+          alertMsg.style.color = "var(--veg-color)";
+          alertMsg.textContent = `✅ ${totals.couponMessage}`;
+        } else if (this.appliedCoupon && !totals.isCouponValid) {
+          alertMsg.style.display = "block";
+          alertMsg.style.color = "var(--nonveg-color)";
+          alertMsg.textContent = `⚠️ ${totals.couponMessage}`;
+        } else {
+          alertMsg.style.display = "none";
+        }
+      },
+
+      updateQty: function(cartItemId, delta) {
+        Cart.updateQuantity(cartItemId, delta);
+        this.render();
+      },
+
+      removeItem: function(cartItemId) {
+        Cart.removeItem(cartItemId);
+        this.render();
+      },
+
+      clearAll: function() {
+        if (confirm("Are you sure you want to clear your cart?")) {
+          Cart.clearCart();
+          localStorage.removeItem("food_app_active_coupon");
+          this.appliedCoupon = null;
+          this.render();
+        }
+      },
+
+      quickApplyCoupon: function(code) {
+        document.getElementById("coupon-code-input").value = code;
+        this.applyCoupon();
+      },
+
+      applyCoupon: function() {
+        const input = document.getElementById("coupon-code-input");
+        const code = input.value.trim().toUpperCase();
+        if (!code) {
+          FoodApp.showToast("Please enter a coupon code", "error");
+          return;
+        }
+
+        this.appliedCoupon = code;
+        localStorage.setItem("food_app_active_coupon", code);
+        
+        const totals = Cart.getTotals(code);
+        if (totals.isCouponValid) {
+          FoodApp.showToast(`Coupon "${code}" applied successfully! 🎉`, "success");
+        } else {
+          FoodApp.showToast(totals.couponMessage || "Invalid coupon code", "error");
+        }
+        this.render();
+      },
+
+      proceedToCheckout: function() {
+        const cart = Cart.getCart();
+        if (cart.length === 0) {
+          FoodApp.showToast("Your cart is empty!", "error");
+          return;
+        }
+        window.location.href = "checkout.html";
+      }
+    };
+
+    document.addEventListener("DOMContentLoaded", () => CartPage.init());
+  </script>
+</body>
+</html>

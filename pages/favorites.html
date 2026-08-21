@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Saved Favorites — Foodiez</title>
+  <meta name="description" content="Your bookmarked favorite dishes and top dining spots ready for express ordering.">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/responsive.css">
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="site-header">
+    <div class="container header-container">
+      <div class="header-left">
+        <a href="../index.html" class="brand-logo">
+          <div class="logo-icon">🍔</div>
+          <span>Food<span>iez</span></span>
+        </a>
+        <div class="location-selector">
+          <span style="font-size: 1.1rem;">📍</span>
+          <span class="current-location-text">Bangalore, Indiranagar</span>
+          <span class="loc-arrow">▼</span>
+        </div>
+      </div>
+
+      <div class="header-search">
+        <span class="search-icon">🔍</span>
+        <input type="text" class="global-search-input" placeholder="Search dishes & restaurants...">
+      </div>
+
+      <nav class="header-nav">
+        <a href="../index.html" class="nav-link">Home</a>
+        <a href="restaurants.html" class="nav-link">Restaurants</a>
+        <a href="pizza.html" class="nav-link">Categories</a>
+        <a href="favorites.html" class="nav-link active">Favorites</a>
+        <a href="order-history.html" class="nav-link">Orders</a>
+      </nav>
+
+      <div style="display: flex; align-items: center; gap: 14px;">
+        <a href="cart.html" class="cart-nav-btn">
+          <span>🛒</span>
+          <span>Cart</span>
+          <span class="cart-count">0</span>
+        </a>
+
+        <div class="user-nav-dropdown">
+          <button class="user-avatar-btn">
+            <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=200&q=80" alt="Avatar" class="user-avatar-img">
+            <span class="user-name-text">Rahul</span>
+            <span style="font-size: 0.75rem; color: var(--text-muted);">▼</span>
+          </button>
+          <div class="dropdown-menu">
+            <a href="profile.html" class="dropdown-item">👤 My Profile</a>
+            <a href="order-history.html" class="dropdown-item">📦 Order History</a>
+            <a href="favorites.html" class="dropdown-item">❤️ Saved Items</a>
+            <div class="dropdown-divider"></div>
+            <a href="login.html" class="dropdown-item">🔑 Login / Signup</a>
+          </div>
+        </div>
+
+        <button class="mobile-menu-btn">☰</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="container" style="padding-top: 30px; padding-bottom: 60px;">
+    
+    <div class="breadcrumb-nav">
+      <a href="../index.html">Home</a>
+      <span class="breadcrumb-separator">/</span>
+      <span style="color: var(--text-main); font-weight: 700;">My Favorites</span>
+    </div>
+
+    <div style="margin: 20px 0 24px; display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 16px;">
+      <div>
+        <h1 style="font-size: 2.2rem; font-weight: 800; margin-bottom: 6px;">Your Saved Favorites ❤️</h1>
+        <p style="color: var(--text-muted); font-size: 0.95rem;">Quickly reorder your beloved food items and top restaurants.</p>
+      </div>
+
+      <!-- Tab Buttons -->
+      <div style="display: flex; gap: 10px;">
+        <button class="chip fav-tab-btn active" data-tab="food">
+          🍔 Favorite Dishes
+        </button>
+        <button class="chip fav-tab-btn" data-tab="restaurants">
+          🍽️ Favorite Restaurants
+        </button>
+      </div>
+    </div>
+
+    <!-- Favorite Food Grid -->
+    <div class="food-grid" id="fav-food-grid">
+      <!-- Populated via JavaScript -->
+    </div>
+
+    <!-- Favorite Restaurants Grid -->
+    <div class="restaurant-grid" id="fav-restaurants-grid" style="display: none;">
+      <!-- Populated via JavaScript -->
+    </div>
+
+    <!-- Empty View -->
+    <div id="fav-empty-view" style="display: none; padding: 70px 20px; text-align: center; background: var(--surface); border-radius: var(--radius-xl); border: 1px solid var(--border); max-width: 540px; margin: 30px auto;">
+      <div style="font-size: 3.5rem; margin-bottom: 12px;">🤍</div>
+      <h3 style="font-size: 1.4rem; font-weight: 800; margin-bottom: 8px;">No Favorites Saved</h3>
+      <p style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 24px;">Tap the heart icon on any dish or restaurant to bookmark it for quick access.</p>
+      <a href="../index.html" class="btn btn-primary btn-sm">Explore Food &rarr;</a>
+    </div>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-bottom">
+        <div>&copy; 2026 Foodiez Technologies Inc. All rights reserved.</div>
+        <div style="display: flex; gap: 20px;">
+          <span>🔒 256-Bit SSL Encrypted</span>
+          <span>⚡ 30-Min Delivery Promise</span>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../js/data.js"></script>
+  <script src="../js/cart.js"></script>
+  <script src="../js/main.js"></script>
+  <script src="../js/search.js"></script>
+  <script src="../js/favorites.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => FavoritesPage.init());
+  </script>
+</body>
+</html>

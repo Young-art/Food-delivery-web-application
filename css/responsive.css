@@ -1,0 +1,142 @@
+/* ===================================================
+   FOOD DELIVERY APPLICATION - RESPONSIVE STYLES
+   Smooth breakpoints for Desktop, Tablet & Mobile
+   =================================================== */
+
+/* --- Medium Laptops & Tablets Landscape (max-width: 1024px) --- */
+@media (max-width: 1024px) {
+  .header-search {
+    max-width: 260px;
+  }
+
+  .footer-top {
+    grid-template-columns: 1.5fr 1fr 1fr 1.5fr;
+    gap: 30px;
+  }
+
+  .footer-col-apps {
+    grid-column: span 4;
+  }
+
+  .footer-app-badges {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+}
+
+/* --- Tablets Portrait (max-width: 768px) --- */
+@media (max-width: 768px) {
+  :root {
+    --header-height: 70px;
+  }
+
+  .header-search {
+    display: none; /* Accessible via mobile search overlay or page top */
+  }
+
+  .header-nav {
+    display: none;
+    position: fixed;
+    top: var(--header-height);
+    left: 0;
+    right: 0;
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    padding: 20px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+    box-shadow: var(--shadow-lg);
+    z-index: 99;
+  }
+
+  .header-nav.mobile-active {
+    display: flex;
+    animation: fadeInDown 0.25s ease;
+  }
+
+  .mobile-menu-btn {
+    display: flex;
+  }
+
+  .location-selector {
+    padding: 6px 10px;
+    font-size: 0.8rem;
+  }
+
+  .footer-top {
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+  }
+
+  .footer-brand {
+    grid-column: span 2;
+  }
+
+  .footer-col-apps {
+    grid-column: span 2;
+  }
+
+  .footer-bottom {
+    flex-direction: column;
+    gap: 12px;
+    text-align: center;
+  }
+
+  .food-grid {
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 16px;
+  }
+
+  .restaurant-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* --- Mobile Devices (max-width: 480px) --- */
+@media (max-width: 480px) {
+  .brand-logo span span, .user-name-text {
+    display: none;
+  }
+
+  .brand-logo {
+    font-size: 1.3rem;
+  }
+
+  .cart-nav-btn {
+    padding: 8px 14px;
+    font-size: 0.88rem;
+  }
+
+  .location-selector .loc-arrow {
+    display: none;
+  }
+
+  .food-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .footer-top {
+    grid-template-columns: 1fr;
+  }
+
+  .footer-brand, .footer-col-apps {
+    grid-column: span 1;
+  }
+
+  .modal-box {
+    margin: 10px;
+    max-height: 95vh;
+  }
+
+  #toast-container {
+    left: 16px;
+    right: 16px;
+    bottom: 16px;
+  }
+
+  .toast {
+    min-width: unset;
+    width: 100%;
+  }
+}

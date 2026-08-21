@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Create Foodiez Account — Food Delivery</title>
+  <meta name="description" content="Join Foodiez today to unlock 50% discount on your first 3 orders and superfast delivery.">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/responsive.css">
+  <style>
+    .auth-container-wrapper {
+      min-height: 80vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 40px 20px;
+    }
+
+    .auth-box {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-xl);
+      padding: 40px;
+      max-width: 480px;
+      width: 100%;
+      box-shadow: var(--shadow-lg);
+    }
+
+    .auth-header {
+      text-align: center;
+      margin-bottom: 28px;
+    }
+
+    .auth-input-group {
+      margin-bottom: 14px;
+    }
+
+    .auth-input-group label {
+      display: block;
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: var(--text-main);
+      margin-bottom: 6px;
+    }
+
+    .auth-input-group input {
+      width: 100%;
+      padding: 11px 16px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      font-size: 0.92rem;
+      outline: none;
+      background: var(--surface-subtle);
+      transition: all var(--transition-fast);
+    }
+
+    .auth-input-group input:focus {
+      background: var(--surface);
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(255, 82, 0, 0.12);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="site-header">
+    <div class="container header-container">
+      <div class="header-left">
+        <a href="../index.html" class="brand-logo">
+          <div class="logo-icon">🍔</div>
+          <span>Food<span>iez</span></span>
+        </a>
+      </div>
+      <div>
+        <a href="login.html" class="btn btn-secondary btn-sm">Already Have Account? Sign In</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Signup Form Main -->
+  <div class="auth-container-wrapper">
+    <div class="auth-box">
+      
+      <div class="auth-header">
+        <div style="font-size: 2.5rem; margin-bottom: 6px;">🎉</div>
+        <h1 style="font-size: 1.8rem; font-weight: 800; margin-bottom: 4px;">Create New Account</h1>
+        <p style="color: var(--text-muted); font-size: 0.9rem;">Join & unlock 50% OFF up to ₹100 on first order!</p>
+      </div>
+
+      <form onsubmit="Auth.handleSignup(event)">
+        
+        <div class="auth-input-group">
+          <label for="signup-name">Full Name</label>
+          <input type="text" id="signup-name" placeholder="e.g. Priya Sharma" required>
+        </div>
+
+        <div class="auth-input-group">
+          <label for="signup-email">Email Address</label>
+          <input type="email" id="signup-email" placeholder="e.g. priya@example.com" required>
+        </div>
+
+        <div class="auth-input-group">
+          <label for="signup-phone">Phone Number</label>
+          <input type="tel" id="signup-phone" placeholder="e.g. +91 98765 43210" required>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 20px;">
+          <div class="auth-input-group" style="margin-bottom: 0;">
+            <label for="signup-password">Password</label>
+            <input type="password" id="signup-password" placeholder="••••••••" required>
+          </div>
+          <div class="auth-input-group" style="margin-bottom: 0;">
+            <label for="signup-confirm-password">Confirm Password</label>
+            <input type="password" id="signup-confirm-password" placeholder="••••••••" required>
+          </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-lg" style="width: 100%; margin-bottom: 20px;">
+          Create Account 🚀
+        </button>
+
+        <div style="text-align: center; font-size: 0.9rem; color: var(--text-muted);">
+          Already have an account? <a href="login.html" style="color: var(--primary); font-weight: 700;">Sign In</a>
+        </div>
+
+      </form>
+
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-bottom">
+        <div>&copy; 2026 Foodiez Technologies Inc. All rights reserved.</div>
+        <div>🔒 256-Bit SSL Encrypted</div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../js/data.js"></script>
+  <script src="../js/cart.js"></script>
+  <script src="../js/main.js"></script>
+  <script src="../js/auth.js"></script>
+</body>
+</html>

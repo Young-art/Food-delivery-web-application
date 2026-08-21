@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Live Order Tracking — Foodiez</title>
+  <meta name="description" content="Track your food order in real-time. View live kitchen preparation status and rider delivery timeline.">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/responsive.css">
+  <link rel="stylesheet" href="../css/checkout.css">
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="site-header">
+    <div class="container header-container">
+      <div class="header-left">
+        <a href="../index.html" class="brand-logo">
+          <div class="logo-icon">🍔</div>
+          <span>Food<span>iez</span></span>
+        </a>
+        <div class="location-selector">
+          <span style="font-size: 1.1rem;">📍</span>
+          <span class="current-location-text">Bangalore, Indiranagar</span>
+          <span class="loc-arrow">▼</span>
+        </div>
+      </div>
+
+      <div class="header-search">
+        <span class="search-icon">🔍</span>
+        <input type="text" class="global-search-input" placeholder="Search dishes & restaurants...">
+      </div>
+
+      <nav class="header-nav">
+        <a href="../index.html" class="nav-link">Home</a>
+        <a href="restaurants.html" class="nav-link">Restaurants</a>
+        <a href="pizza.html" class="nav-link">Categories</a>
+        <a href="favorites.html" class="nav-link">Favorites</a>
+        <a href="order-history.html" class="nav-link active">Orders</a>
+      </nav>
+
+      <div style="display: flex; align-items: center; gap: 14px;">
+        <a href="cart.html" class="cart-nav-btn">
+          <span>🛒</span>
+          <span>Cart</span>
+          <span class="cart-count">0</span>
+        </a>
+
+        <div class="user-nav-dropdown">
+          <button class="user-avatar-btn">
+            <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=200&q=80" alt="Avatar" class="user-avatar-img">
+            <span class="user-name-text">Rahul</span>
+            <span style="font-size: 0.75rem; color: var(--text-muted);">▼</span>
+          </button>
+          <div class="dropdown-menu">
+            <a href="profile.html" class="dropdown-item">👤 My Profile</a>
+            <a href="order-history.html" class="dropdown-item">📦 Order History</a>
+            <a href="favorites.html" class="dropdown-item">❤️ Saved Items</a>
+            <div class="dropdown-divider"></div>
+            <a href="login.html" class="dropdown-item">🔑 Login / Signup</a>
+          </div>
+        </div>
+
+        <button class="mobile-menu-btn">☰</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Order Tracking Content -->
+  <main class="container">
+    
+    <div class="breadcrumb-nav">
+      <a href="../index.html">Home</a>
+      <span class="breadcrumb-separator">/</span>
+      <a href="order-history.html">Orders</a>
+      <span class="breadcrumb-separator">/</span>
+      <span style="color: var(--text-main); font-weight: 700;">Live Tracking</span>
+    </div>
+
+    <!-- Stepper Card -->
+    <div class="tracking-stepper-wrapper">
+      
+      <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 16px;">
+        <div>
+          <span class="chip" style="color: var(--primary); font-weight: 800; margin-bottom: 8px;">
+            ● LIVE TRACKING
+          </span>
+          <h1 style="font-size: 2rem; font-weight: 800;" id="track-current-status-headline">Order Placed</h1>
+          <p style="color: var(--text-muted); font-size: 0.95rem;" id="track-current-status-subtext">
+            Your order has been sent to the restaurant.
+          </p>
+        </div>
+
+        <!-- Estimated Delivery Time Pill -->
+        <div style="background: var(--surface-subtle); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 14px 22px; text-align: right;">
+          <div style="font-size: 0.8rem; color: var(--text-muted); font-weight: 700; text-transform: uppercase;">Estimated Arrival</div>
+          <div style="font-size: 1.6rem; font-weight: 800; color: var(--primary); font-family: 'Outfit', sans-serif;" id="track-eta-time">
+            25-30 Mins
+          </div>
+        </div>
+      </div>
+
+      <!-- 5-Step Animated Visual Pipeline -->
+      <div class="stepper-steps-list">
+        <div class="stepper-progress-bar" id="tracking-progress-bar" style="width: 0%;"></div>
+
+        <!-- Step 0 -->
+        <div class="step-node completed" id="step-node-0">
+          <div class="step-icon-circle">📝</div>
+          <div>
+            <div class="step-node-title">Order Placed</div>
+            <div class="step-node-time">Confirmed</div>
+          </div>
+        </div>
+
+        <!-- Step 1 -->
+        <div class="step-node" id="step-node-1">
+          <div class="step-icon-circle">👨‍🍳</div>
+          <div>
+            <div class="step-node-title">Restaurant Accepted</div>
+            <div class="step-node-time">Kitchen</div>
+          </div>
+        </div>
+
+        <!-- Step 2 -->
+        <div class="step-node" id="step-node-2">
+          <div class="step-icon-circle">🍳</div>
+          <div>
+            <div class="step-node-title">Food Preparing</div>
+            <div class="step-node-time">Cooking</div>
+          </div>
+        </div>
+
+        <!-- Step 3 -->
+        <div class="step-node" id="step-node-3">
+          <div class="step-icon-circle">🛵</div>
+          <div>
+            <div class="step-node-title">Out for Delivery</div>
+            <div class="step-node-time">On the way</div>
+          </div>
+        </div>
+
+        <!-- Step 4 -->
+        <div class="step-node" id="step-node-4">
+          <div class="step-icon-circle">🎉</div>
+          <div>
+            <div class="step-node-title">Delivered</div>
+            <div class="step-node-time">Enjoy meal</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Interactive Stage Simulation Bar -->
+      <div style="background: var(--surface-subtle); border-radius: var(--radius-md); padding: 14px 20px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px;">
+        <div style="font-size: 0.88rem; color: var(--text-muted);">
+          ✨ <strong>Interactive Simulator:</strong> Click to advance the real-time order lifecycle.
+        </div>
+        <button class="btn btn-primary btn-sm" onclick="OrderManager.advanceStatusSimulation()">
+          Simulate Next Stage 🚀
+        </button>
+      </div>
+
+    </div>
+
+    <!-- Details Grid: Rider info + Order Items -->
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-bottom: 60px;">
+      
+      <!-- Delivery Partner Card -->
+      <div class="cart-items-card">
+        <h3 style="font-size: 1.15rem; font-weight: 800; margin-bottom: 16px; border-bottom: 1px solid var(--border); padding-bottom: 10px;">
+          Delivery Partner
+        </h3>
+        <div style="display: flex; align-items: center; gap: 16px; margin-bottom: 16px;">
+          <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=200&q=80" alt="Rider" style="width: 60px; height: 60px; border-radius: 50%; object-fit: cover;">
+          <div>
+            <div style="font-size: 1.1rem; font-weight: 800; color: var(--text-main);">Vikram Singh</div>
+            <div style="font-size: 0.85rem; color: var(--text-muted);">Delivery Hero • ⭐ 4.9 (1,240 deliveries)</div>
+            <div style="font-size: 0.8rem; color: var(--veg-color); font-weight: 700;">🟢 Vaccinated & Temperature Checked</div>
+          </div>
+        </div>
+        <div style="display: flex; gap: 12px;">
+          <button class="btn btn-secondary btn-sm" onclick="FoodApp.showToast('Calling Rider Vikram at +91 98111 22334...', 'info')" style="flex: 1;">
+            📞 Call Partner
+          </button>
+          <button class="btn btn-secondary btn-sm" onclick="FoodApp.showToast('Instruction sent to rider: Ring doorbell twice.', 'success')" style="flex: 1;">
+            💬 Send Note
+          </button>
+        </div>
+      </div>
+
+      <!-- Order Details Summary Card -->
+      <div class="cart-items-card">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; border-bottom: 1px solid var(--border); padding-bottom: 10px;">
+          <h3 style="font-size: 1.15rem; font-weight: 800;" id="track-restaurant-name">Restaurant</h3>
+          <span style="font-size: 0.85rem; color: var(--text-muted);">ID: <strong id="track-order-id">FD-10192</strong></span>
+        </div>
+
+        <div id="track-order-items" style="margin-bottom: 14px;">
+          <!-- Injected via JavaScript -->
+        </div>
+
+        <div style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 10px;">
+          📍 Delivery to: <strong id="track-delivery-address">Bangalore, Indiranagar</strong>
+        </div>
+
+        <div style="display: flex; justify-content: space-between; font-weight: 800; font-size: 1.15rem; border-top: 1px dashed var(--border); padding-top: 12px;">
+          <span>Total Paid</span>
+          <span id="track-order-total" style="color: var(--primary); font-family: 'Outfit', sans-serif;">₹0</span>
+        </div>
+      </div>
+
+    </div>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-bottom">
+        <div>&copy; 2026 Foodiez Technologies Inc. All rights reserved.</div>
+        <div style="display: flex; gap: 20px;">
+          <span>🔒 256-Bit SSL Encrypted</span>
+          <span>⚡ 30-Min Delivery Promise</span>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../js/data.js"></script>
+  <script src="../js/cart.js"></script>
+  <script src="../js/main.js"></script>
+  <script src="../js/search.js"></script>
+  <script src="../js/orders.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      OrderManager.initTracking();
+    });
+  </script>
+</body>
+</html>

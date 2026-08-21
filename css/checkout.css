@@ -1,0 +1,270 @@
+/* ===================================================
+   FOOD DELIVERY APPLICATION - CHECKOUT & TRACKING STYLES
+   =================================================== */
+
+.checkout-grid {
+  display: grid;
+  grid-template-columns: 1.4fr 0.9fr;
+  gap: 36px;
+  margin: 30px 0 70px;
+  align-items: start;
+}
+
+.checkout-step-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xl);
+  padding: 28px;
+  margin-bottom: 24px;
+  box-shadow: var(--shadow-sm);
+}
+
+.step-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--border);
+}
+
+.step-title {
+  font-size: 1.3rem;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.step-badge {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--primary-gradient);
+  color: #FFFFFF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.95rem;
+  font-weight: 800;
+}
+
+/* Address Card Selection Grid */
+.address-selection-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.address-option-card {
+  border: 2px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 18px;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  background: var(--surface);
+  position: relative;
+}
+
+.address-option-card:hover {
+  border-color: var(--primary);
+  background: var(--primary-light);
+}
+
+.address-option-card.selected {
+  border-color: var(--primary);
+  background: #FFF9F5;
+  box-shadow: var(--shadow-sm);
+}
+
+.address-option-card.selected::after {
+  content: '✓';
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: var(--primary);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
+  font-weight: 800;
+}
+
+.addr-type-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--surface-subtle);
+  padding: 3px 10px;
+  border-radius: 6px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+/* Payment Method Tabs & Options */
+.payment-tabs-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.payment-tab-btn {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 16px;
+  border-radius: var(--radius-md);
+  border: 2px solid var(--border);
+  background: var(--surface);
+  font-weight: 700;
+  font-size: 0.9rem;
+  color: var(--text-main);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.payment-tab-btn:hover {
+  border-color: var(--primary);
+}
+
+.payment-tab-btn.active {
+  border-color: var(--primary);
+  background: var(--primary-light);
+  color: var(--primary);
+}
+
+.payment-details-panel {
+  background: var(--surface-subtle);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 20px;
+}
+
+/* Order Tracking Stepper */
+.tracking-stepper-wrapper {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xl);
+  padding: 36px;
+  box-shadow: var(--shadow-sm);
+  margin: 30px 0 60px;
+}
+
+.stepper-steps-list {
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+  margin: 40px 0;
+}
+
+.stepper-steps-list::before {
+  content: '';
+  position: absolute;
+  top: 24px;
+  left: 30px;
+  right: 30px;
+  height: 4px;
+  background: var(--border);
+  z-index: 1;
+}
+
+.stepper-progress-bar {
+  position: absolute;
+  top: 24px;
+  left: 30px;
+  height: 4px;
+  background: var(--veg-color);
+  z-index: 2;
+  transition: width 0.6s ease;
+}
+
+.step-node {
+  position: relative;
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  width: 120px;
+}
+
+.step-icon-circle {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: var(--surface);
+  border: 3px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.3rem;
+  margin-bottom: 12px;
+  transition: all 0.3s ease;
+}
+
+.step-node.completed .step-icon-circle {
+  border-color: var(--veg-color);
+  background: var(--veg-bg);
+  color: var(--veg-color);
+}
+
+.step-node.active .step-icon-circle {
+  border-color: var(--primary);
+  background: var(--primary-light);
+  box-shadow: 0 0 0 6px rgba(255, 82, 0, 0.15);
+  animation: pulseNode 2s infinite;
+}
+
+.step-node-title {
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--text-main);
+}
+
+.step-node-time {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  margin-top: 2px;
+}
+
+@keyframes pulseNode {
+  0% { box-shadow: 0 0 0 0 rgba(255, 82, 0, 0.4); }
+  70% { box-shadow: 0 0 0 10px rgba(255, 82, 0, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(255, 82, 0, 0); }
+}
+
+@media (max-width: 768px) {
+  .checkout-grid {
+    grid-template-columns: 1fr;
+  }
+  .stepper-steps-list {
+    flex-direction: column;
+    gap: 24px;
+  }
+  .stepper-steps-list::before {
+    left: 24px;
+    top: 20px;
+    bottom: 20px;
+    width: 4px;
+    height: auto;
+    right: auto;
+  }
+  .stepper-progress-bar {
+    left: 24px;
+    top: 20px;
+    width: 4px !important;
+  }
+  .step-node {
+    flex-direction: row;
+    width: 100%;
+    gap: 16px;
+    text-align: left;
+  }
+}

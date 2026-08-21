@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Global Food Catalog — Super Admin</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/responsive.css">
+  <link rel="stylesheet" href="../css/dashboard.css">
+</head>
+<body>
+
+  <div class="dashboard-layout">
+    
+    <aside class="dashboard-sidebar">
+      <a href="../index.html" class="brand-logo">
+        <div class="logo-icon">🍔</div>
+        <span>Food<span>iez</span></span>
+      </a>
+
+      <span class="portal-role-tag admin">⚡ Master Admin Portal</span>
+
+      <ul class="sidebar-menu">
+        <li class="sidebar-menu-item"><a href="dashboard.html">📊 Platform Overview</a></li>
+        <li class="sidebar-menu-item"><a href="users.html">👥 User Management</a></li>
+        <li class="sidebar-menu-item"><a href="restaurants.html">🍽️ Restaurants</a></li>
+        <li class="sidebar-menu-item active"><a href="food.html">🍕 Food Catalog</a></li>
+        <li class="sidebar-menu-item"><a href="orders.html">📦 All Orders</a></li>
+        <li class="sidebar-menu-item"><a href="delivery.html">🛵 Delivery Fleet</a></li>
+        <li class="sidebar-menu-item"><a href="coupons.html">🏷️ Coupons</a></li>
+        <li class="sidebar-menu-item"><a href="reports.html">📈 Analytics & Reports</a></li>
+        <li class="sidebar-menu-item"><a href="../index.html">🏠 Customer Storefront</a></li>
+      </ul>
+    </aside>
+
+    <main class="dashboard-main">
+      <div class="dashboard-topbar">
+        <div>
+          <h1 class="dashboard-page-title">Global Food Catalog</h1>
+          <p style="color: var(--text-muted); font-size: 0.9rem;">Inspect and manage 60+ dishes across all 10 categories.</p>
+        </div>
+      </div>
+
+      <div class="table-card">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>Dish</th>
+              <th>Category</th>
+              <th>Price (₹)</th>
+              <th>Discount</th>
+              <th>Rating</th>
+            </tr>
+          </thead>
+          <tbody id="admin-food-tbody">
+            <!-- Populated via JavaScript -->
+          </tbody>
+        </table>
+      </div>
+    </main>
+
+  </div>
+
+  <script src="../js/data.js"></script>
+  <script src="../js/cart.js"></script>
+  <script src="../js/main.js"></script>
+  <script src="../js/admin.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const items = FoodAppStorage.getFoodItems();
+      const tbody = document.getElementById("admin-food-tbody");
+      if (tbody) {
+        tbody.innerHTML = items.map(item => `
+          <tr>
+            <td>
+              <div style="display:flex; align-items:center; gap:10px;">
+                <img src="${item.image}" style="width:40px; height:40px; border-radius:8px; object-fit:cover;">
+                <span class="badge-diet ${item.veg ? 'veg' : 'non-veg'}"></span>
+                <strong>${item.name}</strong>
+              </div>
+            </td>
+            <td><span class="chip" style="font-size:0.75rem; text-transform:uppercase;">${item.category}</span></td>
+            <td><strong>₹${item.price}</strong></td>
+            <td><span style="color:var(--primary); font-weight:700;">${item.discount}% OFF</span></td>
+            <td>⭐ ${item.rating} (${item.ratingCount || 50})</td>
+          </tr>
+        `).join('');
+      }
+    });
+  </script>
+</body>
+</html>
