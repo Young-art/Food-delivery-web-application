@@ -1,15 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Foodiez | Fast & Fresh Food Delivery</title>
-  <meta name="description" content="Order your favorite pizza, biryani, burgers, Chinese, desserts and healthy meals online. Superfast 30 minute delivery to your doorstep.">
-  
+  <meta name="description"
+    content="Order your favorite pizza, biryani, burgers, Chinese, desserts and healthy meals online. Superfast 30 minute delivery to your doorstep.">
+
   <!-- CSS Stylesheets -->
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/responsive.css">
-  
+
   <style>
     /* Home Page Specific Hero & Offers Styling */
     .hero-section {
@@ -133,8 +135,15 @@
     }
 
     @keyframes float {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-10px); }
+
+      0%,
+      100% {
+        transform: translateY(0);
+      }
+
+      50% {
+        transform: translateY(-10px);
+      }
     }
 
     /* Categories Showcase Carousel/Grid */
@@ -284,27 +293,56 @@
         grid-template-columns: 1fr;
         text-align: center;
       }
-      .hero-desc { margin: 0 auto 32px; }
-      .hero-cta-group { justify-content: center; }
-      .hero-stats { justify-content: center; }
-      .category-scroll-grid { grid-template-columns: repeat(3, 1fr); }
-      .app-promo-banner { grid-template-columns: 1fr; text-align: center; }
-      .hero-title { font-size: 2.5rem; }
+
+      .hero-desc {
+        margin: 0 auto 32px;
+      }
+
+      .hero-cta-group {
+        justify-content: center;
+      }
+
+      .hero-stats {
+        justify-content: center;
+      }
+
+      .category-scroll-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+      .app-promo-banner {
+        grid-template-columns: 1fr;
+        text-align: center;
+      }
+
+      .hero-title {
+        font-size: 2.5rem;
+      }
     }
 
     @media (max-width: 600px) {
-      .category-scroll-grid { grid-template-columns: repeat(2, 1fr); }
-      .hero-float-1, .hero-float-2 { display: none; }
-      .hero-title { font-size: 2rem; }
+      .category-scroll-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .hero-float-1,
+      .hero-float-2 {
+        display: none;
+      }
+
+      .hero-title {
+        font-size: 2rem;
+      }
     }
   </style>
 </head>
+
 <body>
 
   <!-- ================= HEADER NAVBAR ================= -->
   <header class="site-header">
     <div class="container header-container">
-      
+
       <!-- Brand & Location -->
       <div class="header-left">
         <a href="index.html" class="brand-logo" id="home-logo-btn">
@@ -322,7 +360,8 @@
       <!-- Search Input Bar with live suggestions -->
       <div class="header-search">
         <span class="search-icon">🔍</span>
-        <input type="text" class="global-search-input" placeholder="Search pizza, biryani, burgers or restaurants..." aria-label="Search dishes and restaurants">
+        <input type="text" class="global-search-input" placeholder="Search pizza, biryani, burgers or restaurants..."
+          aria-label="Search dishes and restaurants">
       </div>
 
       <!-- Navigation Links -->
@@ -346,7 +385,8 @@
         <!-- User Profile Dropdown -->
         <div class="user-nav-dropdown">
           <button class="user-avatar-btn" aria-label="User Account Menu">
-            <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=200&q=80" alt="Avatar" class="user-avatar-img">
+            <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=200&q=80"
+              alt="Avatar" class="user-avatar-img">
             <span class="user-name-text">Thanush</span>
             <span style="font-size: 0.75rem; color: var(--text-muted);">▼</span>
           </button>
@@ -368,7 +408,7 @@
   <!-- ================= HERO SECTION ================= -->
   <section class="hero-section">
     <div class="container hero-wrapper">
-      
+
       <!-- Hero Text Content -->
       <div class="hero-content">
         <div class="hero-badge">
@@ -379,7 +419,8 @@
           Delivered <span>Hot & Fresh</span>.
         </h1>
         <p class="hero-desc">
-          Explore artisanal pizzas, dum biryanis, juicy burgers, healthy salad bowls, and handcrafted desserts from your city's best rated restaurants.
+          Explore artisanal pizzas, dum biryanis, juicy burgers, healthy salad bowls, and handcrafted desserts from your
+          city's best rated restaurants.
         </p>
 
         <div class="hero-cta-group">
@@ -405,8 +446,9 @@
 
       <!-- Hero Visual with floating cards -->
       <div class="hero-visual">
-        <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=800&q=80" alt="Delicious Food Assortment" class="hero-img-main">
-        
+        <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=800&q=80"
+          alt="Delicious Food Assortment" class="hero-img-main">
+
         <div class="hero-floating-card hero-float-1">
           <span style="font-size: 2rem;">⚡</span>
           <div>
@@ -434,7 +476,8 @@
         <h2 class="section-title">Explore Food Categories</h2>
         <p class="section-subtitle">Click any category to open its dedicated page with filters & full menu</p>
       </div>
-      <a href="pages/pizza.html" class="btn btn-secondary btn-sm" style="font-weight: 700; color: var(--primary);">View All Categories &rarr;</a>
+      <a href="pages/pizza.html" class="btn btn-secondary btn-sm" style="font-weight: 700; color: var(--primary);">View
+        All Categories &rarr;</a>
     </div>
 
     <!-- 10 Separate Category Cards (Each linking to its separate HTML page!) -->
@@ -502,7 +545,8 @@
         <h2 class="section-title">Popular Restaurants</h2>
         <p class="section-subtitle">Top rated dining spots with fastest delivery around you</p>
       </div>
-      <a href="pages/restaurants.html" class="btn btn-secondary btn-sm" style="font-weight: 700; color: var(--primary);">See All Restaurants &rarr;</a>
+      <a href="pages/restaurants.html" class="btn btn-secondary btn-sm"
+        style="font-weight: 700; color: var(--primary);">See All Restaurants &rarr;</a>
     </div>
 
     <div class="restaurant-grid" id="home-restaurants-grid">
@@ -528,19 +572,22 @@
   <div class="container">
     <div class="app-promo-banner">
       <div>
-        <h2 style="font-size: 2.2rem; font-weight: 800; color: #FFF; margin-bottom: 12px;">Get The Full Foodiez Experience on Mobile</h2>
+        <h2 style="font-size: 2.2rem; font-weight: 800; color: #FFF; margin-bottom: 12px;">Get The Full Foodiez
+          Experience on Mobile</h2>
         <p style="font-size: 1.05rem; opacity: 0.9; margin-bottom: 24px; line-height: 1.6;">
           Real-time order tracking with live rider map, exclusive app discounts, and 1 tap reordering.
         </p>
         <div style="display: flex; gap: 14px; flex-wrap: wrap;">
-          <a href="#" class="app-badge" style="background: rgba(0,0,0,0.3); border-color: rgba(255,255,255,0.3);" onclick="FoodApp.showToast('Redirecting to Google Play Store...', 'info'); return false;">
+          <a href="#" class="app-badge" style="background: rgba(0,0,0,0.3); border-color: rgba(255,255,255,0.3);"
+            onclick="FoodApp.showToast('Redirecting to Google Play Store...', 'info'); return false;">
             <span style="font-size: 1.6rem;">📱</span>
             <div>
               <div class="app-badge-text">GET IT ON</div>
               <div class="app-badge-title">Google Play</div>
             </div>
           </a>
-          <a href="#" class="app-badge" style="background: rgba(0,0,0,0.3); border-color: rgba(255,255,255,0.3);" onclick="FoodApp.showToast('Redirecting to Apple App Store...', 'info'); return false;">
+          <a href="#" class="app-badge" style="background: rgba(0,0,0,0.3); border-color: rgba(255,255,255,0.3);"
+            onclick="FoodApp.showToast('Redirecting to Apple App Store...', 'info'); return false;">
             <span style="font-size: 1.6rem;">🍎</span>
             <div>
               <div class="app-badge-text">DOWNLOAD ON THE</div>
@@ -550,7 +597,8 @@
         </div>
       </div>
       <div style="display: flex; justify-content: center;">
-        <img src="https://images.unsplash.com/photo-1526367790999-0150786686a2?auto=format&fit=crop&w=500&q=80" alt="App Preview" style="max-width: 280px; border-radius: 24px; box-shadow: var(--shadow-lg);">
+        <img src="https://images.unsplash.com/photo-1526367790999-0150786686a2?auto=format&fit=crop&w=500&q=80"
+          alt="App Preview" style="max-width: 280px; border-radius: 24px; box-shadow: var(--shadow-lg);">
       </div>
     </div>
   </div>
@@ -559,7 +607,7 @@
   <footer class="site-footer">
     <div class="container">
       <div class="footer-top">
-        
+
         <!-- Brand Info -->
         <div class="footer-brand">
           <a href="index.html" class="brand-logo">
@@ -567,7 +615,8 @@
             <span>Food<span>iez</span></span>
           </a>
           <p class="footer-desc">
-            Foodiez delivers hot, hygienic and gourmet meals directly to your doorstep in 30 minutes from premium restaurants in your neighborhood.
+            Foodiez delivers hot, hygienic and gourmet meals directly to your doorstep in 30 minutes from premium
+            restaurants in your neighborhood.
           </p>
           <div class="footer-socials">
             <a href="#" class="social-btn" aria-label="Facebook">📘</a>
@@ -606,26 +655,36 @@
         <div>
           <h4 class="footer-col-title">Help & Legal</h4>
           <ul class="footer-links">
-            <li><a href="#" onclick="FoodApp.showToast('Support team: support@foodiez.app', 'info'); return false;">Customer Support</a></li>
-            <li><a href="#" onclick="FoodApp.showToast('Terms of service updated for 2026', 'info'); return false;">Terms of Service</a></li>
-            <li><a href="#" onclick="FoodApp.showToast('Privacy policy details', 'info'); return false;">Privacy Policy</a></li>
-            <li><a href="#" onclick="FoodApp.showToast('Refund policy: 100% money back on cancellation', 'info'); return false;">Refunds Policy</a></li>
+            <li><a href="#"
+                onclick="FoodApp.showToast('Support team: support@foodiez.app', 'info'); return false;">Customer
+                Support</a></li>
+            <li><a href="#"
+                onclick="FoodApp.showToast('Terms of service updated for 2026', 'info'); return false;">Terms of
+                Service</a></li>
+            <li><a href="#" onclick="FoodApp.showToast('Privacy policy details', 'info'); return false;">Privacy
+                Policy</a></li>
+            <li><a href="#"
+                onclick="FoodApp.showToast('Refund policy: 100% money back on cancellation', 'info'); return false;">Refunds
+                Policy</a></li>
           </ul>
         </div>
 
         <!-- App Download Column -->
         <div class="footer-col-apps">
           <h4 class="footer-col-title">Download Mobile App</h4>
-          <p style="font-size: 0.85rem; color: #94A3B8; margin-bottom: 12px;">Get exclusive app only coupons and live GPS rider tracking.</p>
+          <p style="font-size: 0.85rem; color: #94A3B8; margin-bottom: 12px;">Get exclusive app only coupons and live
+            GPS rider tracking.</p>
           <div class="footer-app-badges">
-            <a href="#" class="app-badge" onclick="FoodApp.showToast('Google Play Store Download', 'info'); return false;">
+            <a href="#" class="app-badge"
+              onclick="FoodApp.showToast('Google Play Store Download', 'info'); return false;">
               <span>📱</span>
               <div>
                 <div class="app-badge-text">Get it on</div>
                 <div class="app-badge-title">Google Play</div>
               </div>
             </a>
-            <a href="#" class="app-badge" onclick="FoodApp.showToast('Apple App Store Download', 'info'); return false;">
+            <a href="#" class="app-badge"
+              onclick="FoodApp.showToast('Apple App Store Download', 'info'); return false;">
               <span>🍎</span>
               <div>
                 <div class="app-badge-text">Download on</div>
@@ -678,7 +737,7 @@
       if (restContainer) {
         const restaurants = FoodAppStorage.getRestaurants().slice(0, 6);
         const favs = FoodAppStorage.getFavorites();
-        
+
         restContainer.innerHTML = restaurants.map(r => `
           <div class="restaurant-card" onclick="window.location.href='pages/restaurant-menu.html?id=${r.id}'" style="cursor: pointer;">
             <div class="restaurant-img-wrap">
@@ -749,4 +808,5 @@
     });
   </script>
 </body>
+
 </html>
