@@ -142,7 +142,7 @@ const DeliveryPortal = {
 
           <div style="background:var(--surface); padding:12px; border-radius:var(--radius-md); border:1px solid var(--border);">
             <div style="font-size:0.75rem; color:var(--text-muted); font-weight:700; text-transform:uppercase;">2. Delivery Customer</div>
-            <div style="font-weight:700; font-size:0.95rem; margin:4px 0;">Rahul Sharma (📞 +91 98765 43210)</div>
+            <div style="font-weight:700; font-size:0.95rem; margin:4px 0;">Thanush Masika (📞 +91 98765 43210)</div>
             <div style="font-size:0.8rem; color:var(--text-muted);">${activeOrder.address}</div>
           </div>
         </div>

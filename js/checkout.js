@@ -77,7 +77,7 @@ const Checkout = {
             </div>
             <div style="margin-bottom: 12px;">
               <label style="display:block; font-size:0.85rem; font-weight:700; margin-bottom:4px;">Full Name</label>
-              <input type="text" id="new-addr-name" placeholder="e.g. Rahul Sharma" value="Rahul Sharma" style="width:100%; padding:9px 12px; border:1px solid var(--border); border-radius:var(--radius-sm); outline:none;">
+              <input type="text" id="new-addr-name" placeholder="e.g. Thanush Masika" value="Thanush Masika" style="width:100%; padding:9px 12px; border:1px solid var(--border); border-radius:var(--radius-sm); outline:none;">
             </div>
             <div style="margin-bottom: 12px;">
               <label style="display:block; font-size:0.85rem; font-weight:700; margin-bottom:4px;">Phone Number</label>

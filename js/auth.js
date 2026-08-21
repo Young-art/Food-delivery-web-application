@@ -50,13 +50,23 @@ const Auth = {
       return;
     }
 
-    // Default simulation session
-    const currentUser = FoodAppStorage.getUser();
-    currentUser.email = identifier.includes("@") ? identifier : currentUser.email;
-    currentUser.phone = !identifier.includes("@") ? identifier : currentUser.phone;
+    let currentUser = FoodAppStorage.getUser();
+    if (identifier.toLowerCase() === "thanushmasika@gmail.com") {
+      currentUser = {
+        name: "Thanush Masika",
+        email: "thanushmasika@gmail.com",
+        phone: "+91 98765 43210",
+        password: "Thanush123",
+        avatar: "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=200&q=80",
+        role: "customer"
+      };
+    } else {
+      currentUser.email = identifier.includes("@") ? identifier : currentUser.email;
+      currentUser.phone = !identifier.includes("@") ? identifier : currentUser.phone;
+    }
 
     FoodAppStorage.saveUser(currentUser);
-    FoodApp.showToast("Login successful! Welcome back 👋", "success");
+    FoodApp.showToast(`Login successful! Welcome back, ${currentUser.name.split(' ')[0]} 👋`, "success");
 
     setTimeout(() => {
       window.location.href = "../index.html";

@@ -53,7 +53,7 @@ const AdminPortal = {
   // USERS MANAGEMENT
   // ==========================================
   defaultUsersList: [
-    { id: "usr-1", name: "Rahul Sharma", email: "rahul.sharma@example.com", phone: "+91 98765 43210", orders: 14, status: "Active" },
+    { id: "usr-1", name: "Thanush Masika", email: "thanushmasika@gmail.com", phone: "+91 98765 43210", orders: 14, status: "Active" },
     { id: "usr-2", name: "Priya Patel", email: "priya.patel@example.com", phone: "+91 98111 22334", orders: 28, status: "Active" },
     { id: "usr-3", name: "Ananya Iyer", email: "ananya.iyer@example.com", phone: "+91 97222 33445", orders: 8, status: "Active" },
     { id: "usr-4", name: "Kunal Verma", email: "kunal.verma@example.com", phone: "+91 96333 44556", orders: 0, status: "Blocked" },

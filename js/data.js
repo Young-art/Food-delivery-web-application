@@ -1462,7 +1462,7 @@ const FoodData = {
       id: "addr-1",
       type: "Home",
       tagIcon: "🏠",
-      name: "Rahul Sharma",
+      name: "Thanush Masika",
       phone: "+91 98765 43210",
       street: "Flat 402, Sunshine Heights, 15th Main Road",
       landmark: "Opposite City Central Park",
@@ -1474,7 +1474,7 @@ const FoodData = {
       id: "addr-2",
       type: "Work",
       tagIcon: "💼",
-      name: "Rahul Sharma",
+      name: "Thanush Masika",
       phone: "+91 98765 43210",
       street: "Tower B, 6th Floor, Cyber Heights Tech Park",
       landmark: "Near Gateway Metro Station",
@@ -1486,9 +1486,10 @@ const FoodData = {
 
   // Default User Profile
   defaultUser: {
-    name: "Rahul Sharma",
-    email: "rahul.sharma@example.com",
+    name: "Thanush Masika",
+    email: "thanushmasika@gmail.com",
     phone: "+91 98765 43210",
+    password: "Thanush123",
     avatar: "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=200&q=80",
     role: "customer"
   },
