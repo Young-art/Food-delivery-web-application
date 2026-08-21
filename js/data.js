@@ -1463,7 +1463,7 @@ const FoodData = {
       type: "Home",
       tagIcon: "🏠",
       name: "Thanush Masika",
-      phone: "+91 98765 43210",
+      phone: "+91 8328247714",
       street: "Flat 402, Sunshine Heights, 15th Main Road",
       landmark: "Opposite City Central Park",
       city: "Bangalore",
@@ -1475,7 +1475,7 @@ const FoodData = {
       type: "Work",
       tagIcon: "💼",
       name: "Thanush Masika",
-      phone: "+91 98765 43210",
+      phone: "+91 8328247714",
       street: "Tower B, 6th Floor, Cyber Heights Tech Park",
       landmark: "Near Gateway Metro Station",
       city: "Bangalore",
@@ -1488,8 +1488,8 @@ const FoodData = {
   defaultUser: {
     name: "Thanush Masika",
     email: "thanushmasika@gmail.com",
-    phone: "+91 98765 43210",
-    password: "Thanush123",
+    phone: "+91 8328247714",
+    password: "Thanush@123",
     avatar: "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=200&q=80",
     role: "customer"
   },
