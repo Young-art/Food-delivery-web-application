@@ -131,16 +131,21 @@ const Auth = {
     if (!container) return;
 
     container.innerHTML = addresses.map(addr => `
-      <div style="background:var(--surface-subtle); border:1px solid var(--border); border-radius:var(--radius-md); padding:16px; margin-bottom:12px; display:flex; justify-content:space-between; align-items:flex-start;">
+      <div style="background:var(--surface-subtle); border:1px solid var(--border); border-radius:var(--radius-md); padding:16px; margin-bottom:12px; display:flex; justify-content:space-between; align-items:flex-start; gap:14px;">
         <div>
           <span class="addr-type-pill">${addr.tagIcon || '📍'} ${addr.type}</span>
           <div style="font-weight:700; color:var(--text-main); margin:4px 0;">${addr.name}</div>
-          <div style="font-size:0.85rem; color:var(--text-muted); line-height:1.4;">${addr.street}, ${addr.landmark}, ${addr.city} to ${addr.pincode}</div>
+          <div style="font-size:0.85rem; color:var(--text-muted); line-height:1.4;">${addr.street}, ${addr.landmark ? addr.landmark + ', ' : ''}${addr.city} ${addr.pincode}</div>
           <div style="font-size:0.8rem; color:var(--text-main); font-weight:600; margin-top:4px;">📞 ${addr.phone}</div>
         </div>
-        <button class="btn btn-secondary btn-sm" style="color:var(--nonveg-color);" onclick="Auth.deleteAddress('${addr.id}')">
-          Delete
-        </button>
+        <div style="display:flex; gap:8px; flex-shrink:0;">
+          <button class="btn btn-secondary btn-sm" style="padding:6px 12px; font-size:0.82rem;" onclick="Checkout.openEditAddressModal('${addr.id}')">
+            ✏️ Edit
+          </button>
+          <button class="btn btn-secondary btn-sm" style="color:var(--nonveg-color); padding:6px 12px; font-size:0.82rem;" onclick="Auth.deleteAddress('${addr.id}')">
+            🗑️ Delete
+          </button>
+        </div>
       </div>
     `).join('');
   },

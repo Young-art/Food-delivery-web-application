@@ -39,10 +39,16 @@ const Checkout = {
     container.innerHTML = addresses.map(addr => `
       <div class="address-option-card ${addr.id === this.selectedAddressId ? 'selected' : ''}" 
         onclick="Checkout.selectAddress('${addr.id}')">
-        <div class="addr-type-pill">${addr.tagIcon || '📍'} ${addr.type}</div>
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+          <div class="addr-type-pill">${addr.tagIcon || '📍'} ${addr.type}</div>
+          <button class="btn btn-secondary btn-sm" style="padding:3px 10px; font-size:0.75rem; border-radius:var(--radius-full);" 
+            onclick="event.stopPropagation(); Checkout.openEditAddressModal('${addr.id}')">
+            ✏️ Edit
+          </button>
+        </div>
         <div style="font-weight: 700; font-size: 0.95rem; color: var(--text-main); margin-bottom: 4px;">${addr.name}</div>
         <div style="font-size: 0.85rem; color: var(--text-muted); line-height: 1.45; margin-bottom: 6px;">
-          ${addr.street}, ${addr.landmark}, ${addr.city} to ${addr.pincode}
+          ${addr.street}, ${addr.landmark ? addr.landmark + ', ' : ''}${addr.city} ${addr.pincode}
         </div>
         <div style="font-size: 0.8rem; font-weight: 600; color: var(--text-main);">📞 ${addr.phone}</div>
       </div>
@@ -56,57 +62,57 @@ const Checkout = {
 
   openAddAddressModal: function() {
     let modal = document.getElementById("add-address-modal");
-    if (!modal) {
-      modal = document.createElement("div");
-      modal.id = "add-address-modal";
-      modal.className = "modal-overlay";
-      modal.innerHTML = `
-        <div class="modal-box">
-          <div class="modal-header">
-            <h3 class="modal-title">Add New Delivery Address</h3>
-            <button class="modal-close" onclick="FoodApp.closeModal('add-address-modal')">&times;</button>
-          </div>
-          <div class="modal-body">
-            <div style="margin-bottom: 12px;">
-              <label style="display:block; font-size:0.85rem; font-weight:700; margin-bottom:4px;">Address Type</label>
-              <div style="display:flex; gap:10px;">
-                <label style="display:flex; align-items:center; gap:6px; font-size:0.9rem; font-weight:600;"><input type="radio" name="addr-type" value="Home" checked> 🏠 Home</label>
-                <label style="display:flex; align-items:center; gap:6px; font-size:0.9rem; font-weight:600;"><input type="radio" name="addr-type" value="Work"> 💼 Work</label>
-                <label style="display:flex; align-items:center; gap:6px; font-size:0.9rem; font-weight:600;"><input type="radio" name="addr-type" value="Other"> 📍 Other</label>
-              </div>
-            </div>
-            <div style="margin-bottom: 12px;">
-              <label style="display:block; font-size:0.85rem; font-weight:700; margin-bottom:4px;">Full Name</label>
-              <input type="text" id="new-addr-name" placeholder="e.g. Thanush Masika" value="Thanush Masika" style="width:100%; padding:9px 12px; border:1px solid var(--border); border-radius:var(--radius-sm); outline:none;">
-            </div>
-            <div style="margin-bottom: 12px;">
-              <label style="display:block; font-size:0.85rem; font-weight:700; margin-bottom:4px;">Phone Number</label>
-              <input type="tel" id="new-addr-phone" placeholder="e.g. +91 98765 43210" value="+91 98765 43210" style="width:100%; padding:9px 12px; border:1px solid var(--border); border-radius:var(--radius-sm); outline:none;">
-            </div>
-            <div style="margin-bottom: 12px;">
-              <label style="display:block; font-size:0.85rem; font-weight:700; margin-bottom:4px;">House No. / Flat / Building / Street</label>
-              <input type="text" id="new-addr-street" placeholder="e.g. Flat 301, Palm Grove Apts, 4th Cross" style="width:100%; padding:9px 12px; border:1px solid var(--border); border-radius:var(--radius-sm); outline:none;">
-            </div>
-            <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom: 12px;">
-              <div>
-                <label style="display:block; font-size:0.85rem; font-weight:700; margin-bottom:4px;">Landmark</label>
-                <input type="text" id="new-addr-landmark" placeholder="e.g. Near Metro Station" style="width:100%; padding:9px 12px; border:1px solid var(--border); border-radius:var(--radius-sm); outline:none;">
-              </div>
-              <div>
-                <label style="display:block; font-size:0.85rem; font-weight:700; margin-bottom:4px;">Pincode</label>
-                <input type="text" id="new-addr-pincode" placeholder="e.g. 560038" value="560038" style="width:100%; padding:9px 12px; border:1px solid var(--border); border-radius:var(--radius-sm); outline:none;">
-              </div>
+    if (modal) modal.remove();
+
+    const user = FoodAppStorage.getUser();
+    modal = document.createElement("div");
+    modal.id = "add-address-modal";
+    modal.className = "modal-overlay active";
+    modal.innerHTML = `
+      <div class="modal-box">
+        <div class="modal-header">
+          <h3 class="modal-title">Add New Delivery Address</h3>
+          <button class="modal-close" onclick="FoodApp.closeModal('add-address-modal')">&times;</button>
+        </div>
+        <div class="modal-body">
+          <div style="margin-bottom: 12px;">
+            <label style="display:block; font-size:0.85rem; font-weight:700; margin-bottom:4px;">Address Type</label>
+            <div style="display:flex; gap:10px;">
+              <label style="display:flex; align-items:center; gap:6px; font-size:0.9rem; font-weight:600;"><input type="radio" name="addr-type" value="Home" checked> 🏠 Home</label>
+              <label style="display:flex; align-items:center; gap:6px; font-size:0.9rem; font-weight:600;"><input type="radio" name="addr-type" value="Work"> 💼 Work</label>
+              <label style="display:flex; align-items:center; gap:6px; font-size:0.9rem; font-weight:600;"><input type="radio" name="addr-type" value="Other"> 📍 Other</label>
             </div>
           </div>
-          <div class="modal-footer">
-            <button class="btn btn-secondary btn-sm" onclick="FoodApp.closeModal('add-address-modal')">Cancel</button>
-            <button class="btn btn-primary btn-sm" onclick="Checkout.saveNewAddress()">Save Address</button>
+          <div style="margin-bottom: 12px;">
+            <label style="display:block; font-size:0.85rem; font-weight:700; margin-bottom:4px;">Full Name</label>
+            <input type="text" id="new-addr-name" placeholder="e.g. Thanush Masika" value="${user.name || 'Thanush Masika'}" style="width:100%; padding:9px 12px; border:1px solid var(--border); border-radius:var(--radius-sm); outline:none;">
+          </div>
+          <div style="margin-bottom: 12px;">
+            <label style="display:block; font-size:0.85rem; font-weight:700; margin-bottom:4px;">Phone Number</label>
+            <input type="tel" id="new-addr-phone" placeholder="e.g. 8328247714" value="${user.phone || '8328247714'}" style="width:100%; padding:9px 12px; border:1px solid var(--border); border-radius:var(--radius-sm); outline:none;">
+          </div>
+          <div style="margin-bottom: 12px;">
+            <label style="display:block; font-size:0.85rem; font-weight:700; margin-bottom:4px;">House No. / Flat / Building / Street</label>
+            <input type="text" id="new-addr-street" placeholder="e.g. Flat 301, Palm Grove Apts, 4th Cross" style="width:100%; padding:9px 12px; border:1px solid var(--border); border-radius:var(--radius-sm); outline:none;">
+          </div>
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom: 12px;">
+            <div>
+              <label style="display:block; font-size:0.85rem; font-weight:700; margin-bottom:4px;">Landmark</label>
+              <input type="text" id="new-addr-landmark" placeholder="e.g. Near Metro Station" style="width:100%; padding:9px 12px; border:1px solid var(--border); border-radius:var(--radius-sm); outline:none;">
+            </div>
+            <div>
+              <label style="display:block; font-size:0.85rem; font-weight:700; margin-bottom:4px;">Pincode</label>
+              <input type="text" id="new-addr-pincode" placeholder="e.g. 560038" value="560038" style="width:100%; padding:9px 12px; border:1px solid var(--border); border-radius:var(--radius-sm); outline:none;">
+            </div>
           </div>
         </div>
-      `;
-      document.body.appendChild(modal);
-    }
-    modal.classList.add("active");
+        <div class="modal-footer">
+          <button class="btn btn-secondary btn-sm" onclick="FoodApp.closeModal('add-address-modal')">Cancel</button>
+          <button class="btn btn-primary btn-sm" onclick="Checkout.saveNewAddress()">Save Address</button>
+        </div>
+      </div>
+    `;
+    document.body.appendChild(modal);
   },
 
   saveNewAddress: function() {
@@ -141,8 +147,121 @@ const Checkout = {
 
     this.selectedAddressId = newAddr.id;
     this.renderAddresses();
+    if (typeof Auth !== "undefined" && typeof Auth.renderProfileAddresses === "function") {
+      Auth.renderProfileAddresses();
+    }
     FoodApp.closeModal("add-address-modal");
     FoodApp.showToast("New delivery address added successfully! 📍", "success");
+  },
+
+  // Open Edit Address Modal
+  openEditAddressModal: function(addrId) {
+    const addresses = FoodAppStorage.getAddresses();
+    const addr = addresses.find(a => a.id === addrId);
+    if (!addr) return;
+
+    let modal = document.getElementById("edit-address-modal");
+    if (modal) modal.remove();
+
+    modal = document.createElement("div");
+    modal.id = "edit-address-modal";
+    modal.className = "modal-overlay active";
+    modal.innerHTML = `
+      <div class="modal-box">
+        <div class="modal-header">
+          <h3 class="modal-title">Edit Delivery Address</h3>
+          <button class="modal-close" onclick="FoodApp.closeModal('edit-address-modal')">&times;</button>
+        </div>
+        <div class="modal-body">
+          <div style="margin-bottom: 12px;">
+            <label style="display:block; font-size:0.85rem; font-weight:700; margin-bottom:4px;">Address Type</label>
+            <div style="display:flex; gap:10px;">
+              <label style="display:flex; align-items:center; gap:6px; font-size:0.9rem; font-weight:600;">
+                <input type="radio" name="edit-addr-type" value="Home" ${addr.type === 'Home' ? 'checked' : ''}> 🏠 Home
+              </label>
+              <label style="display:flex; align-items:center; gap:6px; font-size:0.9rem; font-weight:600;">
+                <input type="radio" name="edit-addr-type" value="Work" ${addr.type === 'Work' ? 'checked' : ''}> 💼 Work
+              </label>
+              <label style="display:flex; align-items:center; gap:6px; font-size:0.9rem; font-weight:600;">
+                <input type="radio" name="edit-addr-type" value="Other" ${addr.type === 'Other' ? 'checked' : ''}> 📍 Other
+              </label>
+            </div>
+          </div>
+          <div style="margin-bottom: 12px;">
+            <label style="display:block; font-size:0.85rem; font-weight:700; margin-bottom:4px;">Full Name</label>
+            <input type="text" id="edit-addr-name" value="${addr.name}" style="width:100%; padding:9px 12px; border:1px solid var(--border); border-radius:var(--radius-sm); outline:none;">
+          </div>
+          <div style="margin-bottom: 12px;">
+            <label style="display:block; font-size:0.85rem; font-weight:700; margin-bottom:4px;">Phone Number</label>
+            <input type="tel" id="edit-addr-phone" value="${addr.phone}" style="width:100%; padding:9px 12px; border:1px solid var(--border); border-radius:var(--radius-sm); outline:none;">
+          </div>
+          <div style="margin-bottom: 12px;">
+            <label style="display:block; font-size:0.85rem; font-weight:700; margin-bottom:4px;">House No. / Flat / Building / Street</label>
+            <input type="text" id="edit-addr-street" value="${addr.street}" style="width:100%; padding:9px 12px; border:1px solid var(--border); border-radius:var(--radius-sm); outline:none;">
+          </div>
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom: 12px;">
+            <div>
+              <label style="display:block; font-size:0.85rem; font-weight:700; margin-bottom:4px;">Landmark</label>
+              <input type="text" id="edit-addr-landmark" value="${addr.landmark || ''}" style="width:100%; padding:9px 12px; border:1px solid var(--border); border-radius:var(--radius-sm); outline:none;">
+            </div>
+            <div>
+              <label style="display:block; font-size:0.85rem; font-weight:700; margin-bottom:4px;">Pincode</label>
+              <input type="text" id="edit-addr-pincode" value="${addr.pincode}" style="width:100%; padding:9px 12px; border:1px solid var(--border); border-radius:var(--radius-sm); outline:none;">
+            </div>
+          </div>
+          <div style="margin-bottom: 12px;">
+            <label style="display:block; font-size:0.85rem; font-weight:700; margin-bottom:4px;">City</label>
+            <input type="text" id="edit-addr-city" value="${addr.city || 'Bangalore'}" style="width:100%; padding:9px 12px; border:1px solid var(--border); border-radius:var(--radius-sm); outline:none;">
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-secondary btn-sm" onclick="FoodApp.closeModal('edit-address-modal')">Cancel</button>
+          <button class="btn btn-primary btn-sm" onclick="Checkout.saveEditAddress('${addr.id}')">Save Changes ✅</button>
+        </div>
+      </div>
+    `;
+    document.body.appendChild(modal);
+  },
+
+  // Save Edited Address
+  saveEditAddress: function(addrId) {
+    const typeEl = document.querySelector("input[name='edit-addr-type']:checked");
+    const type = typeEl ? typeEl.value : "Home";
+    const name = document.getElementById("edit-addr-name").value.trim();
+    const phone = document.getElementById("edit-addr-phone").value.trim();
+    const street = document.getElementById("edit-addr-street").value.trim();
+    const landmark = document.getElementById("edit-addr-landmark").value.trim();
+    const pincode = document.getElementById("edit-addr-pincode").value.trim();
+    const city = document.getElementById("edit-addr-city").value.trim() || "Bangalore";
+
+    if (!name || !phone || !street || !pincode) {
+      FoodApp.showToast("Please fill all required address fields", "error");
+      return;
+    }
+
+    let addresses = FoodAppStorage.getAddresses();
+    const idx = addresses.findIndex(a => a.id === addrId);
+    if (idx > -1) {
+      addresses[idx] = {
+        ...addresses[idx],
+        type: type,
+        tagIcon: type === "Home" ? "🏠" : type === "Work" ? "💼" : "📍",
+        name: name,
+        phone: phone,
+        street: street,
+        landmark: landmark,
+        city: city,
+        pincode: pincode
+      };
+      FoodAppStorage.saveAddresses(addresses);
+      FoodApp.closeModal("edit-address-modal");
+      FoodApp.showToast("Address updated successfully! ✅", "success");
+
+      this.renderAddresses();
+      if (typeof Auth !== "undefined" && typeof Auth.renderProfileAddresses === "function") {
+        Auth.renderProfileAddresses();
+      }
+    }
   },
 
   // Payment Selection
