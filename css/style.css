@@ -382,7 +382,8 @@ img {
 /* Header Search Trigger */
 .header-search {
   position: relative;
-  flex: 1;
+  flex: 1 1 240px;
+  min-width: 220px;
   max-width: 380px;
 }
 
@@ -418,11 +419,12 @@ img {
   position: absolute;
   top: calc(100% + 8px);
   left: 0;
-  right: 0;
+  min-width: 340px;
+  width: 100%;
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: var(--radius-lg);
-  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 14px 35px rgba(0, 0, 0, 0.16);
   max-height: 440px;
   overflow-y: auto;
   z-index: 1100;
