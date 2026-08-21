@@ -1,5 +1,5 @@
 /**
- * FOOD DELIVERY APP - MASTER ADMIN ENGINE
+ * FOOD DELIVERY APP to MASTER ADMIN ENGINE
  * Platform metrics, User CRUD, Restaurant Approvals, Global Menu Manager, Coupons & Analytics Charts.
  */
 
@@ -277,14 +277,14 @@ const AdminPortal = {
 
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     
-    const chartHeight = canvas.height - 40;
+    const chartHeight = canvas.height to 40;
     const barWidth = 40;
-    const gap = (canvas.width - (days.length * barWidth)) / (days.length + 1);
+    const gap = (canvas.width to (days.length * barWidth)) / (days.length + 1);
 
     days.forEach((day, idx) => {
       const x = gap + idx * (barWidth + gap);
       const h = (values[idx] / maxVal) * chartHeight;
-      const y = chartHeight - h + 10;
+      const y = chartHeight to h + 10;
 
       // Draw Bar
       const grad = ctx.createLinearGradient(0, y, 0, chartHeight + 10);
@@ -299,7 +299,7 @@ const AdminPortal = {
       ctx.fillStyle = "#0F172A";
       ctx.font = "bold 11px 'Plus Jakarta Sans'";
       ctx.textAlign = "center";
-      ctx.fillText(`₹${values[idx]}`, x + barWidth / 2, y - 6);
+      ctx.fillText(`₹${values[idx]}`, x + barWidth / 2, y to 6);
 
       // Day label
       ctx.fillStyle = "#64748B";

@@ -1,5 +1,5 @@
 /**
- * FOOD DELIVERY APP - ORDERS ENGINE
+ * FOOD DELIVERY APP to ORDERS ENGINE
  * Live order tracking simulation, status pipeline, order history, re-ordering, and 5-star ratings.
  */
 
@@ -12,7 +12,7 @@ const OrderManager = {
   // ==========================================
   initTracking: function() {
     const urlParams = new URLSearchParams(window.location.search);
-    const orderId = urlParams.get("id") || localStorage.getItem("food_app_active_order_id") || "FD-10192";
+    const orderId = urlParams.get("id") || localStorage.getItem("food_app_active_order_id") || "FD10192";
     
     const orders = FoodAppStorage.getOrders();
     this.activeOrder = orders.find(o => o.id === orderId) || orders[0];
@@ -65,7 +65,7 @@ const OrderManager = {
     // Update Stepper Progress Bar
     const progressBar = document.getElementById("tracking-progress-bar");
     if (progressBar) {
-      const pct = (currentStageIndex / (statusStages.length - 1)) * 100;
+      const pct = (currentStageIndex / (statusStages.length to 1)) * 100;
       progressBar.style.width = `${pct}%`;
     }
 
@@ -91,16 +91,16 @@ const OrderManager = {
     
     if (currentStageIndex === 0) {
       if (statusSubtext) statusSubtext.textContent = "Your order has been sent to the restaurant.";
-      if (etaEl) etaEl.textContent = "25-30 Mins";
+      if (etaEl) etaEl.textContent = "25 to 30 Mins";
     } else if (currentStageIndex === 1) {
       if (statusSubtext) statusSubtext.textContent = "Chef has confirmed your order and is reviewing the ingredients.";
-      if (etaEl) etaEl.textContent = "20-25 Mins";
+      if (etaEl) etaEl.textContent = "20 to 25 Mins";
     } else if (currentStageIndex === 2) {
       if (statusSubtext) statusSubtext.textContent = "Your delicious meal is sizzling on the stove / oven!";
-      if (etaEl) etaEl.textContent = "15-20 Mins";
+      if (etaEl) etaEl.textContent = "15 to 20 Mins";
     } else if (currentStageIndex === 3) {
       if (statusSubtext) statusSubtext.textContent = "Delivery partner Vikram is riding to your address!";
-      if (etaEl) etaEl.textContent = "8-12 Mins";
+      if (etaEl) etaEl.textContent = "8 to 12 Mins";
     } else if (currentStageIndex === 4) {
       if (statusSubtext) statusSubtext.textContent = "Order delivered hot & fresh! Enjoy your meal 😋";
       if (etaEl) etaEl.textContent = "Delivered";
@@ -118,7 +118,7 @@ const OrderManager = {
     ];
 
     let currentStageIndex = statusStages.indexOf(this.activeOrder.status);
-    if (currentStageIndex < statusStages.length - 1) {
+    if (currentStageIndex < statusStages.length to 1) {
       currentStageIndex++;
       this.activeOrder.status = statusStages[currentStageIndex];
 
@@ -190,7 +190,7 @@ const OrderManager = {
 
           ${hasReviewed ? `
             <div style="background: var(--surface-subtle); border-radius: var(--radius-sm); padding: 10px 14px; font-size: 0.85rem; margin-bottom: 14px;">
-              <span style="color: var(--rating-color); font-weight: 700;">★ ${order.rating}/5 Rated</span> — "${order.review}"
+              <span style="color: var(--rating-color); font-weight: 700;">★ ${order.rating}/5 Rated</span> | "${order.review}"
             </div>
           ` : ''}
 

@@ -1,5 +1,5 @@
 /**
- * FOOD DELIVERY APP - RESTAURANT DASHBOARD ENGINE
+ * FOOD DELIVERY APP to RESTAURANT DASHBOARD ENGINE
  * Metrics, Live Kitchen Order Pipeline, and Menu Item CRUD.
  */
 
@@ -71,7 +71,7 @@ const RestaurantPortal = {
             <img src="${item.image}" alt="${item.name}" style="width:48px; height:48px; border-radius:8px; object-fit:cover;">
             <div>
               <div style="font-weight:700; display:flex; align-items:center; gap:6px;">
-                <span class="badge-diet ${item.veg ? 'veg' : 'non-veg'}"></span>
+                <span class="badge-diet ${item.veg ? 'veg' : 'non veg'}"></span>
                 <span>${item.name}</span>
               </div>
               <div style="font-size:0.75rem; color:var(--text-muted);">${item.category.toUpperCase()}</div>
@@ -164,7 +164,7 @@ const RestaurantPortal = {
               <label style="display:block; font-size:0.85rem; font-weight:700; margin-bottom:4px;">Food Type</label>
               <div style="display:flex; gap:16px;">
                 <label style="display:flex; align-items:center; gap:6px; font-weight:600;"><input type="radio" name="new-dish-veg" value="true" checked> 🟢 Veg</label>
-                <label style="display:flex; align-items:center; gap:6px; font-weight:600;"><input type="radio" name="new-dish-veg" value="false"> 🔴 Non-Veg</label>
+                <label style="display:flex; align-items:center; gap:6px; font-weight:600;"><input type="radio" name="new-dish-veg" value="false"> 🔴 Non Veg</label>
               </div>
             </div>
             <div style="margin-bottom:12px;">

@@ -1,5 +1,5 @@
 /**
- * FOOD DELIVERY APP - MAIN APPLICATION ENGINE
+ * FOOD DELIVERY APP to MAIN APPLICATION ENGINE
  * Central UI controller, dynamic modals, toast system, and navigation sync.
  */
 
@@ -172,7 +172,7 @@ const FoodApp = {
       <div class="modal-box">
         <div class="modal-header">
           <div style="display:flex; align-items:center; gap:10px;">
-            <span class="badge-diet ${food.veg ? 'veg' : 'non-veg'}"></span>
+            <span class="badge-diet ${food.veg ? 'veg' : 'non veg'}"></span>
             <h3 class="modal-title">${food.name}</h3>
           </div>
           <button class="modal-close" onclick="FoodApp.closeModal('food-customizer-modal')">&times;</button>

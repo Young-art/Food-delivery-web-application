@@ -1,5 +1,5 @@
 /**
- * FOOD DELIVERY APP - FAVORITES ENGINE
+ * FOOD DELIVERY APP to FAVORITES ENGINE
  * Wishlist management and dual-tab view for saved Dishes and saved Restaurants.
  */
 
@@ -62,7 +62,7 @@ const FavoritesPage = {
             <div class="food-card-content">
               <div class="food-card-header">
                 <div style="display:flex; align-items:center; gap:8px;">
-                  <span class="badge-diet ${food.veg ? 'veg' : 'non-veg'}"></span>
+                  <span class="badge-diet ${food.veg ? 'veg' : 'non veg'}"></span>
                   <h4 class="food-card-title" onclick="window.location.href='food-details.html?id=${food.id}'" style="cursor:pointer;">${food.name}</h4>
                 </div>
                 <span class="rating-pill" style="font-size:0.75rem;">★ ${food.rating}</span>

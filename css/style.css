@@ -230,11 +230,13 @@ img {
   background-color: var(--veg-color);
 }
 
-.badge-diet.non-veg {
+.badge-diet.non-veg,
+.badge-diet.nonveg {
   border: 2px solid var(--nonveg-color);
 }
 
-.badge-diet.non-veg::after {
+.badge-diet.non-veg::after,
+.badge-diet.nonveg::after {
   content: '';
   width: 8px;
   height: 8px;

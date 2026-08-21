@@ -1,5 +1,5 @@
 /**
- * FOOD DELIVERY APP - DATA STORE & SEED DATA
+ * FOOD DELIVERY APP to DATA STORE & SEED DATA
  * Central mock database with LocalStorage synchronization.
  * Designed to be clean, modular, and ready for future Spring Boot / MySQL backend.
  */
@@ -50,7 +50,7 @@ const FoodData = {
     {
       id: "chinese",
       name: "Chinese",
-      tagline: "Wok-tossed noodles, fried rice & fiery gravies",
+      tagline: "Wok tossed noodles, fried rice & fiery gravies",
       image: "https://images.unsplash.com/photo-1585032226651-759b368d7246?auto=format&fit=crop&w=600&q=80",
       banner: "https://images.unsplash.com/photo-1525755662778-989d0524087e?auto=format&fit=crop&w=1200&q=80",
       icon: "🥡",
@@ -123,7 +123,7 @@ const FoodData = {
       ratingCount: 320,
       veg: true,
       popular: true,
-      description: "Classic hand-tossed crust topped with rich Italian San Marzano tomato sauce, fresh mozzarella, and sweet basil leaves.",
+      description: "Classic hand tossed crust topped with rich Italian San Marzano tomato sauce, fresh mozzarella, and sweet basil leaves.",
       image: "https://images.unsplash.com/photo-1604382355076-af4b0eb60143?auto=format&fit=crop&w=600&q=80",
       ingredients: ["San Marzano Tomato Sauce", "Fresh Mozzarella", "Basil", "Extra Virgin Olive Oil"],
       addOns: [
@@ -182,7 +182,7 @@ const FoodData = {
       ratingCount: 410,
       veg: false,
       popular: true,
-      description: "Tender herb-roasted chicken cubes, black olives, sliced onions, and smoky mozzarella with aromatic herbs.",
+      description: "Tender herb roasted chicken cubes, black olives, sliced onions, and smoky mozzarella with aromatic herbs.",
       image: "https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=600&q=80",
       ingredients: ["Herb Roasted Chicken", "Black Olives", "Mozzarella", "Tomato Basil Base"],
       addOns: [
@@ -337,7 +337,7 @@ const FoodData = {
       ratingCount: 310,
       veg: false,
       popular: false,
-      description: "Flame-grilled chicken patty drenched in sweet & tangy hickory BBQ sauce, topped with crispy fried onions and melted pepper jack.",
+      description: "Flame grilled chicken patty drenched in sweet & tangy hickory BBQ sauce, topped with crispy fried onions and melted pepper jack.",
       image: "https://images.unsplash.com/photo-1572802419224-296b0aeee0d9?auto=format&fit=crop&w=600&q=80",
       ingredients: ["Hickory BBQ Chicken", "Crispy Onions", "Pepper Jack Cheese", "Pickles"],
       addOns: [
@@ -358,7 +358,7 @@ const FoodData = {
       ratingCount: 680,
       veg: false,
       popular: true,
-      description: "Dum-cooked long grain basmati rice infused with saffron, rose water, and tender chicken pieces marinated in fragrant spices. Served with raita.",
+      description: "Dum cooked long grain basmati rice infused with saffron, rose water, and tender chicken pieces marinated in fragrant spices. Served with raita.",
       image: "https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?auto=format&fit=crop&w=600&q=80",
       ingredients: ["Basmati Rice", "Tender Chicken", "Saffron", "Spices", "Raita"],
       addOns: [
@@ -378,7 +378,7 @@ const FoodData = {
       ratingCount: 540,
       veg: false,
       popular: true,
-      description: "Slow-cooked tender mutton shank pieces layered with royal aromatic rice, caramelized shallots, mint, and desi ghee.",
+      description: "Slow cooked tender mutton shank pieces layered with royal aromatic rice, caramelized shallots, mint, and desi ghee.",
       image: "https://images.unsplash.com/photo-1589302168068-964664d93dc0?auto=format&fit=crop&w=600&q=80",
       ingredients: ["Tender Mutton", "Desi Ghee", "Saffron Basmati", "Crispy Onions"],
       addOns: [
@@ -397,7 +397,7 @@ const FoodData = {
       ratingCount: 220,
       veg: false,
       popular: false,
-      description: "Crispy shallow-fried spiced eggs nestled inside fragrant aromatic biryani rice, topped with fresh coriander and brown onions.",
+      description: "Crispy shallow fried spiced eggs nestled inside fragrant aromatic biryani rice, topped with fresh coriander and brown onions.",
       image: "https://images.unsplash.com/photo-1633945274405-b6c8069047b0?auto=format&fit=crop&w=600&q=80",
       ingredients: ["Fried Eggs (3 pcs)", "Basmati Rice", "Biryani Spices", "Raita"],
       addOns: [
@@ -416,7 +416,7 @@ const FoodData = {
       ratingCount: 310,
       veg: true,
       popular: true,
-      description: "Garden fresh carrots, green beans, cauliflower, green peas, and potatoes dum-cooked with whole spices and basmati rice.",
+      description: "Garden fresh carrots, green beans, cauliflower, green peas, and potatoes dum cooked with whole spices and basmati rice.",
       image: "https://images.unsplash.com/photo-1642821373181-696a54913e93?auto=format&fit=crop&w=600&q=80",
       ingredients: ["Fresh Assorted Vegetables", "Basmati Rice", "Mint", "Whole Spices"],
       addOns: [
@@ -475,7 +475,7 @@ const FoodData = {
       ratingCount: 390,
       veg: false,
       popular: true,
-      description: "Bite-sized boneless chicken chunks marinated in ginger, garlic, red chilies, deep fried and tempered with curry leaves and green chilies.",
+      description: "Bite sized boneless chicken chunks marinated in ginger, garlic, red chilies, deep fried and tempered with curry leaves and green chilies.",
       image: "https://images.unsplash.com/photo-1610057099443-fde8c4d50f91?auto=format&fit=crop&w=600&q=80",
       ingredients: ["Boneless Chicken", "Curry Leaves", "Green Chilies", "Special 65 Masala"],
       addOns: [
@@ -513,7 +513,7 @@ const FoodData = {
       ratingCount: 280,
       veg: false,
       popular: false,
-      description: "Juicy chicken breast marinated in rosemary, thyme, lemon juice, and olive oil, char-grilled and served with sautéed vegetables.",
+      description: "Juicy chicken breast marinated in rosemary, thyme, lemon juice, and olive oil, char grilled and served with sautéed vegetables.",
       image: "https://images.unsplash.com/photo-1532550907401-a500c9a57435?auto=format&fit=crop&w=600&q=80",
       ingredients: ["Grilled Chicken Breast", "Rosemary Herbs", "Sautéed Veggies", "Mushroom Sauce"],
       addOns: [
@@ -551,7 +551,7 @@ const FoodData = {
       ratingCount: 310,
       veg: false,
       popular: false,
-      description: "Melt-in-the-mouth minced chicken seekh skewers blended with aromatic herbs, ginger, mint, and spices grilled over charcoal embers.",
+      description: "Melt in the mouth minced chicken seekh skewers blended with aromatic herbs, ginger, mint, and spices grilled over charcoal embers.",
       image: "https://images.unsplash.com/photo-1603360946369-dc9bb6258143?auto=format&fit=crop&w=600&q=80",
       ingredients: ["Minced Chicken Seekh", "Charcoal Grill Herbs", "Green Salad", "Mint Dip"],
       addOns: [
@@ -610,7 +610,7 @@ const FoodData = {
       ratingCount: 420,
       veg: false,
       popular: true,
-      description: "Classic wok-tossed rice with shredded tender chicken, scrambled eggs, spring onions, garlic, and savory Chinese spices.",
+      description: "Classic wok tossed rice with shredded tender chicken, scrambled eggs, spring onions, garlic, and savory Chinese spices.",
       image: "https://images.unsplash.com/photo-1603133872878-684f208fb84b?auto=format&fit=crop&w=600&q=80",
       ingredients: ["Chicken Chunks", "Scrambled Eggs", "Jasmine Rice", "Scallions"],
       addOns: [
@@ -629,7 +629,7 @@ const FoodData = {
       ratingCount: 260,
       veg: true,
       popular: false,
-      description: "Soft hakka noodles stir-fried with shredded cabbage, bell peppers, carrots, garlic, and a savory blend of Asian sauces.",
+      description: "Soft hakka noodles stir fried with shredded cabbage, bell peppers, carrots, garlic, and a savory blend of Asian sauces.",
       image: "https://images.unsplash.com/photo-1585032226651-759b368d7246?auto=format&fit=crop&w=600&q=80",
       ingredients: ["Hakka Noodles", "Cabbage", "Capsicum", "Garlic Soy Glaze"],
       addOns: [
@@ -648,7 +648,7 @@ const FoodData = {
       ratingCount: 480,
       veg: false,
       popular: true,
-      description: "Wok-seared noodles loaded with shredded chicken, egg ribbons, crisp julienned vegetables, and toasted sesame aroma.",
+      description: "Wok seared noodles loaded with shredded chicken, egg ribbons, crisp julienned vegetables, and toasted sesame aroma.",
       image: "https://images.unsplash.com/photo-1569718212165-3a8278d5f624?auto=format&fit=crop&w=600&q=80",
       ingredients: ["Egg Noodles", "Shredded Chicken", "Egg Ribbons", "Asian Vegetables"],
       addOns: [
@@ -667,7 +667,7 @@ const FoodData = {
       ratingCount: 350,
       veg: true,
       popular: true,
-      description: "Crispy fried vegetable dumpling balls tossed in a thick, tangy, spicy dark soy and ginger garlic Indo-Chinese gravy.",
+      description: "Crispy fried vegetable dumpling balls tossed in a thick, tangy, spicy dark soy and ginger garlic Indo Chinese gravy.",
       image: "https://images.unsplash.com/photo-1541832676-9b763b0239ab?auto=format&fit=crop&w=600&q=80",
       ingredients: ["Veg Manchurian Balls", "Ginger Garlic Gravy", "Coriander", "Dark Soy"],
       addOns: [
@@ -686,7 +686,7 @@ const FoodData = {
       ratingCount: 380,
       veg: true,
       popular: true,
-      description: "Fiery spicy noodles stir-fried in authentic Sichuan pepper chili paste with crunchy vegetables and spring onions.",
+      description: "Fiery spicy noodles stir fried in authentic Sichuan pepper chili paste with crunchy vegetables and spring onions.",
       image: "https://images.unsplash.com/photo-1612927601601-6638404737ce?auto=format&fit=crop&w=600&q=80",
       ingredients: ["Schezwan Chili Paste", "Hakka Noodles", "Garlic", "Spring Onions"],
       addOns: [
@@ -863,7 +863,7 @@ const FoodData = {
       ratingCount: 440,
       veg: false,
       popular: true,
-      description: "Power-packed bowl featuring 35g protein: quinoa, grilled chicken breast, edamame, boiled egg, steamed broccoli, and tahini drizzle.",
+      description: "Power packed bowl featuring 35g protein: quinoa, grilled chicken breast, edamame, boiled egg, steamed broccoli, and tahini drizzle.",
       image: "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=600&q=80",
       ingredients: ["Quinoa", "Grilled Chicken", "Edamame", "Boiled Egg", "Tahini"],
       addOns: [
@@ -882,7 +882,7 @@ const FoodData = {
       ratingCount: 180,
       veg: true,
       popular: false,
-      description: "Char-grilled zucchini, asparagus, bell peppers, cherry tomatoes, and button mushrooms seasoned with extra virgin olive oil and oregano.",
+      description: "Char grilled zucchini, asparagus, bell peppers, cherry tomatoes, and button mushrooms seasoned with extra virgin olive oil and oregano.",
       image: "https://images.unsplash.com/photo-1592417817098-8f3d69109853?auto=format&fit=crop&w=600&q=80",
       ingredients: ["Zucchini", "Asparagus", "Mushrooms", "Olive Oil", "Oregano"],
       addOns: [
@@ -901,7 +901,7 @@ const FoodData = {
       ratingCount: 230,
       veg: true,
       popular: false,
-      description: "Whole wheat multi-grain wrap loaded with hummus, baby spinach, roasted bell peppers, crunchy cucumbers, and avocado dressing.",
+      description: "Whole wheat multi grain wrap loaded with hummus, baby spinach, roasted bell peppers, crunchy cucumbers, and avocado dressing.",
       image: "https://images.unsplash.com/photo-1626700051175-6818013e1d4f?auto=format&fit=crop&w=600&q=80",
       ingredients: ["Whole Wheat Tortilla", "Baby Spinach", "Hummus", "Avocado Dressing"],
       addOns: [
@@ -998,7 +998,7 @@ const FoodData = {
       ratingCount: 320,
       veg: true,
       popular: false,
-      description: "Fluffy yeast-risen donut dipped in glossy dark chocolate glaze and finished with colorful rainbow sprinkles.",
+      description: "Fluffy yeast risen donut dipped in glossy dark chocolate glaze and finished with colorful rainbow sprinkles.",
       image: "https://images.unsplash.com/photo-1551024601-bec78aea704b?auto=format&fit=crop&w=600&q=80",
       ingredients: ["Glazed Donut", "Dark Chocolate Dip", "Rainbow Sprinkles"],
       addOns: [
@@ -1096,7 +1096,7 @@ const FoodData = {
       ratingCount: 290,
       veg: true,
       popular: false,
-      description: "100% cold-pressed Valencia orange juice freshly extracted with no added sugar or preservatives.",
+      description: "100% cold pressed Valencia orange juice freshly extracted with no added sugar or preservatives.",
       image: "https://images.unsplash.com/photo-1613478223719-2ab802602423?auto=format&fit=crop&w=600&q=80",
       ingredients: ["Valencia Oranges", "Crushed Ice", "Mint Leaf"],
       addOns: [
@@ -1211,7 +1211,7 @@ const FoodData = {
       ratingCount: 340,
       veg: true,
       popular: false,
-      description: "Creamy churned ice cream infused with real hand-picked Mahabaleshwar strawberry chunks.",
+      description: "Creamy churned ice cream infused with real hand picked Mahabaleshwar strawberry chunks.",
       image: "https://images.unsplash.com/photo-1497034825429-c343d7c6a68f?auto=format&fit=crop&w=600&q=80",
       ingredients: ["Fresh Strawberry Chunks", "Strawberry Swirl", "Cream"],
       addOns: [
@@ -1249,7 +1249,7 @@ const FoodData = {
       ratingCount: 530,
       veg: true,
       popular: true,
-      description: "Sun-ripened Ratnagiri Alphonso mango pulp churned into ultra-smooth seasonal gourmet ice cream.",
+      description: "Sun ripened Ratnagiri Alphonso mango pulp churned into ultra-smooth seasonal gourmet ice cream.",
       image: "https://images.unsplash.com/photo-1505394033641-40c6ad1178d7?auto=format&fit=crop&w=600&q=80",
       ingredients: ["Alphonso Mango Pulp", "Mango Chunks", "Sweetened Cream"],
       addOns: [
@@ -1286,7 +1286,7 @@ const FoodData = {
       cuisine: "Italian, Pizza, Fast Food",
       rating: 4.8,
       ratingCount: 1420,
-      deliveryTime: "25-30 mins",
+      deliveryTime: "25 to 30 mins",
       distance: "2.4 km",
       deliveryFee: 30,
       priceForTwo: "₹500 for two",
@@ -1294,7 +1294,7 @@ const FoodData = {
       image: "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=600&q=80",
       banner: "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1200&q=80",
       isOpen: true,
-      openingHours: "11:00 AM - 11:30 PM",
+      openingHours: "11:00 AM to 11:30 PM",
       address: "84, Little Italy Lane, Central Avenue",
       categories: ["pizza", "beverages", "desserts"]
     },
@@ -1304,7 +1304,7 @@ const FoodData = {
       cuisine: "Burgers, American, Shakes",
       rating: 4.7,
       ratingCount: 1890,
-      deliveryTime: "20-25 mins",
+      deliveryTime: "20 to 25 mins",
       distance: "1.8 km",
       deliveryFee: 25,
       priceForTwo: "₹400 for two",
@@ -1312,7 +1312,7 @@ const FoodData = {
       image: "https://images.unsplash.com/photo-1550547660-d9450f859349?auto=format&fit=crop&w=600&q=80",
       banner: "https://images.unsplash.com/photo-1466978913421-dad2ebd01d17?auto=format&fit=crop&w=1200&q=80",
       isOpen: true,
-      openingHours: "10:00 AM - 12:00 AM",
+      openingHours: "10:00 AM to 12:00 AM",
       address: "12, Downtown Plaza, Ring Road",
       categories: ["burgers", "beverages"]
     },
@@ -1322,7 +1322,7 @@ const FoodData = {
       cuisine: "Biryani, Mughlai, Kebabs",
       rating: 4.9,
       ratingCount: 3200,
-      deliveryTime: "30-35 mins",
+      deliveryTime: "30 to 35 mins",
       distance: "3.5 km",
       deliveryFee: 40,
       priceForTwo: "₹600 for two",
@@ -1330,7 +1330,7 @@ const FoodData = {
       image: "https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?auto=format&fit=crop&w=600&q=80",
       banner: "https://images.unsplash.com/photo-1514933651103-005eec06c04b?auto=format&fit=crop&w=1200&q=80",
       isOpen: true,
-      openingHours: "11:30 AM - 11:00 PM",
+      openingHours: "11:30 AM to 11:00 PM",
       address: "45, Heritage Chowk, Old Fort Area",
       categories: ["biryani", "chicken", "desserts"]
     },
@@ -1340,7 +1340,7 @@ const FoodData = {
       cuisine: "Chicken, North Indian, Tandoor",
       rating: 4.7,
       ratingCount: 1650,
-      deliveryTime: "25-30 mins",
+      deliveryTime: "25 to 30 mins",
       distance: "2.8 km",
       deliveryFee: 30,
       priceForTwo: "₹550 for two",
@@ -1348,17 +1348,17 @@ const FoodData = {
       image: "https://images.unsplash.com/photo-1626082927389-6cd097cdc6ec?auto=format&fit=crop&w=600&q=80",
       banner: "https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=1200&q=80",
       isOpen: true,
-      openingHours: "12:00 PM - 11:30 PM",
+      openingHours: "12:00 PM to 11:30 PM",
       address: "71, Spice Garden Boulevard, South Wing",
       categories: ["chicken", "biryani"]
     },
     {
       id: "rest-5",
-      name: "Dragon Wok Pan-Asian",
+      name: "Dragon Wok Pan Asian",
       cuisine: "Chinese, Asian, Noodles",
       rating: 4.6,
       ratingCount: 980,
-      deliveryTime: "25-30 mins",
+      deliveryTime: "25 to 30 mins",
       distance: "2.1 km",
       deliveryFee: 25,
       priceForTwo: "₹450 for two",
@@ -1366,7 +1366,7 @@ const FoodData = {
       image: "https://images.unsplash.com/photo-1585032226651-759b368d7246?auto=format&fit=crop&w=600&q=80",
       banner: "https://images.unsplash.com/photo-1525755662778-989d0524087e?auto=format&fit=crop&w=1200&q=80",
       isOpen: true,
-      openingHours: "11:00 AM - 10:30 PM",
+      openingHours: "11:00 AM to 10:30 PM",
       address: "19, Silk Route Complex, East End",
       categories: ["chinese"]
     },
@@ -1376,7 +1376,7 @@ const FoodData = {
       cuisine: "Mexican, Tacos, Burritos",
       rating: 4.8,
       ratingCount: 1120,
-      deliveryTime: "30-35 mins",
+      deliveryTime: "30 to 35 mins",
       distance: "3.2 km",
       deliveryFee: 35,
       priceForTwo: "₹500 for two",
@@ -1384,7 +1384,7 @@ const FoodData = {
       image: "https://images.unsplash.com/photo-1565299585323-38d6b0865b47?auto=format&fit=crop&w=600&q=80",
       banner: "https://images.unsplash.com/photo-1504544750208-dc0358e63f7f?auto=format&fit=crop&w=1200&q=80",
       isOpen: true,
-      openingHours: "12:00 PM - 11:00 PM",
+      openingHours: "12:00 PM to 11:00 PM",
       address: "88, Sunset Strip, Commercial Hub",
       categories: ["mexican", "beverages"]
     },
@@ -1394,7 +1394,7 @@ const FoodData = {
       cuisine: "Healthy Food, Salads, Smoothies",
       rating: 4.9,
       ratingCount: 890,
-      deliveryTime: "20-25 mins",
+      deliveryTime: "20 to 25 mins",
       distance: "1.5 km",
       deliveryFee: 20,
       priceForTwo: "₹450 for two",
@@ -1402,7 +1402,7 @@ const FoodData = {
       image: "https://images.unsplash.com/photo-1540420773420-3366772f4999?auto=format&fit=crop&w=600&q=80",
       banner: "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&w=1200&q=80",
       isOpen: true,
-      openingHours: "8:00 AM - 10:00 PM",
+      openingHours: "8:00 AM to 10:00 PM",
       address: "04, Wellness Park, Eco Zone",
       categories: ["healthy-food", "beverages"]
     },
@@ -1412,7 +1412,7 @@ const FoodData = {
       cuisine: "Desserts, Bakery, Ice Cream",
       rating: 4.9,
       ratingCount: 2450,
-      deliveryTime: "15-20 mins",
+      deliveryTime: "15 to 20 mins",
       distance: "1.2 km",
       deliveryFee: 20,
       priceForTwo: "₹350 for two",
@@ -1420,7 +1420,7 @@ const FoodData = {
       image: "https://images.unsplash.com/photo-1551024601-bec78aea704b?auto=format&fit=crop&w=600&q=80",
       banner: "https://images.unsplash.com/photo-1587314168485-3236d6710814?auto=format&fit=crop&w=1200&q=80",
       isOpen: true,
-      openingHours: "9:00 AM - 12:00 AM",
+      openingHours: "9:00 AM to 12:00 AM",
       address: "27, Baker Street Corner, Market Yard",
       categories: ["desserts", "ice-cream", "beverages"]
     }
@@ -1496,7 +1496,7 @@ const FoodData = {
   // Seed sample initial order history
   defaultOrders: [
     {
-      id: "FD-10192",
+      id: "FD10192",
       date: "2026-08-19 20:15",
       restaurantName: "Bella Italia Artisan Pizzeria",
       restaurantImage: "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=600&q=80",
@@ -1515,7 +1515,7 @@ const FoodData = {
       review: "Crispy crust and arrived piping hot! Loved it."
     },
     {
-      id: "FD-10185",
+      id: "FD10185",
       date: "2026-08-15 13:40",
       restaurantName: "Royal Darbar Biryani House",
       restaurantImage: "https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?auto=format&fit=crop&w=600&q=80",

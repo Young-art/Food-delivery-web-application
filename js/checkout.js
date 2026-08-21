@@ -1,5 +1,5 @@
 /**
- * FOOD DELIVERY APP - CHECKOUT CONTROLLER
+ * FOOD DELIVERY APP to CHECKOUT CONTROLLER
  * Manages Address selection & CRUD, Payment methods, and Order placement.
  */
 
@@ -42,7 +42,7 @@ const Checkout = {
         <div class="addr-type-pill">${addr.tagIcon || '📍'} ${addr.type}</div>
         <div style="font-weight: 700; font-size: 0.95rem; color: var(--text-main); margin-bottom: 4px;">${addr.name}</div>
         <div style="font-size: 0.85rem; color: var(--text-muted); line-height: 1.45; margin-bottom: 6px;">
-          ${addr.street}, ${addr.landmark}, ${addr.city} - ${addr.pincode}
+          ${addr.street}, ${addr.landmark}, ${addr.city} to ${addr.pincode}
         </div>
         <div style="font-size: 0.8rem; font-weight: 600; color: var(--text-main);">📞 ${addr.phone}</div>
       </div>
@@ -257,8 +257,8 @@ const Checkout = {
     const selectedAddr = addresses.find(a => a.id === this.selectedAddressId) || addresses[0];
     const totals = Cart.getTotals(this.activeCoupon);
     
-    // Generate Order ID (FD-xxxxx)
-    const orderId = "FD-" + Math.floor(10000 + Math.random() * 90000);
+    // Generate Order ID (FDxxxxx)
+    const orderId = "FD" + Math.floor(10000 + Math.random() * 90000);
     const orderDate = new Date().toISOString().replace("T", " ").substring(0, 16);
 
     const newOrder = {

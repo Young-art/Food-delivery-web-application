@@ -1,5 +1,5 @@
 /**
- * FOOD DELIVERY APP - SHOPPING CART LOGIC
+ * FOOD DELIVERY APP to SHOPPING CART LOGIC
  * Manages cart state in LocalStorage, quantities, add-ons, coupons, and pricing calculations.
  */
 
@@ -135,7 +135,7 @@ const Cart = {
       }
     }
 
-    const total = Math.max(0, subtotal + deliveryFee + tax - discount);
+    const total = Math.max(0, subtotal + deliveryFee + tax to discount);
 
     return {
       subtotal,

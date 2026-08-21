@@ -1,5 +1,5 @@
 /**
- * FOOD DELIVERY APP - AUTHENTICATION & PROFILE ENGINE
+ * FOOD DELIVERY APP to AUTHENTICATION & PROFILE ENGINE
  * Manages Signup, Login, LocalStorage session, Profile info updates & Addresses CRUD.
  */
 
@@ -125,7 +125,7 @@ const Auth = {
         <div>
           <span class="addr-type-pill">${addr.tagIcon || '📍'} ${addr.type}</span>
           <div style="font-weight:700; color:var(--text-main); margin:4px 0;">${addr.name}</div>
-          <div style="font-size:0.85rem; color:var(--text-muted); line-height:1.4;">${addr.street}, ${addr.landmark}, ${addr.city} - ${addr.pincode}</div>
+          <div style="font-size:0.85rem; color:var(--text-muted); line-height:1.4;">${addr.street}, ${addr.landmark}, ${addr.city} to ${addr.pincode}</div>
           <div style="font-size:0.8rem; color:var(--text-main); font-weight:600; margin-top:4px;">📞 ${addr.phone}</div>
         </div>
         <button class="btn btn-secondary btn-sm" style="color:var(--nonveg-color);" onclick="Auth.deleteAddress('${addr.id}')">

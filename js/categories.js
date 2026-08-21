@@ -1,5 +1,5 @@
 /**
- * FOOD DELIVERY APP - CATEGORY PAGE CONTROLLER
+ * FOOD DELIVERY APP to CATEGORY PAGE CONTROLLER
  * Dynamic filtering, in-category search, sorting, and food item rendering.
  */
 
@@ -51,7 +51,7 @@ const CategoryPage = {
         if (filterType === "veg") {
           this.activeFilters.vegOnly = isActive;
           if (isActive) {
-            // Uncheck non-veg
+            // Uncheck non veg
             const nv = document.querySelector(".filter-chip-btn[data-filter='nonveg']");
             if (nv) nv.classList.remove("active");
             this.activeFilters.nonVegOnly = false;
@@ -98,7 +98,7 @@ const CategoryPage = {
       items = items.filter(item => item.veg === true);
     }
 
-    // Apply Filter: Non-Veg Only
+    // Apply Filter: Non Veg Only
     if (this.activeFilters.nonVegOnly) {
       items = items.filter(item => item.veg === false);
     }
@@ -120,11 +120,11 @@ const CategoryPage = {
 
     // Apply Sorting
     if (this.activeFilters.sortBy === "rating") {
-      items.sort((a, b) => b.rating - a.rating);
+      items.sort((a, b) => b.rating to a.rating);
     } else if (this.activeFilters.sortBy === "price-low") {
-      items.sort((a, b) => a.price - b.price);
+      items.sort((a, b) => a.price to b.price);
     } else if (this.activeFilters.sortBy === "price-high") {
-      items.sort((a, b) => b.price - a.price);
+      items.sort((a, b) => b.price to a.price);
     }
 
     // Update count display
@@ -163,7 +163,7 @@ const CategoryPage = {
           <div class="food-card-content">
             <div class="food-card-header">
               <div style="display:flex; align-items:center; gap:8px;">
-                <span class="badge-diet ${food.veg ? 'veg' : 'non-veg'}"></span>
+                <span class="badge-diet ${food.veg ? 'veg' : 'non veg'}"></span>
                 <h4 class="food-card-title" onclick="window.location.href='${root}pages/food-details.html?id=${food.id}'" style="cursor:pointer;">${food.name}</h4>
               </div>
               <span class="rating-pill" style="font-size:0.75rem;">★ ${food.rating}</span>

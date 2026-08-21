@@ -1,5 +1,5 @@
 /**
- * FOOD DELIVERY APP - DELIVERY PARTNER ENGINE
+ * FOOD DELIVERY APP to DELIVERY PARTNER ENGINE
  * Manages Rider Availability, Available deliveries, Active delivery lifecycle & Earnings.
  */
 
