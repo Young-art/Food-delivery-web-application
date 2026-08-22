@@ -4,7 +4,7 @@ import { useAuth } from '../../context/AuthContext';
 import { useCart } from '../../context/CartContext';
 import { useLocation } from '../../context/LocationContext';
 import { CATEGORIES, FOOD_ITEMS, RESTAURANTS } from '../../data/mockData';
-import { Badge } from '../common/Badge';
+import { Badge, DietBadge } from '../common/Badge';
 import { 
   MapPin, 
   Search, 
@@ -18,8 +18,24 @@ import {
   Clock, 
   Home, 
   LayoutGrid, 
-  UtensilsCrossed 
+  UtensilsCrossed,
+  X,
+  Star,
+  Flame,
+  ArrowRight,
+  TrendingUp
 } from 'lucide-react';
+
+const TRENDING_SEARCHES = [
+  "Margherita Pizza",
+  "Dum Biryani",
+  "Smash Burger",
+  "Chicken Wings",
+  "Hakka Noodles",
+  "Avocado Bowl",
+  "Choco Lava",
+  "Cold Coffee"
+];
 
 export const Navbar = () => {
   const { user } = useAuth();
@@ -29,7 +45,8 @@ export const Navbar = () => {
   const routerLocation = useRouterLocation();
 
   const [searchQuery, setSearchQuery] = useState('');
-  const [searchResults, setSearchResults] = useState([]);
+  const [matchedDishes, setMatchedDishes] = useState([]);
+  const [matchedRests, setMatchedRests] = useState([]);
   const [showSearchDropdown, setShowSearchDropdown] = useState(false);
   const [showUserDropdown, setShowUserDropdown] = useState(false);
   const [showCategoriesDropdown, setShowCategoriesDropdown] = useState(false);
@@ -61,29 +78,68 @@ export const Navbar = () => {
     };
   }, []);
 
-  const handleSearch = (val) => {
+  const executeSearch = (val) => {
     setSearchQuery(val);
     if (!val.trim()) {
-      setSearchResults([]);
-      setShowSearchDropdown(false);
+      setMatchedDishes([]);
+      setMatchedRests([]);
       return;
     }
-    const q = val.toLowerCase();
-    const matchedFoods = FOOD_ITEMS.filter(f => f.name.toLowerCase().includes(q) || f.category.toLowerCase().includes(q)).slice(0, 4);
-    const matchedRests = RESTAURANTS.filter(r => r.name.toLowerCase().includes(q) || r.cuisine.toLowerCase().includes(q)).slice(0, 3);
-    setSearchResults([...matchedFoods, ...matchedRests]);
+    const q = val.toLowerCase().trim();
+
+    // Search across food items
+    const foods = FOOD_ITEMS.filter(f => {
+      const inName = f.name.toLowerCase().includes(q);
+      const inCat = f.category.toLowerCase().includes(q);
+      const inDesc = f.description.toLowerCase().includes(q);
+      const inRest = f.restaurantName.toLowerCase().includes(q);
+      const inIng = f.ingredients?.some(i => i.toLowerCase().includes(q));
+      return inName || inCat || inDesc || inRest || inIng;
+    }).slice(0, 5);
+
+    // Search across restaurants
+    const rests = RESTAURANTS.filter(r => {
+      const inName = r.name.toLowerCase().includes(q);
+      const inCuisine = r.cuisine.toLowerCase().includes(q);
+      const inOffer = r.offer?.toLowerCase().includes(q);
+      return inName || inCuisine || inOffer;
+    }).slice(0, 3);
+
+    setMatchedDishes(foods);
+    setMatchedRests(rests);
     setShowSearchDropdown(true);
   };
 
-  const handleSelectResult = (item) => {
-    setSearchQuery('');
-    setSearchResults([]);
-    setShowSearchDropdown(false);
-    if (item.cuisine) {
-      navigate(`/restaurant/${item.id}`);
-    } else {
-      navigate(`/food/${item.id}`);
+  const handleKeyDown = (e) => {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      if (searchQuery.trim()) {
+        setShowSearchDropdown(false);
+        navigate(`/search?q=${encodeURIComponent(searchQuery.trim())}`);
+      }
     }
+  };
+
+  const handleSelectFood = (food) => {
+    setSearchQuery('');
+    setShowSearchDropdown(false);
+    navigate(`/food/${food.id}`);
+  };
+
+  const handleSelectRestaurant = (rest) => {
+    setSearchQuery('');
+    setShowSearchDropdown(false);
+    navigate(`/restaurant/${rest.id}`);
+  };
+
+  const handleSelectTrending = (tag) => {
+    setSearchQuery(tag);
+    executeSearch(tag);
+  };
+
+  const handleViewAllResults = () => {
+    setShowSearchDropdown(false);
+    navigate(`/search?q=${encodeURIComponent(searchQuery.trim())}`);
   };
 
   const isHomeActive = routerLocation.pathname === '/';
@@ -96,7 +152,7 @@ export const Navbar = () => {
       <div className="container nav-container">
         
         {/* Brand Logo & Location */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
           <Link to="/" className="brand-logo">
             <span style={{ color: 'var(--primary)', display: 'flex', alignItems: 'center' }}>
               <ShoppingBag size={24} />
@@ -115,53 +171,210 @@ export const Navbar = () => {
 
         {/* Global Live Search Bar */}
         <div className="nav-search-bar" ref={searchBoxRef}>
-          <Search size={16} className="nav-search-icon" />
+          <Search size={17} className="nav-search-icon" />
           <input
             type="text"
             className="nav-search-input"
             placeholder="Search pizza, biryani, burgers, restaurants..."
             value={searchQuery}
-            onChange={e => handleSearch(e.target.value)}
-            onFocus={() => {
-              if (searchResults.length > 0) setShowSearchDropdown(true);
-            }}
+            onChange={e => executeSearch(e.target.value)}
+            onFocus={() => setShowSearchDropdown(true)}
+            onKeyDown={handleKeyDown}
           />
-          {showSearchDropdown && searchResults.length > 0 && (
+          {searchQuery && (
+            <button
+              onClick={() => {
+                setSearchQuery('');
+                setMatchedDishes([]);
+                setMatchedRests([]);
+              }}
+              style={{
+                position: 'absolute',
+                right: '14px',
+                top: '50%',
+                transform: 'translateY(-50%)',
+                background: 'none',
+                border: 'none',
+                cursor: 'pointer',
+                color: 'var(--text-muted)',
+                display: 'flex',
+                alignItems: 'center',
+                padding: '4px'
+              }}
+            >
+              <X size={15} />
+            </button>
+          )}
+
+          {/* Search Dropdown Popover */}
+          {showSearchDropdown && (
             <div style={{
               position: 'absolute',
-              top: 'calc(100% + 6px)',
+              top: 'calc(100% + 8px)',
               left: 0,
               right: 0,
               background: 'var(--surface)',
               border: '1px solid var(--border)',
-              borderRadius: 'var(--radius-lg)',
-              boxShadow: 'var(--shadow-xl)',
-              zIndex: 100,
-              maxHeight: '300px',
-              overflowY: 'auto'
+              borderRadius: 'var(--radius-xl)',
+              boxShadow: '0 20px 35px -8px rgba(0, 0, 0, 0.2), 0 8px 16px -4px rgba(0, 0, 0, 0.08)',
+              zIndex: 300,
+              maxHeight: '440px',
+              overflowY: 'auto',
+              padding: '12px'
             }}>
-              {searchResults.map((item, i) => (
-                <div
-                  key={i}
-                  onClick={() => handleSelectResult(item)}
-                  style={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: '12px',
-                    padding: '10px 14px',
-                    borderBottom: '1px solid var(--border)',
-                    cursor: 'pointer'
-                  }}
-                >
-                  <img src={item.image} alt={item.name} style={{ width: '36px', height: '36px', borderRadius: 'var(--radius-sm)', objectFit: 'cover' }} />
-                  <div style={{ flex: 1 }}>
-                    <div style={{ fontWeight: '700', fontSize: '0.85rem' }}>{item.name}</div>
-                    <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>
-                      {item.cuisine || `${item.category} • ₹${item.price}`}
-                    </div>
+              
+              {/* If search query is empty, show Trending Searches */}
+              {!searchQuery.trim() ? (
+                <div>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '0.78rem', fontWeight: '800', color: 'var(--text-muted)', textTransform: 'uppercase', marginBottom: '10px', padding: '0 6px' }}>
+                    <TrendingUp size={14} color="var(--primary)" /> Popular Cravings
+                  </div>
+                  <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px', padding: '0 4px' }}>
+                    {TRENDING_SEARCHES.map(item => (
+                      <button
+                        key={item}
+                        type="button"
+                        onClick={() => handleSelectTrending(item)}
+                        className="chip"
+                        style={{ fontSize: '0.82rem', padding: '6px 12px' }}
+                      >
+                        <Search size={12} color="var(--primary)" /> {item}
+                      </button>
+                    ))}
                   </div>
                 </div>
-              ))}
+              ) : (matchedDishes.length === 0 && matchedRests.length === 0) ? (
+                <div style={{ textAlign: 'center', padding: '24px 12px' }}>
+                  <p style={{ fontWeight: '700', fontSize: '0.92rem', color: 'var(--text-main)', marginBottom: '4px' }}>
+                    No quick results for "{searchQuery}"
+                  </p>
+                  <p style={{ fontSize: '0.78rem', color: 'var(--text-muted)', marginBottom: '12px' }}>
+                    Press Enter to view full search catalog
+                  </p>
+                  <button
+                    className="btn btn-primary btn-sm"
+                    onClick={handleViewAllResults}
+                  >
+                    View All Results &rarr;
+                  </button>
+                </div>
+              ) : (
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '14px' }}>
+                  
+                  {/* Matched Dishes */}
+                  {matchedDishes.length > 0 && (
+                    <div>
+                      <div style={{ fontSize: '0.75rem', fontWeight: '800', color: 'var(--text-muted)', textTransform: 'uppercase', marginBottom: '6px', padding: '0 6px' }}>
+                        Dishes ({matchedDishes.length})
+                      </div>
+                      <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
+                        {matchedDishes.map(food => (
+                          <div
+                            key={food.id}
+                            onClick={() => handleSelectFood(food)}
+                            style={{
+                              display: 'flex',
+                              alignItems: 'center',
+                              justifyContent: 'space-between',
+                              padding: '8px 10px',
+                              borderRadius: 'var(--radius-md)',
+                              cursor: 'pointer',
+                              transition: 'background 0.15s ease'
+                            }}
+                            onMouseEnter={e => e.currentTarget.style.background = 'var(--surface-subtle)'}
+                            onMouseLeave={e => e.currentTarget.style.background = 'transparent'}
+                          >
+                            <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+                              <img
+                                src={food.image}
+                                alt={food.name}
+                                style={{ width: '42px', height: '42px', borderRadius: 'var(--radius-sm)', objectFit: 'cover' }}
+                              />
+                              <div>
+                                <div style={{ display: 'flex', alignItems: 'center', gap: '6px', marginBottom: '2px' }}>
+                                  <DietBadge isVeg={food.veg} />
+                                  <span style={{ fontWeight: '700', fontSize: '0.88rem', color: 'var(--text-main)' }}>{food.name}</span>
+                                </div>
+                                <div style={{ fontSize: '0.76rem', color: 'var(--text-muted)' }}>
+                                  {food.restaurantName} • <Badge variant="primary" style={{ fontSize: '0.62rem', padding: '1px 5px' }}>{food.category}</Badge>
+                                </div>
+                              </div>
+                            </div>
+
+                            <div style={{ textAlign: 'right' }}>
+                              <div style={{ fontWeight: '800', fontFamily: 'Outfit, sans-serif', fontSize: '0.95rem', color: 'var(--text-main)' }}>
+                                ₹{food.price}
+                              </div>
+                              <div style={{ display: 'flex', alignItems: 'center', gap: '2px', fontSize: '0.72rem', color: '#D97706', fontWeight: '700' }}>
+                                <Star size={10} fill="#F59E0B" /> {food.rating}
+                              </div>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Matched Restaurants */}
+                  {matchedRests.length > 0 && (
+                    <div style={{ borderTop: '1px solid var(--border)', paddingTop: '10px' }}>
+                      <div style={{ fontSize: '0.75rem', fontWeight: '800', color: 'var(--text-muted)', textTransform: 'uppercase', marginBottom: '6px', padding: '0 6px' }}>
+                        Restaurants ({matchedRests.length})
+                      </div>
+                      <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
+                        {matchedRests.map(rest => (
+                          <div
+                            key={rest.id}
+                            onClick={() => handleSelectRestaurant(rest)}
+                            style={{
+                              display: 'flex',
+                              alignItems: 'center',
+                              justifyContent: 'space-between',
+                              padding: '8px 10px',
+                              borderRadius: 'var(--radius-md)',
+                              cursor: 'pointer',
+                              transition: 'background 0.15s ease'
+                            }}
+                            onMouseEnter={e => e.currentTarget.style.background = 'var(--surface-subtle)'}
+                            onMouseLeave={e => e.currentTarget.style.background = 'transparent'}
+                          >
+                            <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+                              <img
+                                src={rest.image}
+                                alt={rest.name}
+                                style={{ width: '42px', height: '42px', borderRadius: 'var(--radius-sm)', objectFit: 'cover' }}
+                              />
+                              <div>
+                                <div style={{ fontWeight: '700', fontSize: '0.88rem', color: 'var(--text-main)' }}>{rest.name}</div>
+                                <div style={{ fontSize: '0.76rem', color: 'var(--text-muted)' }}>{rest.cuisine}</div>
+                              </div>
+                            </div>
+
+                            <div style={{ textAlign: 'right' }}>
+                              <div style={{ display: 'flex', alignItems: 'center', gap: '3px', background: '#10B981', color: '#FFF', padding: '1px 6px', borderRadius: 'var(--radius-sm)', fontSize: '0.75rem', fontWeight: '800' }}>
+                                <span>{rest.rating}</span>
+                                <Star size={9} fill="#FFF" />
+                              </div>
+                              <div style={{ fontSize: '0.72rem', color: 'var(--text-muted)', marginTop: '2px' }}>{rest.deliveryTime}</div>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+
+                  {/* View All Results Button */}
+                  <button
+                    onClick={handleViewAllResults}
+                    className="btn btn-primary btn-sm"
+                    style={{ width: '100%', marginTop: '6px', borderRadius: 'var(--radius-md)' }}
+                  >
+                    View All Results for "{searchQuery}" <ArrowRight size={14} />
+                  </button>
+
+                </div>
+              )}
+
             </div>
           )}
         </div>

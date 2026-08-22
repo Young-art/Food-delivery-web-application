@@ -19,6 +19,7 @@ import { RestaurantMenu } from './pages/storefront/RestaurantMenu';
 import { FoodDetails } from './pages/storefront/FoodDetails';
 import { Cart } from './pages/storefront/Cart';
 import { Checkout } from './pages/storefront/Checkout';
+import { SearchResults } from './pages/storefront/SearchResults';
 import { OrderTracking } from './pages/storefront/OrderTracking';
 import { OrderHistory } from './pages/storefront/OrderHistory';
 import { Favorites } from './pages/storefront/Favorites';
@@ -58,6 +59,7 @@ const AppContent = () => {
           <Route path="/food/:id" element={<FoodDetails />} />
           <Route path="/cart" element={<Cart />} />
           <Route path="/checkout" element={<Checkout />} />
+          <Route path="/search" element={<SearchResults />} />
           <Route path="/order-tracking/:orderId" element={<OrderTracking />} />
           <Route path="/orders" element={<OrderHistory />} />
           <Route path="/favorites" element={<Favorites />} />
