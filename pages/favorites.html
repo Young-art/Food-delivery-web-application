@@ -15,18 +15,24 @@
     <div class="container header-container">
       <div class="header-left">
         <a href="../index.html" class="brand-logo">
-          <div class="logo-icon">🍔</div>
+          <div class="logo-icon">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8h1a4 4 0 0 1 0 8h-1"></path><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"></path><line x1="6" y1="1" x2="6" y2="4"></line><line x1="10" y1="1" x2="10" y2="4"></line><line x1="14" y1="1" x2="14" y2="4"></line></svg>
+          </div>
           <span>Food<span>iez</span></span>
         </a>
         <div class="location-selector">
-          <span style="font-size: 1.1rem;">📍</span>
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a8 8 0 0 0-8 8c0 5.25 8 12 8 12s8-6.75 8-12a8 8 0 0 0-8-8z"/><circle cx="12" cy="10" r="3"/></svg>
           <span class="current-location-text">Bangalore, Indiranagar</span>
-          <span class="loc-arrow">▼</span>
+          <span class="loc-arrow">
+            <svg viewBox="0 0 24 24" width="10" height="10" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+          </span>
         </div>
       </div>
 
       <div class="header-search">
-        <span class="search-icon">🔍</span>
+        <span class="search-icon">
+          <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        </span>
         <input type="text" class="global-search-input" placeholder="Search dishes & restaurants...">
       </div>
 
@@ -86,17 +92,22 @@
 
     <div style="margin: 20px 0 24px; display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 16px;">
       <div>
+        <div style="margin-bottom: 6px;">
+          <span class="badge badge-primary" style="font-size: 0.8rem; padding: 4px 12px;">SAVED WISHLIST</span>
+        </div>
         <h1 style="font-size: 2.2rem; font-weight: 800; margin-bottom: 6px;">Your Favourites</h1>
         <p style="color: var(--text-muted); font-size: 0.95rem;">Quickly reorder your beloved food items and top restaurants.</p>
       </div>
 
-      <!-- Tab Buttons -->
+      <!-- Tab Buttons with Badges -->
       <div style="display: flex; gap: 10px;">
-        <button class="chip fav-tab-btn active" data-tab="food">
-          Favourite Dishes
+        <button class="chip fav-tab-btn active" data-tab="food" style="display:inline-flex; align-items:center; gap:8px;">
+          <span class="badge badge-primary" style="font-size:0.75rem; padding:2px 8px;">DISHES</span>
+          <span>Favourite Dishes</span>
         </button>
-        <button class="chip fav-tab-btn" data-tab="restaurants">
-          Favourite Restaurants
+        <button class="chip fav-tab-btn" data-tab="restaurants" style="display:inline-flex; align-items:center; gap:8px;">
+          <span class="badge badge-warning" style="font-size:0.75rem; padding:2px 8px;">DINING</span>
+          <span>Favourite Restaurants</span>
         </button>
       </div>
     </div>
@@ -113,7 +124,9 @@
 
     <!-- Empty View -->
     <div id="fav-empty-view" style="display: none; padding: 70px 20px; text-align: center; background: var(--surface); border-radius: var(--radius-xl); border: 1px solid var(--border); max-width: 540px; margin: 30px auto;">
-      <div style="font-size: 3.5rem; margin-bottom: 12px;">🤍</div>
+      <div style="margin-bottom: 12px; color: var(--text-muted);">
+        <svg viewBox="0 0 24 24" width="48" height="48" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+      </div>
       <h3 style="font-size: 1.4rem; font-weight: 800; margin-bottom: 8px;">No Favourites Saved</h3>
       <p style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 24px;">Tap the heart icon on any dish or restaurant to bookmark it for quick access.</p>
       <a href="../index.html" class="btn btn-primary btn-sm">Explore Food &rarr;</a>
@@ -126,9 +139,9 @@
     <div class="container">
       <div class="footer-bottom">
         <div>&copy; 2026 Foodiez Technologies Inc. All rights reserved.</div>
-        <div style="display: flex; gap: 20px;">
-          <span>🔒 256 Bit SSL Encrypted</span>
-          <span>⚡ 30 Min Delivery Promise</span>
+        <div style="display: flex; gap: 20px; align-items: center;">
+          <span style="display:inline-flex; align-items:center; gap:4px;"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg> 256 Bit SSL Encrypted</span>
+          <span style="display:inline-flex; align-items:center; gap:4px;"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg> 30 Min Delivery Promise</span>
         </div>
       </div>
     </div>

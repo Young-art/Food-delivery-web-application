@@ -18,11 +18,11 @@ const DeliveryPortal = {
     const badge = document.getElementById("rider-status-pill");
     if (badge) {
       if (this.isOnline) {
-        badge.className = "status-badge success";
-        badge.textContent = "🟢 Online & Receiving Orders";
+        badge.className = "badge badge-success";
+        badge.textContent = "ONLINE & RECEIVING ORDERS";
       } else {
-        badge.className = "status-badge danger";
-        badge.textContent = "🔴 Offline";
+        badge.className = "badge badge-primary";
+        badge.textContent = "OFFLINE";
       }
     }
     FoodApp.showToast(`Status: You are now ${this.isOnline ? 'Online' : 'Offline'}`, "info");
@@ -41,7 +41,7 @@ const DeliveryPortal = {
     if (earnEl) earnEl.textContent = `₹${earnings + 250}`; // + Base incentive
 
     const ratingEl = document.getElementById("rider-kpi-rating");
-    if (ratingEl) ratingEl.textContent = "⭐ 4.9 (142 ratings)";
+    if (ratingEl) ratingEl.textContent = "4.9 (142 ratings)";
   },
 
   renderAvailableDeliveries: function() {
@@ -63,7 +63,7 @@ const DeliveryPortal = {
     if (available.length === 0) {
       container.innerHTML = `
         <div style="padding: 40px 20px; text-align: center; color: var(--text-muted);">
-          🎉 No pending orders right now. You're in a high-demand zone!
+          No pending orders right now. You're in a high-demand zone!
         </div>
       `;
       return;

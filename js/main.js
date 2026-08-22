@@ -119,12 +119,12 @@ const FoodApp = {
               Choose your city to discover restaurants & top dishes delivering to you.
             </p>
             <div style="display: flex; flex-direction: column; gap: 10px;">
-              <button class="city-opt-btn chip active" onclick="FoodApp.selectLocation('Bangalore, Indiranagar')">📍 Bangalore, Indiranagar</button>
-              <button class="city-opt-btn chip" onclick="FoodApp.selectLocation('Bangalore, Koramangala')">📍 Bangalore, Koramangala</button>
-              <button class="city-opt-btn chip" onclick="FoodApp.selectLocation('Mumbai, Bandra West')">📍 Mumbai, Bandra West</button>
-              <button class="city-opt-btn chip" onclick="FoodApp.selectLocation('Delhi NCR, Connaught Place')">📍 Delhi NCR, Connaught Place</button>
-              <button class="city-opt-btn chip" onclick="FoodApp.selectLocation('Hyderabad, Hitec City')">📍 Hyderabad, Hitec City</button>
-              <button class="city-opt-btn chip" onclick="FoodApp.selectLocation('Pune, Koregaon Park')">📍 Pune, Koregaon Park</button>
+              <button class="city-opt-btn chip active" onclick="FoodApp.selectLocation('Bangalore, Indiranagar')" style="display:inline-flex; align-items:center; gap:8px;"><span class="badge badge-primary" style="font-size:0.7rem; padding:2px 6px;">BLR</span> Bangalore, Indiranagar</button>
+              <button class="city-opt-btn chip" onclick="FoodApp.selectLocation('Bangalore, Koramangala')" style="display:inline-flex; align-items:center; gap:8px;"><span class="badge badge-primary" style="font-size:0.7rem; padding:2px 6px;">BLR</span> Bangalore, Koramangala</button>
+              <button class="city-opt-btn chip" onclick="FoodApp.selectLocation('Mumbai, Bandra West')" style="display:inline-flex; align-items:center; gap:8px;"><span class="badge badge-primary" style="font-size:0.7rem; padding:2px 6px;">BOM</span> Mumbai, Bandra West</button>
+              <button class="city-opt-btn chip" onclick="FoodApp.selectLocation('Delhi NCR, Connaught Place')" style="display:inline-flex; align-items:center; gap:8px;"><span class="badge badge-primary" style="font-size:0.7rem; padding:2px 6px;">DEL</span> Delhi NCR, Connaught Place</button>
+              <button class="city-opt-btn chip" onclick="FoodApp.selectLocation('Hyderabad, Hitec City')" style="display:inline-flex; align-items:center; gap:8px;"><span class="badge badge-primary" style="font-size:0.7rem; padding:2px 6px;">HYD</span> Hyderabad, Hitec City</button>
+              <button class="city-opt-btn chip" onclick="FoodApp.selectLocation('Pune, Koregaon Park')" style="display:inline-flex; align-items:center; gap:8px;"><span class="badge badge-primary" style="font-size:0.7rem; padding:2px 6px;">PNQ</span> Pune, Koregaon Park</button>
             </div>
           </div>
         </div>
@@ -250,7 +250,7 @@ const FoodApp = {
             <span id="modal-total-display" style="font-size:1.3rem; font-weight:800; font-family:'Outfit', sans-serif; color:var(--text-main);">₹${food.price}</span>
           </div>
           <button class="btn btn-primary" onclick="FoodApp.confirmCustomizedAdd('${food.id}')">
-            Add to Cart 🛒
+            Add to Cart &rarr;
           </button>
         </div>
       </div>
@@ -321,17 +321,62 @@ const FoodApp = {
     FoodAppStorage.saveFavorites(favs);
   },
 
-  // Quick Switch Role Helper Bar for easy role navigation
-  injectRoleSwitcher: function() {
-    const root = this.getRootPath();
+  // Toast Notification System
+  showToast: function(message, type = "info") {
+    let container = document.getElementById("toast-container");
+    if (!container) {
+      container = document.createElement("div");
+      container.id = "toast-container";
+      container.className = "toast-container";
+      document.body.appendChild(container);
+    }
+
+    const toast = document.createElement("div");
+    toast.className = `toast ${type}`;
+    
+    let iconSvg = "";
+    if (type === "success") {
+      iconSvg = `<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>`;
+    } else if (type === "error") {
+      iconSvg = `<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>`;
+    } else {
+      iconSvg = `<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>`;
+    }
+
+    toast.innerHTML = `
+      <div style="display:flex; align-items:center; gap:8px;">
+        <span style="display:flex; align-items:center;">${iconSvg}</span>
+        <span>${message}</span>
+      </div>
+    `;
+
+    container.appendChild(toast);
+
+    setTimeout(() => {
+      toast.style.opacity = "0";
+      toast.style.transform = "translateX(50px)";
+      setTimeout(() => toast.remove(), 300);
+    }, 3500);
+  },
+
+  // Floating Multi-Portal Navigation helper for easy demoing
+  injectPortalSwitcher: function() {
+    const isLocal = window.location.protocol === "file:" || window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1";
+    if (!isLocal && !window.location.hostname.includes("github.io")) return;
+
+    const currentPath = window.location.pathname;
+    let root = "";
+    if (currentPath.includes("/pages/") || currentPath.includes("/admin/") || currentPath.includes("/restaurant/") || currentPath.includes("/delivery/")) {
+      root = "../";
+    }
+
     const bar = document.createElement("div");
-    bar.id = "role-quick-switcher";
+    bar.id = "dev-portal-switcher";
     bar.style.cssText = `
       position: fixed;
-      bottom: 12px;
-      left: 50%;
-      transform: translateX(-50%);
-      background: rgba(15, 23, 42, 0.95);
+      bottom: 16px;
+      right: 16px;
+      background: rgba(15, 23, 42, 0.9);
       backdrop-filter: blur(10px);
       border: 1px solid rgba(255, 255, 255, 0.15);
       border-radius: 999px;
@@ -347,7 +392,7 @@ const FoodApp = {
     `;
 
     bar.innerHTML = `
-      <span style="color:#FFF; display:flex; align-items:center; gap:4px;">✨ Portal Switcher:</span>
+      <span class="badge badge-primary" style="font-size:0.72rem; padding:2px 7px;">PORTALS</span>
       <a href="${root}index.html" style="color:#FFF; padding:3px 8px; border-radius:99px; background:${window.location.pathname.endsWith('index.html') || window.location.pathname.endsWith('/') ? 'var(--primary)' : 'rgba(255,255,255,0.1)'};">Customer</a>
       <a href="${root}restaurant/dashboard.html" style="color:#FFF; padding:3px 8px; border-radius:99px; background:${window.location.pathname.includes('/restaurant/') ? 'var(--primary)' : 'rgba(255,255,255,0.1)'};">Restaurant</a>
       <a href="${root}delivery/dashboard.html" style="color:#FFF; padding:3px 8px; border-radius:99px; background:${window.location.pathname.includes('/delivery/') ? 'var(--primary)' : 'rgba(255,255,255,0.1)'};">Delivery Partner</a>

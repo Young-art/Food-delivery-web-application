@@ -71,6 +71,9 @@ const FavoritesPage = {
                   ${food.rating}
                 </span>
               </div>
+              <div style="margin: 4px 0 8px;">
+                <span class="badge badge-primary" style="font-size:0.68rem; padding:2px 8px; text-transform:uppercase;">${food.category}</span>
+              </div>
               <p class="food-card-desc">${food.description}</p>
               <div class="food-card-footer">
                 <div class="food-price-box">
@@ -125,7 +128,9 @@ const FavoritesPage = {
                 ${r.rating}
               </span>
             </div>
-            <div class="restaurant-cuisine">${r.cuisine}</div>
+            <div class="restaurant-cuisine">
+              <span class="badge badge-primary" style="font-size:0.72rem; padding:2px 8px;">${r.cuisine}</span>
+            </div>
             <div class="restaurant-meta">
               <span class="restaurant-meta-item">
                 <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>

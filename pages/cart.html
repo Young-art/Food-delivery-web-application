@@ -16,18 +16,24 @@
     <div class="container header-container">
       <div class="header-left">
         <a href="../index.html" class="brand-logo">
-          <div class="logo-icon">🍔</div>
+          <div class="logo-icon">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8h1a4 4 0 0 1 0 8h-1"></path><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"></path><line x1="6" y1="1" x2="6" y2="4"></line><line x1="10" y1="1" x2="10" y2="4"></line><line x1="14" y1="1" x2="14" y2="4"></line></svg>
+          </div>
           <span>Food<span>iez</span></span>
         </a>
         <div class="location-selector">
-          <span style="font-size: 1.1rem;">📍</span>
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a8 8 0 0 0-8 8c0 5.25 8 12 8 12s8-6.75 8-12a8 8 0 0 0-8-8z"/><circle cx="12" cy="10" r="3"/></svg>
           <span class="current-location-text">Bangalore, Indiranagar</span>
-          <span class="loc-arrow">▼</span>
+          <span class="loc-arrow">
+            <svg viewBox="0 0 24 24" width="10" height="10" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+          </span>
         </div>
       </div>
 
       <div class="header-search">
-        <span class="search-icon">🔍</span>
+        <span class="search-icon">
+          <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        </span>
         <input type="text" class="global-search-input" placeholder="Search dishes & restaurants...">
       </div>
 
@@ -270,8 +276,8 @@
                   ₹${item.unitPrice * item.quantity}
                 </div>
 
-                <button class="cart-delete-btn" onclick="CartPage.removeItem('${item.cartItemId}')" title="Remove item">
-                  🗑️
+                <button class="cart-delete-btn" onclick="CartPage.removeItem('${item.cartItemId}')" title="Remove item" style="display:flex; align-items:center; justify-content:center;">
+                  <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><line x1="10" y1="11" x2="10" y2="17"/><line x1="14" y1="11" x2="14" y2="17"/></svg>
                 </button>
               </div>
             `;
@@ -304,11 +310,11 @@
           couponInput.value = this.appliedCoupon;
           alertMsg.style.display = "block";
           alertMsg.style.color = "var(--veg-color)";
-          alertMsg.textContent = `✅ ${totals.couponMessage}`;
+          alertMsg.textContent = totals.couponMessage;
         } else if (this.appliedCoupon && !totals.isCouponValid) {
           alertMsg.style.display = "block";
           alertMsg.style.color = "var(--nonveg-color)";
-          alertMsg.textContent = `⚠️ ${totals.couponMessage}`;
+          alertMsg.textContent = totals.couponMessage;
         } else {
           alertMsg.style.display = "none";
         }
@@ -351,7 +357,7 @@
         
         const totals = Cart.getTotals(code);
         if (totals.isCouponValid) {
-          FoodApp.showToast(`Coupon "${code}" applied successfully! 🎉`, "success");
+          FoodApp.showToast(`Coupon "${code}" applied successfully!`, "success");
         } else {
           FoodApp.showToast(totals.couponMessage || "Invalid coupon code", "error");
         }

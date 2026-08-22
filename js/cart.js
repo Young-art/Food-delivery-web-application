@@ -51,7 +51,7 @@ const Cart = {
 
     this.saveCart(cart);
     if (typeof FoodApp !== "undefined") {
-      FoodApp.showToast(`Added ${food.name} to your cart! 🛒`, "success");
+      FoodApp.showToast(`Added ${food.name} to your cart!`, "success");
     }
   },
 

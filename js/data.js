@@ -1461,7 +1461,7 @@ const FoodData = {
     {
       id: "addr-1",
       type: "Home",
-      tagIcon: "🏠",
+      tagIcon: "",
       name: "Thanush Masika",
       phone: "+91 8328247714",
       street: "Flat 402, Sunshine Heights, 15th Main Road",
@@ -1473,7 +1473,7 @@ const FoodData = {
     {
       id: "addr-2",
       type: "Work",
-      tagIcon: "💼",
+      tagIcon: "",
       name: "Thanush Masika",
       phone: "+91 8328247714",
       street: "Tower B, 6th Floor, Cyber Heights Tech Park",

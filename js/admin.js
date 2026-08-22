@@ -86,7 +86,7 @@ const AdminPortal = {
         <td><span class="status-badge ${user.status === 'Active' ? 'success' : 'danger'}">${user.status}</span></td>
         <td>
           <button class="btn btn-secondary btn-sm" style="padding:4px 8px;" onclick="AdminPortal.toggleUserStatus('${user.id}')">
-            ${user.status === 'Active' ? '🚫 Block' : '✅ Unblock'}
+            ${user.status === 'Active' ? 'Block Account' : 'Unblock Account'}
           </button>
         </td>
       </tr>
@@ -245,7 +245,7 @@ const AdminPortal = {
     localStorage.setItem("food_app_coupons", JSON.stringify(coupons));
 
     FoodApp.closeModal("add-coupon-modal");
-    FoodApp.showToast(`Coupon ${code} created & active! 🎉`, "success");
+    FoodApp.showToast(`Coupon ${code} created & active!`, "success");
     this.renderCoupons();
   },
 

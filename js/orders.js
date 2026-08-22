@@ -102,7 +102,7 @@ const OrderManager = {
       if (statusSubtext) statusSubtext.textContent = "Delivery partner Vikram is riding to your address!";
       if (etaEl) etaEl.textContent = "8 to 12 Mins";
     } else if (currentStageIndex === 4) {
-      if (statusSubtext) statusSubtext.textContent = "Order delivered hot & fresh! Enjoy your meal 😋";
+      if (statusSubtext) statusSubtext.textContent = "Order delivered hot & fresh! Enjoy your meal.";
       if (etaEl) etaEl.textContent = "Delivered";
     }
   },
@@ -118,7 +118,7 @@ const OrderManager = {
     ];
 
     let currentStageIndex = statusStages.indexOf(this.activeOrder.status);
-    if (currentStageIndex < statusStages.length to 1) {
+    if (currentStageIndex < statusStages.length - 1) {
       currentStageIndex++;
       this.activeOrder.status = statusStages[currentStageIndex];
 
@@ -131,7 +131,7 @@ const OrderManager = {
       }
 
       this.updateStepperUI();
-      FoodApp.showToast(`Order status updated to: ${this.activeOrder.status} 🔔`, "info");
+      FoodApp.showToast(`Order status updated to: ${this.activeOrder.status}`, "info");
     } else {
       FoodApp.showToast("Order is already Delivered!", "success");
     }
@@ -242,7 +242,7 @@ const OrderManager = {
       Cart.addItem(match, pastItem.quantity);
     });
 
-    FoodApp.showToast("Items added to your cart from past order! 🛒", "success");
+    FoodApp.showToast("Items added to your cart from past order!", "success");
     setTimeout(() => {
       window.location.href = "cart.html";
     }, 1000);

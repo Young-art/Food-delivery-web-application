@@ -173,6 +173,9 @@ const CategoryPage = {
                 ${food.rating}
               </span>
             </div>
+            <div style="margin: 4px 0 8px;">
+              <span class="badge badge-primary" style="font-size:0.68rem; padding:2px 8px; text-transform:uppercase;">${food.category}</span>
+            </div>
             <p class="food-card-desc">${food.description}</p>
             <div class="food-card-footer">
               <div class="food-price-box">

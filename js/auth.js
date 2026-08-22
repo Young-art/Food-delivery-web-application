@@ -32,7 +32,7 @@ const Auth = {
     };
 
     FoodAppStorage.saveUser(newUser);
-    FoodApp.showToast("Account created successfully! Welcome to Foodiez 🎉", "success");
+    FoodApp.showToast("Account created successfully! Welcome to Foodiez", "success");
 
     setTimeout(() => {
       window.location.href = "../index.html";
@@ -66,7 +66,7 @@ const Auth = {
     }
 
     FoodAppStorage.saveUser(currentUser);
-    FoodApp.showToast(`Login successful! Welcome back, ${currentUser.name.split(' ')[0]} 👋`, "success");
+    FoodApp.showToast(`Login successful! Welcome back, ${currentUser.name.split(' ')[0]}`, "success");
 
     setTimeout(() => {
       window.location.href = "../index.html";

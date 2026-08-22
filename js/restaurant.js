@@ -95,7 +95,7 @@ const RestaurantPortal = {
         </td>
         <td>
           <button class="btn btn-secondary btn-sm" style="color:var(--nonveg-color); padding:4px 8px;" onclick="RestaurantPortal.deleteItem('${item.id}')">
-            🗑️ Delete
+            Delete
           </button>
         </td>
       </tr>
@@ -108,7 +108,7 @@ const RestaurantPortal = {
     if (idx > -1) {
       items[idx].price = Number(newPrice);
       localStorage.setItem("food_app_items", JSON.stringify(items));
-      FoodApp.showToast(`Updated price to ₹${newPrice} ✅`, "success");
+      FoodApp.showToast(`Updated price to ₹${newPrice}`, "success");
     }
   },
 
@@ -163,8 +163,8 @@ const RestaurantPortal = {
             <div style="margin-bottom:12px;">
               <label style="display:block; font-size:0.85rem; font-weight:700; margin-bottom:4px;">Food Type</label>
               <div style="display:flex; gap:16px;">
-                <label style="display:flex; align-items:center; gap:6px; font-weight:600;"><input type="radio" name="new-dish-veg" value="true" checked> 🟢 Veg</label>
-                <label style="display:flex; align-items:center; gap:6px; font-weight:600;"><input type="radio" name="new-dish-veg" value="false"> 🔴 Non Veg</label>
+                <label style="display:flex; align-items:center; gap:6px; font-weight:600;"><input type="radio" name="new-dish-veg" value="true" checked> <span class="badge-diet veg" style="width:10px; height:10px;"></span> Veg</label>
+                <label style="display:flex; align-items:center; gap:6px; font-weight:600;"><input type="radio" name="new-dish-veg" value="false"> <span class="badge-diet non-veg" style="width:10px; height:10px;"></span> Non Veg</label>
               </div>
             </div>
             <div style="margin-bottom:12px;">
@@ -221,7 +221,7 @@ const RestaurantPortal = {
     localStorage.setItem("food_app_items", JSON.stringify(items));
 
     FoodApp.closeModal("add-dish-modal");
-    FoodApp.showToast(`"${name}" added to menu successfully! 🎉`, "success");
+    FoodApp.showToast(`"${name}" added to menu successfully!`, "success");
     this.renderMenuItems();
   },
 
