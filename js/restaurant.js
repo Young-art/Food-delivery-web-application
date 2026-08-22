@@ -272,34 +272,34 @@ const RestaurantPortal = {
         <div style="display:flex; gap:10px; justify-content:flex-end; border-top:1px solid var(--surface-subtle); padding-top:12px; flex-wrap:wrap;">
           ${order.status === 'Order Placed' ? `
             <button class="btn btn-primary btn-sm" onclick="RestaurantPortal.changeOrderStatus('${order.id}', 'Restaurant Accepted')">
-              ✅ Accept Order
+              Accept Order
             </button>
             <button class="btn btn-secondary btn-sm" style="color:var(--nonveg-color);" onclick="RestaurantPortal.changeOrderStatus('${order.id}', 'Cancelled')">
-              ❌ Reject
+              Reject
             </button>
           ` : ''}
 
           ${order.status === 'Restaurant Accepted' ? `
             <button class="btn btn-primary btn-sm" onclick="RestaurantPortal.changeOrderStatus('${order.id}', 'Food Being Prepared')">
-              🍳 Start Cooking
+              Start Cooking
             </button>
           ` : ''}
 
           ${order.status === 'Food Being Prepared' ? `
             <button class="btn btn-primary btn-sm" onclick="RestaurantPortal.changeOrderStatus('${order.id}', 'Out for Delivery')">
-              🛵 Handover to Rider (Ready)
+              Handover to Rider (Ready)
             </button>
           ` : ''}
 
           ${order.status === 'Out for Delivery' ? `
             <span style="font-size:0.85rem; color:var(--text-muted); font-weight:600; padding:6px 10px;">
-              🛵 Rider Vikram is delivering to customer...
+              Rider Vikram is delivering to customer...
             </span>
           ` : ''}
 
           ${order.status === 'Delivered' ? `
-            <span style="font-size:0.85rem; color:var(--veg-color); font-weight:700; padding:6px 10px;">
-              ✓ Order Completed Successfully
+            <span class="badge badge-success" style="padding:6px 12px;">
+              Order Completed
             </span>
           ` : ''}
         </div>

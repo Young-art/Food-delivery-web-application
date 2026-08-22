@@ -16,18 +16,24 @@
     <div class="container header-container">
       <div class="header-left">
         <a href="../index.html" class="brand-logo">
-          <div class="logo-icon">🍔</div>
+          <div class="logo-icon">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8h1a4 4 0 0 1 0 8h-1"></path><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"></path><line x1="6" y1="1" x2="6" y2="4"></line><line x1="10" y1="1" x2="10" y2="4"></line><line x1="14" y1="1" x2="14" y2="4"></line></svg>
+          </div>
           <span>Food<span>iez</span></span>
         </a>
         <div class="location-selector">
-          <span style="font-size: 1.1rem;">📍</span>
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a8 8 0 0 0-8 8c0 5.25 8 12 8 12s8-6.75 8-12a8 8 0 0 0-8-8z"/><circle cx="12" cy="10" r="3"/></svg>
           <span class="current-location-text">Bangalore, Indiranagar</span>
-          <span class="loc-arrow">▼</span>
+          <span class="loc-arrow">
+            <svg viewBox="0 0 24 24" width="10" height="10" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+          </span>
         </div>
       </div>
 
       <div class="header-search">
-        <span class="search-icon">🔍</span>
+        <span class="search-icon">
+          <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        </span>
         <input type="text" class="global-search-input" placeholder="Search dishes & restaurants...">
       </div>
 
@@ -41,7 +47,7 @@
 
       <div style="display: flex; align-items: center; gap: 14px;">
         <a href="cart.html" class="cart-nav-btn">
-          <span>🛒</span>
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
           <span>Cart</span>
           <span class="cart-count">0</span>
         </a>
@@ -50,14 +56,24 @@
           <button class="user-avatar-btn">
             <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=200&q=80" alt="Avatar" class="user-avatar-img">
             <span class="user-name-text">Thanush</span>
-            <span style="font-size: 0.75rem; color: var(--text-muted);">▼</span>
+            <span style="font-size: 0.75rem; color: var(--text-muted); display:inline-flex; align-items:center;">
+              <svg viewBox="0 0 24 24" width="11" height="11" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+            </span>
           </button>
           <div class="dropdown-menu">
-            <a href="profile.html" class="dropdown-item">👤 My Profile</a>
-            <a href="order-history.html" class="dropdown-item">📦 Order History</a>
-            <a href="favorites.html" class="dropdown-item">❤️ Saved Items</a>
+            <a href="profile.html" class="dropdown-item">
+              <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg> My Profile
+            </a>
+            <a href="order-history.html" class="dropdown-item">
+              <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg> Order History
+            </a>
+            <a href="favorites.html" class="dropdown-item">
+              <svg viewBox="0 0 24 24" width="15" height="15" fill="currentColor"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg> Saved Items
+            </a>
             <div class="dropdown-divider"></div>
-            <a href="login.html" class="dropdown-item">🔑 Login / Signup</a>
+            <a href="login.html" class="dropdown-item">
+              <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg> Login / Signup
+            </a>
           </div>
         </div>
 
@@ -82,8 +98,8 @@
         <div>
           <h1 style="font-size: 1.8rem; font-weight: 800;" id="profile-display-name">Thanush Masika</h1>
           <p style="color: var(--text-muted); font-size: 0.9rem;" id="profile-display-email">thanushmasika@gmail.com</p>
-          <span class="chip" style="font-size: 0.75rem; padding: 2px 8px; margin-top: 6px; background: var(--primary-light); color: var(--primary); border: none;">
-            ⭐ Gold Member
+          <span class="badge badge-gold" style="margin-top: 6px;">
+            Gold Member
           </span>
         </div>
       </div>
@@ -127,7 +143,7 @@
           </div>
 
           <button class="btn btn-primary btn-sm" onclick="Auth.saveProfileChanges()">
-            Save Changes ✅
+            Save Changes
           </button>
         </div>
 
@@ -165,7 +181,7 @@
           </div>
 
           <button class="btn btn-secondary btn-sm" onclick="FoodApp.showToast('Password updated successfully!', 'success')">
-            Update Password 🔒
+            Update Password
           </button>
         </div>
 
@@ -177,13 +193,13 @@
 
           <div style="display: flex; flex-direction: column; gap: 10px;">
             <button class="btn btn-secondary" onclick="Auth.logout()" style="width: 100%; justify-content: flex-start; gap: 10px;">
-              🚪 Logout of Account
+              Logout of Account
             </button>
             <button class="btn btn-secondary" onclick="if(confirm('Are you sure you want to reset all temporary demo data?')) { FoodAppStorage.resetDatabase(); location.reload(); }" style="width: 100%; justify-content: flex-start; gap: 10px; color: var(--primary);">
-              🔄 Reset Demo Database Seeds
+              Reset Demo Database Seeds
             </button>
             <button class="btn btn-secondary" onclick="if(confirm('Delete account permanently?')) { FoodApp.showToast('Account deleted', 'info'); Auth.logout(); }" style="width: 100%; justify-content: flex-start; gap: 10px; color: var(--nonveg-color);">
-              🗑️ Delete Account
+              Delete Account
             </button>
           </div>
         </div>
@@ -199,9 +215,9 @@
     <div class="container">
       <div class="footer-bottom">
         <div>&copy; 2026 Foodiez Technologies Inc. All rights reserved.</div>
-        <div style="display: flex; gap: 20px;">
-          <span>🔒 256 Bit SSL Encrypted</span>
-          <span>⚡ 30 Min Delivery Promise</span>
+        <div style="display: flex; gap: 20px; align-items: center;">
+          <span style="display:inline-flex; align-items:center; gap:4px;"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg> 256 Bit SSL Encrypted</span>
+          <span style="display:inline-flex; align-items:center; gap:4px;"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg> 30 Min Delivery Promise</span>
         </div>
       </div>
     </div>

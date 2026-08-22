@@ -152,7 +152,9 @@ const OrderManager = {
     if (orders.length === 0) {
       container.innerHTML = `
         <div style="padding: 60px 20px; text-align: center; background: var(--surface); border-radius: var(--radius-lg); border: 1px solid var(--border);">
-          <div style="font-size: 3rem; margin-bottom: 8px;">📦</div>
+          <div style="margin-bottom: 12px; color: var(--text-muted);">
+            <svg viewBox="0 0 24 24" width="44" height="44" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+          </div>
           <h3 style="font-size: 1.3rem; font-weight: 700; margin-bottom: 6px;">No past orders found</h3>
           <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 20px;">Place your first order and track it live!</p>
           <a href="../index.html" class="btn btn-primary btn-sm">Explore Food &rarr;</a>
@@ -173,8 +175,8 @@ const OrderManager = {
               <div style="font-size: 0.8rem; color: var(--text-muted);">Order ID: <strong>${order.id}</strong> • ${order.date}</div>
             </div>
             <div style="display: flex; align-items: center; gap: 10px;">
-              <span class="chip" style="font-weight: 700; ${isDelivered ? 'background:var(--veg-bg); color:var(--veg-color); border-color:var(--veg-color);' : 'background:var(--primary-light); color:var(--primary);'}">
-                ● ${order.status}
+              <span class="badge ${isDelivered ? 'badge-success' : 'badge-primary'}">
+                ${order.status}
               </span>
               <span style="font-size: 1.15rem; font-weight: 800; font-family: 'Outfit', sans-serif;">₹${order.total}</span>
             </div>
@@ -189,23 +191,30 @@ const OrderManager = {
           </div>
 
           ${hasReviewed ? `
-            <div style="background: var(--surface-subtle); border-radius: var(--radius-sm); padding: 10px 14px; font-size: 0.85rem; margin-bottom: 14px;">
-              <span style="color: var(--rating-color); font-weight: 700;">★ ${order.rating}/5 Rated</span> | "${order.review}"
+            <div style="background: var(--surface-subtle); border-radius: var(--radius-sm); padding: 10px 14px; font-size: 0.85rem; margin-bottom: 14px; display:flex; align-items:center; gap:8px;">
+              <span class="badge badge-warning">
+                <svg viewBox="0 0 24 24" width="10" height="10" fill="#F59E0B"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                ${order.rating}/5 Rated
+              </span>
+              <span style="color:var(--text-muted);">"${order.review}"</span>
             </div>
           ` : ''}
 
           <div style="display: flex; justify-content: flex-end; gap: 10px; flex-wrap: wrap; border-top: 1px solid var(--surface-subtle); padding-top: 12px;">
-            <a href="order-tracking.html?id=${order.id}" class="btn btn-secondary btn-sm">
-              📍 Track Order
+            <a href="order-tracking.html?id=${order.id}" class="btn btn-secondary btn-sm" style="gap:6px;">
+              <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a8 8 0 0 0-8 8c0 5.25 8 12 8 12s8-6.75 8-12a8 8 0 0 0-8-8z"/><circle cx="12" cy="10" r="3"/></svg>
+              Track Order
             </a>
             
-            <button class="btn btn-secondary btn-sm" onclick="OrderManager.reorder('${order.id}')">
-              🔄 Reorder
+            <button class="btn btn-secondary btn-sm" style="gap:6px;" onclick="OrderManager.reorder('${order.id}')">
+              <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 4v6h-6"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg>
+              Reorder
             </button>
 
             ${isDelivered && !hasReviewed ? `
-              <button class="btn btn-primary btn-sm" onclick="OrderManager.openRatingModal('${order.id}')">
-                ⭐ Rate & Review
+              <button class="btn btn-primary btn-sm" style="gap:6px;" onclick="OrderManager.openRatingModal('${order.id}')">
+                <svg viewBox="0 0 24 24" width="13" height="13" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                Rate & Review
               </button>
             ` : ''}
           </div>

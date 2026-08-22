@@ -87,7 +87,7 @@ const DeliveryPortal = {
         </div>
 
         <button class="btn btn-primary btn-sm" style="width:100%;" onclick="DeliveryPortal.acceptOrder('${order.id}')">
-          Accept Delivery Request 🛵
+          Accept Delivery Request
         </button>
       </div>
     `).join('');
@@ -100,7 +100,7 @@ const DeliveryPortal = {
       orders[idx].status = "Food Being Prepared";
       FoodAppStorage.saveOrders(orders);
       this.activeDeliveryId = orderId;
-      FoodApp.showToast(`Accepted Delivery for ${orderId}! Heading to restaurant 🛵`, "success");
+      FoodApp.showToast(`Accepted Delivery for ${orderId}! Heading to restaurant`, "success");
       this.renderAvailableDeliveries();
       this.renderActiveDelivery();
     }
@@ -125,8 +125,8 @@ const DeliveryPortal = {
       <div class="cart-items-card" style="border: 2px solid var(--primary); background: #FFFBF9;">
         <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:14px; border-bottom:1px solid var(--border); padding-bottom:10px;">
           <div>
-            <span class="chip" style="background:var(--primary-light); color:var(--primary); font-weight:800; font-size:0.75rem;">
-              ● ACTIVE DELIVERY IN PROGRESS
+            <span class="badge badge-primary" style="font-size:0.75rem;">
+              ACTIVE DELIVERY IN PROGRESS
             </span>
             <div style="font-size:1.2rem; font-weight:800; margin-top:4px;">Order ID: ${activeOrder.id}</div>
           </div>
@@ -142,7 +142,7 @@ const DeliveryPortal = {
 
           <div style="background:var(--surface); padding:12px; border-radius:var(--radius-md); border:1px solid var(--border);">
             <div style="font-size:0.75rem; color:var(--text-muted); font-weight:700; text-transform:uppercase;">2. Delivery Customer</div>
-            <div style="font-weight:700; font-size:0.95rem; margin:4px 0;">Thanush Masika (📞 +91 8328247714)</div>
+            <div style="font-weight:700; font-size:0.95rem; margin:4px 0;">Thanush Masika (8328247714)</div>
             <div style="font-size:0.8rem; color:var(--text-muted);">${activeOrder.address}</div>
           </div>
         </div>
@@ -151,11 +151,11 @@ const DeliveryPortal = {
         <div style="display:flex; gap:12px; justify-content:flex-end;">
           ${activeOrder.status === 'Food Being Prepared' ? `
             <button class="btn btn-primary btn-sm" onclick="DeliveryPortal.updateActiveStatus('${activeOrder.id}', 'Out for Delivery')">
-              📦 Order Picked Up & Out For Delivery
+              Order Picked Up & Out For Delivery
             </button>
           ` : `
             <button class="btn btn-primary btn-sm" style="background:var(--veg-color);" onclick="DeliveryPortal.updateActiveStatus('${activeOrder.id}', 'Delivered')">
-              ✅ Confirm Order Delivered (OTP: 4821)
+              Confirm Order Delivered (OTP: 4821)
             </button>
           `}
         </div>
@@ -169,7 +169,7 @@ const DeliveryPortal = {
     if (idx > -1) {
       orders[idx].status = nextStatus;
       FoodAppStorage.saveOrders(orders);
-      FoodApp.showToast(`Order status updated to: ${nextStatus} 🎉`, "success");
+      FoodApp.showToast(`Order status updated to: ${nextStatus}`, "success");
       this.renderActiveDelivery();
       this.renderKPIs();
     }

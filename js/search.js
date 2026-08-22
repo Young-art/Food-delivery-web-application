@@ -148,7 +148,9 @@ const GlobalSearch = {
     if (matchedFoods.length === 0 && matchedCats.length === 0 && matchedRests.length === 0) {
       dropdown.innerHTML = `
         <div style="padding: 24px 16px; text-align: center; color: var(--text-muted); font-size: 0.9rem;">
-          <div style="font-size: 1.5rem; margin-bottom: 6px;">🔍</div>
+          <div style="margin-bottom: 8px; color:var(--text-muted);">
+            <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+          </div>
           No matching dishes or restaurants for "<strong>${cleanQuery}</strong>".
           <div style="font-size: 0.8rem; margin-top: 6px; color: var(--primary);">Try searching "Pizza", "Biryani", "Burger", or "Cake"</div>
         </div>
@@ -165,7 +167,7 @@ const GlobalSearch = {
       matchedCats.forEach(cat => {
         html += `
           <div class="search-item" onclick="window.location.href='${root}pages/${cat.page}'">
-            <span style="font-size: 1.4rem;">${cat.icon}</span>
+            <span style="display:inline-flex; align-items:center; justify-content:center; width:34px; height:34px; border-radius:8px; background:var(--primary-light); color:var(--primary);">${cat.icon}</span>
             <div class="search-item-info">
               <div class="search-item-title">${cat.name} Category</div>
               <div class="search-item-meta">${cat.count} delicious dishes • View Page &rarr;</div>
@@ -188,7 +190,13 @@ const GlobalSearch = {
                 <span class="badge-diet ${food.veg ? 'veg' : 'non-veg'}"></span>
                 <span class="search-item-title">${food.name}</span>
               </div>
-              <div class="search-item-meta">₹${food.price} • ${food.category.toUpperCase()} • ⭐ ${food.rating}</div>
+              <div class="search-item-meta">
+                ₹${food.price} • ${food.category.toUpperCase()} • 
+                <span class="rating-pill" style="font-size:0.7rem; padding:1px 5px;">
+                  <svg viewBox="0 0 24 24" width="9" height="9" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                  ${food.rating}
+                </span>
+              </div>
             </div>
             <button class="btn btn-sm btn-primary" style="padding:4px 10px; font-size:0.8rem;" onclick="event.stopPropagation(); FoodApp.openCustomizerModal('${food.id}')">
               Add +
@@ -207,7 +215,13 @@ const GlobalSearch = {
             <img src="${rest.image}" class="search-item-img" alt="${rest.name}">
             <div class="search-item-info">
               <div class="search-item-title">${rest.name}</div>
-              <div class="search-item-meta">⭐ ${rest.rating} • ${rest.cuisine} • ${rest.deliveryTime}</div>
+              <div class="search-item-meta">
+                <span class="rating-pill" style="font-size:0.7rem; padding:1px 5px;">
+                  <svg viewBox="0 0 24 24" width="9" height="9" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                  ${rest.rating}
+                </span>
+                • ${rest.cuisine} • ${rest.deliveryTime}
+              </div>
             </div>
             <span style="font-size: 0.78rem; color: var(--primary); font-weight: 700;">Menu &rarr;</span>
           </div>

@@ -13,7 +13,7 @@ const FoodData = {
       tagline: "Cheesy, crispy crusts & gourmet toppings",
       image: "https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=600&q=80",
       banner: "https://images.unsplash.com/photo-1590947132387-155cc02f3212?auto=format&fit=crop&w=1200&q=80",
-      icon: "🍕",
+      icon: `<svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M15 11h.01M11 15h.01M16 16h.01M2 16l20 6-6-20A20 20 0 0 0 2 16z"/></svg>`,
       count: 6,
       page: "pizza.html"
     },
@@ -23,7 +23,7 @@ const FoodData = {
       tagline: "Juicy patties, melted cheese & toasted brioche",
       image: "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=600&q=80",
       banner: "https://images.unsplash.com/photo-1550547660-d9450f859349?auto=format&fit=crop&w=1200&q=80",
-      icon: "🍔",
+      icon: `<svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11h18a7 7 0 0 0-14-3.5A7 7 0 0 0 3 11zm-1 3a1 1 0 0 0 1 1h18a1 1 0 0 0 1-1v-1H2v1zm1 3h18a3 3 0 0 1-3 3H6a3 3 0 0 1-3-3v0z"/></svg>`,
       count: 6,
       page: "burgers.html"
     },
@@ -33,7 +33,7 @@ const FoodData = {
       tagline: "Aromatic basmati rice layered with rich spices",
       image: "https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?auto=format&fit=crop&w=600&q=80",
       banner: "https://images.unsplash.com/photo-1589302168068-964664d93dc0?auto=format&fit=crop&w=1200&q=80",
-      icon: "🍚",
+      icon: `<svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12h20a8 8 0 0 1-16 6 8 8 0 0 1-4-6z"/><path d="M6 8c1-2 2-3 4-3s2 1 3 3M11 8c1-2 2-3 4-3s2 1 3 3"/></svg>`,
       count: 6,
       page: "biryani.html"
     },
@@ -43,7 +43,7 @@ const FoodData = {
       tagline: "Sizzling kebabs, crispy wings & rich curries",
       image: "https://images.unsplash.com/photo-1626082927389-6cd097cdc6ec?auto=format&fit=crop&w=600&q=80",
       banner: "https://images.unsplash.com/photo-1532550907401-a500c9a57435?auto=format&fit=crop&w=1200&q=80",
-      icon: "🍗",
+      icon: `<svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5a6 6 0 0 0-6 6c0 2 1 3.5 2 4.5l-4 4a2.12 2.12 0 1 0 3 3l4-4c1 1 2.5 2 4.5 2a6 6 0 0 0 6-6 6 6 0 0 0-6-6z"/><circle cx="15" cy="11" r="1.5"/></svg>`,
       count: 6,
       page: "chicken.html"
     },
@@ -53,7 +53,7 @@ const FoodData = {
       tagline: "Wok tossed noodles, fried rice & fiery gravies",
       image: "https://images.unsplash.com/photo-1585032226651-759b368d7246?auto=format&fit=crop&w=600&q=80",
       banner: "https://images.unsplash.com/photo-1525755662778-989d0524087e?auto=format&fit=crop&w=1200&q=80",
-      icon: "🥡",
+      icon: `<svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 6h14l-2 14H7L5 6zM4 6l8-4 8 4"/><path d="M9 12h6M10 16h4"/></svg>`,
       count: 6,
       page: "chinese.html"
     },
@@ -63,7 +63,7 @@ const FoodData = {
       tagline: "Loaded tacos, zesty burritos & crunchy nachos",
       image: "https://images.unsplash.com/photo-1565299585323-38d6b0865b47?auto=format&fit=crop&w=600&q=80",
       banner: "https://images.unsplash.com/photo-1504544750208-dc0358e63f7f?auto=format&fit=crop&w=1200&q=80",
-      icon: "🌮",
+      icon: `<svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17a10 10 0 0 1 18 0H3z"/><path d="M7 13c1-2 3-3 5-3s4 1 5 3"/></svg>`,
       count: 6,
       page: "mexican.html"
     },
@@ -73,7 +73,7 @@ const FoodData = {
       tagline: "Fresh salad bowls, lean proteins & detox smoothies",
       image: "https://images.unsplash.com/photo-1540420773420-3366772f4999?auto=format&fit=crop&w=600&q=80",
       banner: "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&w=1200&q=80",
-      icon: "🥗",
+      icon: `<svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a10 10 0 0 0-10 10c0 5.52 4.48 10 10 10a10 10 0 0 0 10-10A10 10 0 0 0 12 2zm0 18a8 8 0 1 1 0-16 8 8 0 0 1 0 16z"/><path d="M12 6c-3.31 0-6 2.69-6 6 0 2 1.5 4 4 4 4 0 6-4 6-7 0-1.66-1.79-3-4-3z"/></svg>`,
       count: 6,
       page: "healthy-food.html"
     },
@@ -83,7 +83,7 @@ const FoodData = {
       tagline: "Decadent cakes, brownies, donuts & artisan treats",
       image: "https://images.unsplash.com/photo-1551024601-bec78aea704b?auto=format&fit=crop&w=600&q=80",
       banner: "https://images.unsplash.com/photo-1587314168485-3236d6710814?auto=format&fit=crop&w=1200&q=80",
-      icon: "🍰",
+      icon: `<svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 10h16v11a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V10z"/><path d="M4 10a4 4 0 0 1 8-2 4 4 0 0 1 8 2"/><circle cx="12" cy="4" r="2"/></svg>`,
       count: 6,
       page: "desserts.html"
     },
@@ -93,7 +93,7 @@ const FoodData = {
       tagline: "Craft coffees, shakes, fresh juices & coolers",
       image: "https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?auto=format&fit=crop&w=600&q=80",
       banner: "https://images.unsplash.com/photo-1544145945-f90425340c7e?auto=format&fit=crop&w=1200&q=80",
-      icon: "🥤",
+      icon: `<svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 7h12l-1.5 13.5a2 2 0 0 1-2 1.5H9.5a2 2 0 0 1-2-1.5L6 7z"/><path d="M5 7h14M15 2l-2 5"/></svg>`,
       count: 6,
       page: "beverages.html"
     },
@@ -103,7 +103,7 @@ const FoodData = {
       tagline: "Creamy scoops, sundaes, swirls & frozen delights",
       image: "https://images.unsplash.com/photo-1563805042-7684c019e1cb?auto=format&fit=crop&w=600&q=80",
       banner: "https://images.unsplash.com/photo-1501443762994-82bd5dace89a?auto=format&fit=crop&w=1200&q=80",
-      icon: "🍨",
+      icon: `<svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 11h10l-5 11-5-11z"/><path d="M7 11a5 5 0 0 1 10 0"/></svg>`,
       count: 6,
       page: "ice-cream.html"
     }

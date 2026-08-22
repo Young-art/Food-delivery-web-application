@@ -263,6 +263,80 @@ img {
   fill: currentColor;
 }
 
+/* Vector Icon & Badge Utility System */
+.icon-svg {
+  width: 1em;
+  height: 1em;
+  display: inline-block;
+  vertical-align: -0.15em;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin="round";
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 4px 10px;
+  border-radius: var(--radius-full);
+  font-size: 0.78rem;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: 0.2px;
+}
+
+.badge-primary {
+  background: var(--primary-light);
+  color: var(--primary);
+  border: 1px solid rgba(255, 82, 0, 0.2);
+}
+
+.badge-success {
+  background: var(--veg-bg);
+  color: var(--veg-color);
+  border: 1px solid rgba(16, 185, 129, 0.2);
+}
+
+.badge-warning {
+  background: #FEF3C7;
+  color: #B45309;
+  border: 1px solid rgba(245, 158, 11, 0.25);
+}
+
+.badge-gold {
+  background: linear-gradient(135deg, #FEF3C7 0%, #FDE68A 100%);
+  color: #92400E;
+  border: 1px solid rgba(245, 158, 11, 0.3);
+}
+
+.badge-offer {
+  background: #FFFBEB;
+  color: #B45309;
+  border: 1px dashed #F59E0B;
+  font-weight: 800;
+}
+
+.cat-icon-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 54px;
+  height: 54px;
+  border-radius: var(--radius-lg);
+  background: var(--surface-subtle);
+  color: var(--primary);
+  transition: all var(--transition-fast);
+}
+
+.category-card:hover .cat-icon-badge {
+  background: var(--primary);
+  color: #FFFFFF;
+  transform: scale(1.08);
+}
+
 /* Chip Tag */
 .chip {
   display: inline-flex;

@@ -1,6 +1,7 @@
 /**
  * FOOD DELIVERY APP to CHECKOUT CONTROLLER
  * Manages Address selection & CRUD, Payment methods, and Order placement.
+ * Uses clean SVG icons and modern badges.
  */
 
 const Checkout = {
@@ -40,17 +41,20 @@ const Checkout = {
       <div class="address-option-card ${addr.id === this.selectedAddressId ? 'selected' : ''}" 
         onclick="Checkout.selectAddress('${addr.id}')">
         <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
-          <div class="addr-type-pill">${addr.tagIcon || '📍'} ${addr.type}</div>
+          <div class="badge badge-primary">${addr.type}</div>
           <button class="btn btn-secondary btn-sm" style="padding:3px 10px; font-size:0.75rem; border-radius:var(--radius-full);" 
             onclick="event.stopPropagation(); Checkout.openEditAddressModal('${addr.id}')">
-            ✏️ Edit
+            Edit
           </button>
         </div>
         <div style="font-weight: 700; font-size: 0.95rem; color: var(--text-main); margin-bottom: 4px;">${addr.name}</div>
         <div style="font-size: 0.85rem; color: var(--text-muted); line-height: 1.45; margin-bottom: 6px;">
           ${addr.street}, ${addr.landmark ? addr.landmark + ', ' : ''}${addr.city} ${addr.pincode}
         </div>
-        <div style="font-size: 0.8rem; font-weight: 600; color: var(--text-main);">📞 ${addr.phone}</div>
+        <div style="font-size: 0.8rem; font-weight: 600; color: var(--text-main); display:flex; align-items:center; gap:4px;">
+          <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          ${addr.phone}
+        </div>
       </div>
     `).join('');
   },
@@ -78,9 +82,9 @@ const Checkout = {
           <div style="margin-bottom: 12px;">
             <label style="display:block; font-size:0.85rem; font-weight:700; margin-bottom:4px;">Address Type</label>
             <div style="display:flex; gap:10px;">
-              <label style="display:flex; align-items:center; gap:6px; font-size:0.9rem; font-weight:600;"><input type="radio" name="addr-type" value="Home" checked> 🏠 Home</label>
-              <label style="display:flex; align-items:center; gap:6px; font-size:0.9rem; font-weight:600;"><input type="radio" name="addr-type" value="Work"> 💼 Work</label>
-              <label style="display:flex; align-items:center; gap:6px; font-size:0.9rem; font-weight:600;"><input type="radio" name="addr-type" value="Other"> 📍 Other</label>
+              <label style="display:flex; align-items:center; gap:6px; font-size:0.9rem; font-weight:600;"><input type="radio" name="addr-type" value="Home" checked> Home</label>
+              <label style="display:flex; align-items:center; gap:6px; font-size:0.9rem; font-weight:600;"><input type="radio" name="addr-type" value="Work"> Work</label>
+              <label style="display:flex; align-items:center; gap:6px; font-size:0.9rem; font-weight:600;"><input type="radio" name="addr-type" value="Other"> Other</label>
             </div>
           </div>
           <div style="margin-bottom: 12px;">
@@ -98,12 +102,16 @@ const Checkout = {
           <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom: 12px;">
             <div>
               <label style="display:block; font-size:0.85rem; font-weight:700; margin-bottom:4px;">Landmark</label>
-              <input type="text" id="new-addr-landmark" placeholder="e.g. Near Metro Station" style="width:100%; padding:9px 12px; border:1px solid var(--border); border-radius:var(--radius-sm); outline:none;">
+              <input type="text" id="new-addr-landmark" placeholder="e.g. Near Metro Pillar 12" style="width:100%; padding:9px 12px; border:1px solid var(--border); border-radius:var(--radius-sm); outline:none;">
             </div>
             <div>
               <label style="display:block; font-size:0.85rem; font-weight:700; margin-bottom:4px;">Pincode</label>
               <input type="text" id="new-addr-pincode" placeholder="e.g. 560038" value="560038" style="width:100%; padding:9px 12px; border:1px solid var(--border); border-radius:var(--radius-sm); outline:none;">
             </div>
+          </div>
+          <div style="margin-bottom: 12px;">
+            <label style="display:block; font-size:0.85rem; font-weight:700; margin-bottom:4px;">City</label>
+            <input type="text" id="new-addr-city" value="Bangalore" style="width:100%; padding:9px 12px; border:1px solid var(--border); border-radius:var(--radius-sm); outline:none;">
           </div>
         </div>
         <div class="modal-footer">
@@ -115,6 +123,7 @@ const Checkout = {
     document.body.appendChild(modal);
   },
 
+  // Save New Address
   saveNewAddress: function() {
     const typeEl = document.querySelector("input[name='addr-type']:checked");
     const type = typeEl ? typeEl.value : "Home";
@@ -132,7 +141,7 @@ const Checkout = {
     const newAddr = {
       id: "addr-" + Date.now(),
       type: type,
-      tagIcon: type === "Home" ? "🏠" : type === "Work" ? "💼" : "📍",
+      tagIcon: "",
       name: name,
       phone: phone,
       street: street,
@@ -151,7 +160,7 @@ const Checkout = {
       Auth.renderProfileAddresses();
     }
     FoodApp.closeModal("add-address-modal");
-    FoodApp.showToast("New delivery address added successfully! 📍", "success");
+    FoodApp.showToast("New delivery address added successfully", "success");
   },
 
   // Open Edit Address Modal
@@ -177,13 +186,13 @@ const Checkout = {
             <label style="display:block; font-size:0.85rem; font-weight:700; margin-bottom:4px;">Address Type</label>
             <div style="display:flex; gap:10px;">
               <label style="display:flex; align-items:center; gap:6px; font-size:0.9rem; font-weight:600;">
-                <input type="radio" name="edit-addr-type" value="Home" ${addr.type === 'Home' ? 'checked' : ''}> 🏠 Home
+                <input type="radio" name="edit-addr-type" value="Home" ${addr.type === 'Home' ? 'checked' : ''}> Home
               </label>
               <label style="display:flex; align-items:center; gap:6px; font-size:0.9rem; font-weight:600;">
-                <input type="radio" name="edit-addr-type" value="Work" ${addr.type === 'Work' ? 'checked' : ''}> 💼 Work
+                <input type="radio" name="edit-addr-type" value="Work" ${addr.type === 'Work' ? 'checked' : ''}> Work
               </label>
               <label style="display:flex; align-items:center; gap:6px; font-size:0.9rem; font-weight:600;">
-                <input type="radio" name="edit-addr-type" value="Other" ${addr.type === 'Other' ? 'checked' : ''}> 📍 Other
+                <input type="radio" name="edit-addr-type" value="Other" ${addr.type === 'Other' ? 'checked' : ''}> Other
               </label>
             </div>
           </div>
@@ -216,7 +225,7 @@ const Checkout = {
         </div>
         <div class="modal-footer">
           <button class="btn btn-secondary btn-sm" onclick="FoodApp.closeModal('edit-address-modal')">Cancel</button>
-          <button class="btn btn-primary btn-sm" onclick="Checkout.saveEditAddress('${addr.id}')">Save Changes ✅</button>
+          <button class="btn btn-primary btn-sm" onclick="Checkout.saveEditAddress('${addr.id}')">Save Changes</button>
         </div>
       </div>
     `;
@@ -245,7 +254,7 @@ const Checkout = {
       addresses[idx] = {
         ...addresses[idx],
         type: type,
-        tagIcon: type === "Home" ? "🏠" : type === "Work" ? "💼" : "📍",
+        tagIcon: "",
         name: name,
         phone: phone,
         street: street,
@@ -255,7 +264,7 @@ const Checkout = {
       };
       FoodAppStorage.saveAddresses(addresses);
       FoodApp.closeModal("edit-address-modal");
-      FoodApp.showToast("Address updated successfully! ✅", "success");
+      FoodApp.showToast("Address updated successfully", "success");
 
       this.renderAddresses();
       if (typeof Auth !== "undefined" && typeof Auth.renderProfileAddresses === "function") {
@@ -264,8 +273,9 @@ const Checkout = {
     }
   },
 
-  // Payment Selection
+  // Payment Tabs Handling
   bindPaymentTabs: function() {
+    this.renderPaymentPanel();
     const tabs = document.querySelectorAll(".payment-tab-btn");
     tabs.forEach(tab => {
       tab.addEventListener("click", () => {
@@ -286,17 +296,17 @@ const Checkout = {
         <div style="font-size:0.9rem; font-weight:700; margin-bottom:12px;">Select UPI App / ID:</div>
         <div style="display:flex; gap:12px; margin-bottom:16px; flex-wrap:wrap;">
           <label style="display:flex; align-items:center; gap:8px; padding:10px 14px; border:1px solid var(--border); border-radius:var(--radius-md); background:var(--surface); cursor:pointer; font-weight:600; font-size:0.88rem;">
-            <input type="radio" name="upi-app" value="Google Pay" checked> 🔵 Google Pay
+            <input type="radio" name="upi-app" value="Google Pay" checked> Google Pay
           </label>
           <label style="display:flex; align-items:center; gap:8px; padding:10px 14px; border:1px solid var(--border); border-radius:var(--radius-md); background:var(--surface); cursor:pointer; font-weight:600; font-size:0.88rem;">
-            <input type="radio" name="upi-app" value="PhonePe"> 🟣 PhonePe
+            <input type="radio" name="upi-app" value="PhonePe"> PhonePe
           </label>
           <label style="display:flex; align-items:center; gap:8px; padding:10px 14px; border:1px solid var(--border); border-radius:var(--radius-md); background:var(--surface); cursor:pointer; font-weight:600; font-size:0.88rem;">
-            <input type="radio" name="upi-app" value="Paytm"> 💠 Paytm
+            <input type="radio" name="upi-app" value="Paytm"> Paytm
           </label>
         </div>
         <div style="font-size:0.85rem; color:var(--text-muted);">
-          Instant UPI intent payment simulation will be activated upon placing order.
+          Instant UPI payment simulation will be activated upon placing order.
         </div>
       `;
     } else if (this.selectedPaymentMethod === "Card") {
@@ -324,7 +334,8 @@ const Checkout = {
     } else {
       panel.innerHTML = `
         <div style="display:flex; align-items:center; gap:10px; color:var(--text-main); font-weight:600; font-size:0.9rem;">
-          <span style="font-size:1.4rem;">💵</span> Pay with exact cash or UPI QR upon food delivery.
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M2 10h20"/><circle cx="16" cy="15" r="1"/></svg>
+          Pay with exact cash or UPI QR upon food delivery.
         </div>
       `;
     }
@@ -418,7 +429,7 @@ const Checkout = {
     localStorage.removeItem("food_app_active_coupon");
     localStorage.setItem("food_app_active_order_id", orderId);
 
-    FoodApp.showToast(`Order Placed Successfully! Order ID: ${orderId} 🎉`, "success");
+    FoodApp.showToast(`Order Placed Successfully! Order ID: ${orderId}`, "success");
 
     // Redirect to Order Tracking
     setTimeout(() => {

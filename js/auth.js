@@ -121,7 +121,7 @@ const Auth = {
     user.phone = phone;
 
     FoodAppStorage.saveUser(user);
-    FoodApp.showToast("Profile details updated successfully! ✅", "success");
+    FoodApp.showToast("Profile details updated successfully", "success");
     this.initProfile();
   },
 
@@ -133,17 +133,20 @@ const Auth = {
     container.innerHTML = addresses.map(addr => `
       <div style="background:var(--surface-subtle); border:1px solid var(--border); border-radius:var(--radius-md); padding:16px; margin-bottom:12px; display:flex; justify-content:space-between; align-items:flex-start; gap:14px;">
         <div>
-          <span class="addr-type-pill">${addr.tagIcon || '📍'} ${addr.type}</span>
-          <div style="font-weight:700; color:var(--text-main); margin:4px 0;">${addr.name}</div>
+          <span class="badge badge-primary">${addr.type}</span>
+          <div style="font-weight:700; color:var(--text-main); margin:6px 0 4px;">${addr.name}</div>
           <div style="font-size:0.85rem; color:var(--text-muted); line-height:1.4;">${addr.street}, ${addr.landmark ? addr.landmark + ', ' : ''}${addr.city} ${addr.pincode}</div>
-          <div style="font-size:0.8rem; color:var(--text-main); font-weight:600; margin-top:4px;">📞 ${addr.phone}</div>
+          <div style="font-size:0.8rem; color:var(--text-main); font-weight:600; margin-top:6px; display:flex; align-items:center; gap:4px;">
+            <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            ${addr.phone}
+          </div>
         </div>
         <div style="display:flex; gap:8px; flex-shrink:0;">
           <button class="btn btn-secondary btn-sm" style="padding:6px 12px; font-size:0.82rem;" onclick="Checkout.openEditAddressModal('${addr.id}')">
-            ✏️ Edit
+            Edit
           </button>
           <button class="btn btn-secondary btn-sm" style="color:var(--nonveg-color); padding:6px 12px; font-size:0.82rem;" onclick="Auth.deleteAddress('${addr.id}')">
-            🗑️ Delete
+            Delete
           </button>
         </div>
       </div>

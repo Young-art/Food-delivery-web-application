@@ -169,7 +169,7 @@
 
       <div style="display: flex; align-items: center; gap: 14px;">
         <a href="cart.html" class="cart-nav-btn">
-          <span>🛒</span>
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
           <span>Cart</span>
           <span class="cart-count">0</span>
         </a>
@@ -178,14 +178,24 @@
           <button class="user-avatar-btn">
             <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=200&q=80" alt="Avatar" class="user-avatar-img">
             <span class="user-name-text">Thanush</span>
-            <span style="font-size: 0.75rem; color: var(--text-muted);">▼</span>
+            <span style="font-size: 0.75rem; color: var(--text-muted); display:inline-flex; align-items:center;">
+              <svg viewBox="0 0 24 24" width="11" height="11" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+            </span>
           </button>
           <div class="dropdown-menu">
-            <a href="profile.html" class="dropdown-item">👤 My Profile</a>
-            <a href="order-history.html" class="dropdown-item">📦 Order History</a>
-            <a href="favorites.html" class="dropdown-item">❤️ Saved Items</a>
+            <a href="profile.html" class="dropdown-item">
+              <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg> My Profile
+            </a>
+            <a href="order-history.html" class="dropdown-item">
+              <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg> Order History
+            </a>
+            <a href="favorites.html" class="dropdown-item">
+              <svg viewBox="0 0 24 24" width="15" height="15" fill="currentColor"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg> Saved Items
+            </a>
             <div class="dropdown-divider"></div>
-            <a href="login.html" class="dropdown-item">🔑 Login / Signup</a>
+            <a href="login.html" class="dropdown-item">
+              <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg> Login / Signup
+            </a>
           </div>
         </div>
 
@@ -316,24 +326,39 @@
                 <h1 class="rest-hero-title">${r.name}</h1>
                 <button class="food-fav-btn ${favs.restaurantIds.includes(r.id) ? 'active' : ''}" 
                   onclick="FoodApp.toggleFavoriteRestaurant('${r.id}', this)" aria-label="Favorite Restaurant">
-                  ❤️
+                  <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
                 </button>
               </div>
               <div class="rest-hero-cuisine">${r.cuisine} • ${r.address}</div>
               <div class="rest-pills-row">
-                <span class="rating-pill" style="font-size: 0.9rem; padding: 4px 10px;">★ ${r.rating} (${r.ratingCount}+ ratings)</span>
-                <span class="chip" style="color: var(--primary); font-weight: 700;">🏷️ ${r.offer}</span>
-                <span style="font-size: 0.85rem; color: var(--text-muted); font-weight: 600;">🕒 ${r.openingHours}</span>
+                <span class="rating-pill" style="font-size: 0.85rem; padding: 4px 10px;">
+                  <svg viewBox="0 0 24 24" width="11" height="11" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                  ${r.rating} (${r.ratingCount}+ ratings)
+                </span>
+                <span class="badge badge-offer">
+                  <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><circle cx="7" cy="7" r="1"/></svg>
+                  ${r.offer}
+                </span>
+                <span style="font-size: 0.85rem; color: var(--text-muted); font-weight: 600; display:inline-flex; align-items:center; gap:4px;">
+                  <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                  ${r.openingHours}
+                </span>
               </div>
             </div>
             
             <div style="display: flex; gap: 14px;">
               <div class="rest-stat-box">
-                <div class="rest-stat-score">⏱️ ${r.deliveryTime}</div>
+                <div class="rest-stat-score" style="display:flex; align-items:center; gap:4px;">
+                  <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                  ${r.deliveryTime}
+                </div>
                 <div style="font-size: 0.75rem; color: var(--text-muted);">Delivery Time</div>
               </div>
               <div class="rest-stat-box">
-                <div class="rest-stat-score">📍 ${r.distance}</div>
+                <div class="rest-stat-score" style="display:flex; align-items:center; gap:4px;">
+                  <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a8 8 0 0 0-8 8c0 5.25 8 12 8 12s8-6.75 8-12a8 8 0 0 0-8-8z"/><circle cx="12" cy="10" r="3"/></svg>
+                  ${r.distance}
+                </div>
                 <div style="font-size: 0.75rem; color: var(--text-muted);">Distance</div>
               </div>
               <div class="rest-stat-box">
@@ -419,16 +444,19 @@
                         ${food.discount > 0 ? `<div class="food-discount-badge">${food.discount}% OFF</div>` : ''}
                         <button class="food-fav-btn ${favs.foodIds.includes(food.id) ? 'active' : ''}" 
                           onclick="event.stopPropagation(); FoodApp.toggleFavoriteFood('${food.id}', this)" aria-label="Favorite dish">
-                          ❤️
+                          <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
                         </button>
                       </div>
                       <div class="food-card-content">
                         <div class="food-card-header">
                           <div style="display:flex; align-items:center; gap:8px;">
-                            <span class="badge-diet ${food.veg ? 'veg' : 'non veg'}"></span>
+                            <span class="badge-diet ${food.veg ? 'veg' : 'non-veg'}"></span>
                             <h4 class="food-card-title" onclick="window.location.href='food-details.html?id=${food.id}'" style="cursor:pointer;">${food.name}</h4>
                           </div>
-                          <span class="rating-pill" style="font-size:0.75rem;">★ ${food.rating}</span>
+                          <span class="rating-pill" style="font-size:0.75rem;">
+                            <svg viewBox="0 0 24 24" width="10" height="10" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                            ${food.rating}
+                          </span>
                         </div>
                         <p class="food-card-desc">${food.description}</p>
                         <div class="food-card-footer">
