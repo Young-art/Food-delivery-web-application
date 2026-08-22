@@ -38,16 +38,16 @@ const TRENDING_SEARCHES = [
 ];
 
 const SEARCH_CAROUSEL_WORDS = [
-  '"pizza"',
-  '"biryani"',
-  '"burger"',
-  '"noodles"',
-  '"chicken"',
-  '"cake"',
-  '"coffee"',
-  '"pasta"',
-  '"tacos"',
-  '"icecream"'
+  'pizza',
+  'biryani',
+  'burger',
+  'noodles',
+  'chicken',
+  'cake',
+  'coffee',
+  'pasta',
+  'tacos',
+  'ice cream'
 ];
 
 export const Navbar = () => {
