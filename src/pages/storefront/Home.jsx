@@ -14,7 +14,9 @@ import {
   Star, 
   ChevronLeft, 
   ChevronRight, 
-  TrendingUp 
+  TrendingUp,
+  Clock,
+  Award
 } from 'lucide-react';
 
 const HERO_CAROUSEL_SLIDES = [
@@ -24,8 +26,8 @@ const HERO_CAROUSEL_SLIDES = [
     slug: 'pizza',
     tag: 'WOOD-FIRED CRUSTS',
     headline: 'Hot, Fresh Wood-Fired Pizza',
-    subtext: 'Crafted with authentic San Marzano tomato reduction, melting buffalo mozzarella & fresh sweet basil.',
-    image: 'https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=1600&q=80',
+    subtext: 'Authentic San Marzano tomato reduction, melting buffalo mozzarella, artisanal pepperoni & fresh sweet basil.',
+    image: 'https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=1920&q=85',
     deliveryTime: '20-25 Mins',
     offer: '50% OFF up to ₹100'
   },
@@ -35,8 +37,8 @@ const HERO_CAROUSEL_SLIDES = [
     slug: 'biryani',
     tag: 'SLOW-COOKED SAFFRON',
     headline: 'Royal Hyderabadi Dum Biryani',
-    subtext: 'Aromatic basmati rice layered with slow-cooked marinated cuts, caramelized onions & spicy salan.',
-    image: 'https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?auto=format&fit=crop&w=1600&q=80',
+    subtext: 'Aromatic long-grain basmati rice layered with slow-cooked saffron spiced marinated cuts & mirchi ka salan.',
+    image: 'https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?auto=format&fit=crop&w=1920&q=85',
     deliveryTime: '25-30 Mins',
     offer: 'Flat ₹125 OFF'
   },
@@ -46,10 +48,10 @@ const HERO_CAROUSEL_SLIDES = [
     slug: 'burgers',
     tag: 'SMASHED & GRILLED',
     headline: 'Juicy Gourmet Smashed Burgers',
-    subtext: 'Double grilled patties, melted aged cheddar, secret house smash sauce on toasted golden brioche.',
-    image: 'https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=1600&q=80',
+    subtext: 'Double grilled patties, melted aged cheddar, secret house smash sauce on toasted golden brioche buns.',
+    image: 'https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=1920&q=85',
     deliveryTime: '15-20 Mins',
-    offer: 'Free Fries with Burger'
+    offer: 'Free Fries on ₹299+'
   },
   {
     id: 'chicken',
@@ -57,8 +59,8 @@ const HERO_CAROUSEL_SLIDES = [
     slug: 'chicken',
     tag: 'CRUNCHY & JUICY',
     headline: 'Fiery Wings & Crispy Tenders',
-    subtext: 'Southern style buttermilk fried chicken coated in secret herbs with hot garlic dip.',
-    image: 'https://images.unsplash.com/photo-1626082927389-6cd097cdc6ec?auto=format&fit=crop&w=1600&q=80',
+    subtext: 'Southern style golden buttermilk fried chicken coated in secret spices with homemade garlic aioli.',
+    image: 'https://images.unsplash.com/photo-1626082927389-6cd097cdc6ec?auto=format&fit=crop&w=1920&q=85',
     deliveryTime: '20 Mins',
     offer: '20% OFF on Buckets'
   },
@@ -68,10 +70,21 @@ const HERO_CAROUSEL_SLIDES = [
     slug: 'chinese',
     tag: 'WOK-TOSSED SPECIALS',
     headline: 'Sizzling Hakka Noodles & Dim Sums',
-    subtext: 'Wok-charred noodles tossed with crisp julienned vegetables and fiery Schezwan glaze.',
-    image: 'https://images.unsplash.com/photo-1541696432-82c6da8ce7bf?auto=format&fit=crop&w=1600&q=80',
+    subtext: 'Wok-charred wheat noodles tossed with crisp julienned veggies, spring onions and fiery Schezwan glaze.',
+    image: 'https://images.unsplash.com/photo-1541696432-82c6da8ce7bf?auto=format&fit=crop&w=1920&q=85',
     deliveryTime: '20-25 Mins',
     offer: 'Free Dim Sum on ₹399+'
+  },
+  {
+    id: 'mexican',
+    categoryName: 'Mexican Cravings',
+    slug: 'mexican',
+    tag: 'ZESTY & LOADED',
+    headline: 'Cheesy Loaded Nachos & Tacos',
+    subtext: 'Crispy corn tortilla chips drowned in warm melted cheese sauce, refried beans, guacamole & zesty salsa.',
+    image: 'https://images.unsplash.com/photo-1565299585323-38d6b0865b47?auto=format&fit=crop&w=1920&q=85',
+    deliveryTime: '20 Mins',
+    offer: 'Free Salsa Dip with Nachos'
   },
   {
     id: 'healthy-food',
@@ -80,7 +93,7 @@ const HERO_CAROUSEL_SLIDES = [
     tag: 'ORGANIC SUPERFOODS',
     headline: 'Nutrient-Packed Quinoa Bowls',
     subtext: 'Fresh organic Hass avocado, tri-color quinoa, cherry tomatoes, kalamata olives & lemon vinaigrette.',
-    image: 'https://images.unsplash.com/photo-1540420773420-3366772f4999?auto=format&fit=crop&w=1600&q=80',
+    image: 'https://images.unsplash.com/photo-1540420773420-3366772f4999?auto=format&fit=crop&w=1920&q=85',
     deliveryTime: '15 Mins',
     offer: '100% Organic Ingredients'
   },
@@ -90,8 +103,8 @@ const HERO_CAROUSEL_SLIDES = [
     slug: 'desserts',
     tag: 'SWEET CRAVINGS',
     headline: 'Molten Choco Lava & Gelato',
-    subtext: 'Gushing dark Belgian chocolate fudge cake paired with authentic Italian vanilla bean gelato.',
-    image: 'https://images.unsplash.com/photo-1551024709-8f23befc6f87?auto=format&fit=crop&w=1600&q=80',
+    subtext: 'Gushing dark Belgian chocolate fudge cake paired with authentic Italian vanilla bean gelato & brownies.',
+    image: 'https://images.unsplash.com/photo-1551024709-8f23befc6f87?auto=format&fit=crop&w=1920&q=85',
     deliveryTime: '10-15 Mins',
     offer: 'Buy 1 Get 1 on Scoops'
   }
@@ -131,169 +144,178 @@ export const Home = () => {
   return (
     <div style={{ paddingBottom: '60px' }}>
       
-      {/* Dynamic Total Background Food Carousel Hero Section */}
+      {/* Full-Screen Fit Hero Section with Total Background Carousel & Text Overlay */}
       <section 
-        className="hero-carousel-section"
+        className="hero-fullscreen-section"
         onMouseEnter={() => setIsPaused(true)}
         onMouseLeave={() => setIsPaused(false)}
       >
         
-        {/* Multi-Slide Total Background Food Layers */}
-        <div className="hero-bg-layer">
+        {/* Full-Screen Multi-Slide Food Background Layer */}
+        <div className="hero-fullscreen-bg-layer">
           {HERO_CAROUSEL_SLIDES.map((slide, index) => (
             <div
               key={slide.id}
-              className={`hero-bg-slide ${index === activeSlide ? 'active' : ''}`}
+              className={`hero-fullscreen-bg-slide ${index === activeSlide ? 'active' : ''}`}
               style={{
                 backgroundImage: `url(${slide.image})`
               }}
             />
           ))}
-          {/* Ambient Lighting & Readability Gradient Overlay */}
-          <div className="hero-bg-overlay" />
+          {/* Cinematic Dark Readability Overlay */}
+          <div className="hero-fullscreen-overlay" />
         </div>
 
-        {/* Hero Interactive Content Layer */}
-        <div className="container hero-content-layer">
-          <div style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
-            alignItems: 'center',
-            gap: '40px'
-          }}>
+        {/* Previous & Next Arrow Navigation Overlay Controls */}
+        <button 
+          className="hero-nav-arrow-overlay hero-nav-arrow-prev" 
+          onClick={handlePrevSlide}
+          title="Previous Food Category"
+        >
+          <ChevronLeft size={26} />
+        </button>
+        <button 
+          className="hero-nav-arrow-overlay hero-nav-arrow-next" 
+          onClick={handleNextSlide}
+          title="Next Food Category"
+        >
+          <ChevronRight size={26} />
+        </button>
+
+        {/* Text & Content Layer Overlaid Directly on Full-Screen Background */}
+        <div className="container hero-fullscreen-content">
+          <div style={{ maxWidth: '780px' }}>
             
-            {/* Left Hero Messaging */}
-            <div>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '16px' }}>
-                <Badge variant="primary">EXPRESS 30 MIN DELIVERY</Badge>
-                <Badge variant="warning">{currentSlide.tag}</Badge>
-              </div>
-
-              <h1 style={{
-                fontFamily: 'Outfit, sans-serif',
-                fontSize: 'clamp(2.2rem, 5vw, 3.4rem)',
-                fontWeight: '900',
-                lineHeight: '1.15',
-                color: 'var(--text-main)',
-                marginBottom: '18px'
-              }}>
-                Hot, Fresh <span style={{ color: 'var(--primary)' }}>{currentSlide.categoryName}</span> Delivered to Your Doorstep.
-              </h1>
-
-              <p style={{ fontSize: '1.05rem', color: 'var(--text-muted)', lineHeight: '1.6', marginBottom: '28px', maxWidth: '520px' }}>
-                {currentSlide.subtext}
-              </p>
-
-              <div style={{ display: 'flex', gap: '14px', flexWrap: 'wrap' }}>
-                <Link to={`/category/${currentSlide.slug}`} className="btn btn-primary btn-lg">
-                  Explore {currentSlide.categoryName} <ArrowRight size={18} />
-                </Link>
-                <Link to="/restaurants" className="btn btn-secondary btn-lg">
-                  Browse Restaurants
-                </Link>
-              </div>
-
-              {/* Quick Hero KPIs */}
-              <div style={{ display: 'flex', gap: '24px', marginTop: '36px', paddingTop: '24px', borderTop: '1px solid rgba(226, 232, 240, 0.8)' }}>
-                <div>
-                  <div style={{ fontFamily: 'Outfit, sans-serif', fontSize: '1.4rem', fontWeight: '800', color: 'var(--text-main)' }}>50+</div>
-                  <div style={{ fontSize: '0.78rem', color: 'var(--text-muted)' }}>Curated Dishes</div>
-                </div>
-                <div>
-                  <div style={{ fontFamily: 'Outfit, sans-serif', fontSize: '1.4rem', fontWeight: '800', color: 'var(--text-main)' }}>30 Mins</div>
-                  <div style={{ fontSize: '0.78rem', color: 'var(--text-muted)' }}>Delivery Promise</div>
-                </div>
-                <div>
-                  <div style={{ fontFamily: 'Outfit, sans-serif', fontSize: '1.4rem', fontWeight: '800', color: 'var(--text-main)' }}>4.9 / 5.0</div>
-                  <div style={{ fontSize: '0.78rem', color: 'var(--text-muted)' }}>Customer Satisfaction</div>
-                </div>
-              </div>
+            {/* Badges Row */}
+            <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '20px', flexWrap: 'wrap' }}>
+              <Badge variant="primary" style={{ padding: '6px 14px', fontSize: '0.78rem', background: '#FF4B2B', color: '#FFF', borderColor: 'transparent' }}>
+                EXPRESS 30 MIN DELIVERY
+              </Badge>
+              <Badge variant="warning" style={{ padding: '6px 14px', fontSize: '0.78rem', background: 'rgba(245, 158, 11, 0.25)', color: '#FCD34D', borderColor: 'rgba(245, 158, 11, 0.5)' }}>
+                {currentSlide.tag}
+              </Badge>
+              <Badge variant="success" style={{ padding: '6px 14px', fontSize: '0.78rem', background: 'rgba(16, 185, 129, 0.25)', color: '#6EE7B7', borderColor: 'rgba(16, 185, 129, 0.5)' }}>
+                {currentSlide.offer}
+              </Badge>
             </div>
 
-            {/* Right Food Showcase Card Carousel */}
-            <div style={{ position: 'relative' }}>
-              
-              <div className="hero-showcase-box">
-                {HERO_CAROUSEL_SLIDES.map((slide, index) => (
-                  <div
-                    key={slide.id}
-                    className={`hero-showcase-slide ${index === activeSlide ? 'active' : ''}`}
-                    style={{
-                      backgroundImage: `url(${slide.image})`
-                    }}
-                  />
-                ))}
+            {/* Main Headline */}
+            <h1 style={{
+              fontFamily: 'Outfit, sans-serif',
+              fontSize: 'clamp(2.4rem, 5.5vw, 4.2rem)',
+              fontWeight: '900',
+              lineHeight: '1.12',
+              color: '#FFFFFF',
+              marginBottom: '18px',
+              textShadow: '0 4px 20px rgba(0, 0, 0, 0.5)'
+            }}>
+              Hot, Fresh <span style={{ color: '#FF4B2B' }}>{currentSlide.categoryName}</span> Delivered to Your Doorstep.
+            </h1>
 
-                {/* Left & Right Arrow Controls */}
-                <button 
-                  className="hero-nav-arrow hero-nav-prev" 
-                  onClick={handlePrevSlide}
-                  title="Previous Category"
-                >
-                  <ChevronLeft size={22} />
-                </button>
-                <button 
-                  className="hero-nav-arrow hero-nav-next" 
-                  onClick={handleNextSlide}
-                  title="Next Category"
-                >
-                  <ChevronRight size={22} />
-                </button>
+            {/* Description Subtext */}
+            <p style={{
+              fontSize: '1.15rem',
+              color: '#E2E8F0',
+              lineHeight: '1.6',
+              marginBottom: '32px',
+              maxWidth: '680px',
+              textShadow: '0 2px 10px rgba(0, 0, 0, 0.4)'
+            }}>
+              {currentSlide.subtext}
+            </p>
 
-                {/* Active Category Overlay Card */}
-                <div style={{
-                  position: 'absolute',
-                  bottom: '20px',
-                  left: '20px',
-                  right: '20px',
-                  background: 'rgba(255, 255, 255, 0.95)',
+            {/* Action Buttons */}
+            <div style={{ display: 'flex', gap: '16px', flexWrap: 'wrap', marginBottom: '40px' }}>
+              <Link to={`/category/${currentSlide.slug}`} className="btn btn-primary btn-lg" style={{ padding: '14px 32px', fontSize: '1.05rem', boxShadow: '0 8px 25px rgba(255, 75, 43, 0.5)' }}>
+                Explore {currentSlide.categoryName} <ArrowRight size={18} />
+              </Link>
+              <Link 
+                to="/restaurants" 
+                className="btn btn-secondary btn-lg" 
+                style={{
+                  background: 'rgba(255, 255, 255, 0.15)',
                   backdropFilter: 'blur(10px)',
-                  padding: '14px 20px',
-                  borderRadius: 'var(--radius-lg)',
-                  boxShadow: 'var(--shadow-lg)',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'space-between',
-                  gap: '12px'
-                }}>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-                    <div style={{ width: '42px', height: '42px', borderRadius: '50%', background: 'var(--primary)', color: '#FFF', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
-                      <Zap size={20} />
-                    </div>
-                    <div>
-                      <div style={{ fontWeight: '800', fontSize: '0.95rem', color: 'var(--text-main)' }}>
-                        {currentSlide.categoryName}
-                      </div>
-                      <div style={{ fontSize: '0.78rem', color: 'var(--text-muted)' }}>
-                        Express {currentSlide.deliveryTime} • {currentSlide.offer}
-                      </div>
-                    </div>
-                  </div>
+                  color: '#FFFFFF',
+                  borderColor: 'rgba(255, 255, 255, 0.3)',
+                  padding: '14px 28px'
+                }}
+              >
+                Browse Restaurants
+              </Link>
+            </div>
 
-                  <Link 
-                    to={`/category/${currentSlide.slug}`}
-                    className="btn btn-primary btn-sm"
-                    style={{ padding: '6px 14px', borderRadius: 'var(--radius-full)' }}
-                  >
-                    Order Now &rarr;
-                  </Link>
+            {/* KPIs & Live Feature Chips */}
+            <div style={{ display: 'flex', gap: '20px', flexWrap: 'wrap', paddingTop: '24px', borderTop: '1px solid rgba(255, 255, 255, 0.15)' }}>
+              <div style={{
+                background: 'rgba(255, 255, 255, 0.08)',
+                backdropFilter: 'blur(10px)',
+                border: '1px solid rgba(255, 255, 255, 0.15)',
+                borderRadius: 'var(--radius-lg)',
+                padding: '10px 18px',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '12px'
+              }}>
+                <div style={{ width: '36px', height: '36px', borderRadius: '50%', background: 'rgba(255, 75, 43, 0.25)', color: '#FF4B2B', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                  <Flame size={18} />
+                </div>
+                <div>
+                  <div style={{ fontFamily: 'Outfit, sans-serif', fontSize: '1.25rem', fontWeight: '800', color: '#FFF' }}>50+ Dishes</div>
+                  <div style={{ fontSize: '0.75rem', color: '#CBD5E1' }}>10 Curated Categories</div>
                 </div>
               </div>
 
+              <div style={{
+                background: 'rgba(255, 255, 255, 0.08)',
+                backdropFilter: 'blur(10px)',
+                border: '1px solid rgba(255, 255, 255, 0.15)',
+                borderRadius: 'var(--radius-lg)',
+                padding: '10px 18px',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '12px'
+              }}>
+                <div style={{ width: '36px', height: '36px', borderRadius: '50%', background: 'rgba(16, 185, 129, 0.25)', color: '#10B981', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                  <Zap size={18} />
+                </div>
+                <div>
+                  <div style={{ fontFamily: 'Outfit, sans-serif', fontSize: '1.25rem', fontWeight: '800', color: '#FFF' }}>30 Mins</div>
+                  <div style={{ fontSize: '0.75rem', color: '#CBD5E1' }}>Express Delivery Guarantee</div>
+                </div>
+              </div>
+
+              <div style={{
+                background: 'rgba(255, 255, 255, 0.08)',
+                backdropFilter: 'blur(10px)',
+                border: '1px solid rgba(255, 255, 255, 0.15)',
+                borderRadius: 'var(--radius-lg)',
+                padding: '10px 18px',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '12px'
+              }}>
+                <div style={{ width: '36px', height: '36px', borderRadius: '50%', background: 'rgba(245, 158, 11, 0.25)', color: '#F59E0B', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                  <Star size={18} />
+                </div>
+                <div>
+                  <div style={{ fontFamily: 'Outfit, sans-serif', fontSize: '1.25rem', fontWeight: '800', color: '#FFF' }}>4.9 / 5.0</div>
+                  <div style={{ fontSize: '0.75rem', color: '#CBD5E1' }}>Verified Customer Reviews</div>
+                </div>
+              </div>
             </div>
 
           </div>
 
-          {/* Interactive Category Carousel Tabs / Ticker */}
-          <div className="hero-category-dots">
-            <span style={{ fontSize: '0.75rem', fontWeight: '800', color: 'var(--text-muted)', textTransform: 'uppercase', marginRight: '4px' }}>
+          {/* Spotlight Category Quick Tabs at the bottom */}
+          <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginTop: '36px', overflowX: 'auto', paddingBottom: '6px', scrollbarWidth: 'none' }}>
+            <span style={{ fontSize: '0.78rem', fontWeight: '800', color: '#CBD5E1', textTransform: 'uppercase', marginRight: '6px', whiteSpace: 'nowrap' }}>
               Spotlight Categories:
             </span>
             {HERO_CAROUSEL_SLIDES.map((slide, index) => (
               <button
                 key={slide.id}
                 type="button"
-                className={`hero-cat-pill ${index === activeSlide ? 'active' : ''}`}
+                className={`hero-cat-pill-dark ${index === activeSlide ? 'active' : ''}`}
                 onClick={() => setActiveSlide(index)}
               >
                 <span>{slide.categoryName}</span>
@@ -305,7 +327,7 @@ export const Home = () => {
       </section>
 
       {/* 10 Food Categories Grid */}
-      <section className="container" style={{ marginTop: '30px', marginBottom: '50px' }}>
+      <section className="container" style={{ marginTop: '50px', marginBottom: '50px' }}>
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '24px' }}>
           <div>
             <div style={{ display: 'flex', alignItems: 'center', gap: '6px', marginBottom: '4px' }}>
