@@ -37,17 +37,17 @@ const TRENDING_SEARCHES = [
   "Cold Coffee"
 ];
 
-const CAROUSEL_CRAVINGS = [
-  "\"pizza\"",
-  "\"hyderabadi biryani\"",
-  "\"smash burger\"",
-  "\"crispy chicken wings\"",
-  "\"schezwan noodles\"",
-  "\"paneer tikka\"",
-  "\"choco lava cake\"",
-  "\"iced cold coffee\"",
-  "\"gelato naturals\"",
-  "\"tacos & burritos\""
+const SEARCH_CAROUSEL_WORDS = [
+  '"pizza"',
+  '"biryani"',
+  '"burger"',
+  '"noodles"',
+  '"chicken"',
+  '"cake"',
+  '"coffee"',
+  '"pasta"',
+  '"tacos"',
+  '"icecream"'
 ];
 
 export const Navbar = () => {
@@ -58,22 +58,23 @@ export const Navbar = () => {
   const routerLocation = useRouterLocation();
 
   const [searchQuery, setSearchQuery] = useState('');
+  const [carouselIndex, setCarouselIndex] = useState(0);
   const [matchedDishes, setMatchedDishes] = useState([]);
   const [matchedRests, setMatchedRests] = useState([]);
   const [showSearchDropdown, setShowSearchDropdown] = useState(false);
   const [showUserDropdown, setShowUserDropdown] = useState(false);
   const [showCategoriesDropdown, setShowCategoriesDropdown] = useState(false);
-  const [carouselIdx, setCarouselIdx] = useState(0);
 
   const searchBoxRef = useRef(null);
   const userMenuRef = useRef(null);
   const categoriesMenuRef = useRef(null);
 
-  // Rotate placeholder carousel every 2.2s
+  // Rotate single-word carousel every 2.4 seconds from right to left
   useEffect(() => {
     const timer = setInterval(() => {
-      setCarouselIdx(prev => (prev + 1) % CAROUSEL_CRAVINGS.length);
-    }, 2200);
+      setCarouselIndex(prev => (prev + 1) % SEARCH_CAROUSEL_WORDS.length);
+    }, 2400);
+
     return () => clearInterval(timer);
   }, []);
 
@@ -135,9 +136,10 @@ export const Navbar = () => {
   const handleKeyDown = (e) => {
     if (e.key === 'Enter') {
       e.preventDefault();
-      const targetQuery = searchQuery.trim() || CAROUSEL_CRAVINGS[carouselIdx].replace(/"/g, '');
-      setShowSearchDropdown(false);
-      navigate(`/search?q=${encodeURIComponent(targetQuery)}`);
+      if (searchQuery.trim()) {
+        setShowSearchDropdown(false);
+        navigate(`/search?q=${encodeURIComponent(searchQuery.trim())}`);
+      }
     }
   };
 
@@ -159,9 +161,8 @@ export const Navbar = () => {
   };
 
   const handleViewAllResults = () => {
-    const targetQuery = searchQuery.trim() || CAROUSEL_CRAVINGS[carouselIdx].replace(/"/g, '');
     setShowSearchDropdown(false);
-    navigate(`/search?q=${encodeURIComponent(targetQuery)}`);
+    navigate(`/search?q=${encodeURIComponent(searchQuery.trim())}`);
   };
 
   const isHomeActive = routerLocation.pathname === '/';
@@ -191,17 +192,19 @@ export const Navbar = () => {
           </button>
         </div>
 
-        {/* Global Live Search Bar with Animated Text Carousel */}
+        {/* Global Live Search Bar */}
         <div className="nav-search-bar" ref={searchBoxRef}>
           <Search size={17} className="nav-search-icon" />
 
-          {/* Animated Carousel Placeholder */}
+          {/* Animated Right-to-Left Single Word Placeholder Carousel */}
           {!searchQuery && (
-            <div className="search-carousel-wrapper">
-              <span>Search</span>
-              <span key={carouselIdx} className="search-carousel-animated-item">
-                {CAROUSEL_CRAVINGS[carouselIdx]}
-              </span>
+            <div className="search-carousel-placeholder">
+              <span className="search-carousel-static">Search</span>
+              <div className="search-carousel-track">
+                <span key={carouselIndex} className="search-carousel-word">
+                  {SEARCH_CAROUSEL_WORDS[carouselIndex]}
+                </span>
+              </div>
             </div>
           )}
 
@@ -232,7 +235,7 @@ export const Navbar = () => {
                 display: 'flex',
                 alignItems: 'center',
                 padding: '4px',
-                zIndex: 4
+                zIndex: 2
               }}
             >
               <X size={15} />

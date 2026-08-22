@@ -304,16 +304,6 @@ button, input, select, textarea {
   max-width: 580px;
   position: relative;
   margin: 0 8px;
-  background: var(--surface-subtle);
-  border-radius: var(--radius-full);
-  border: 1.5px solid var(--border);
-  transition: all var(--transition-fast);
-}
-
-.nav-search-bar:focus-within {
-  border-color: var(--primary);
-  background: var(--surface);
-  box-shadow: 0 0 0 3.5px var(--primary-light), 0 8px 20px -4px rgba(0, 0, 0, 0.1);
 }
 
 .nav-search-input {
@@ -321,13 +311,18 @@ button, input, select, textarea {
   height: 44px;
   padding: 10px 42px 10px 44px;
   border-radius: var(--radius-full);
-  border: none;
-  background: transparent;
+  border: 1.5px solid var(--border);
+  background: var(--surface-subtle);
   font-size: 0.92rem;
   color: var(--text-main);
   outline: none;
-  position: relative;
-  z-index: 2;
+  transition: all var(--transition-fast);
+}
+
+.nav-search-input:focus {
+  border-color: var(--primary);
+  background: var(--surface);
+  box-shadow: 0 0 0 3.5px var(--primary-light), 0 8px 20px -4px rgba(0, 0, 0, 0.1);
 }
 
 .nav-search-icon {
@@ -337,42 +332,57 @@ button, input, select, textarea {
   transform: translateY(-50%);
   color: var(--text-muted);
   pointer-events: none;
-  z-index: 3;
+  z-index: 2;
 }
 
-/* Search Bar Carousel Animation */
-.search-carousel-wrapper {
+/* Search Bar Right-to-Left Single Word Carousel */
+.search-carousel-placeholder {
   position: absolute;
   left: 44px;
   top: 50%;
   transform: translateY(-50%);
   display: flex;
   align-items: center;
-  gap: 5px;
+  pointer-events: none;
   font-size: 0.92rem;
   color: var(--text-muted);
-  pointer-events: none;
   user-select: none;
-  z-index: 1;
   overflow: hidden;
+  height: 28px;
+  z-index: 1;
+}
+
+.search-carousel-static {
+  margin-right: 5px;
+  font-weight: 500;
+  color: #64748B;
+}
+
+.search-carousel-track {
+  display: inline-flex;
+  align-items: center;
+  position: relative;
   height: 24px;
+  overflow: hidden;
+  min-width: 80px;
 }
 
-.search-carousel-animated-item {
+.search-carousel-word {
   display: inline-block;
-  color: var(--primary);
   font-weight: 700;
-  animation: searchCarouselSlide 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  color: var(--primary);
+  animation: slideRightToLeft 0.45s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  white-space: nowrap;
 }
 
-@keyframes searchCarouselSlide {
+@keyframes slideRightToLeft {
   0% {
+    transform: translateX(45px);
     opacity: 0;
-    transform: translateY(10px);
   }
   100% {
+    transform: translateX(0);
     opacity: 1;
-    transform: translateY(0);
   }
 }
 
