@@ -5,6 +5,7 @@ import { FoodCard } from '../../components/common/FoodCard';
 import { RestaurantCard } from '../../components/common/RestaurantCard';
 import { Badge } from '../../components/common/Badge';
 import { AnimatedDeliveryRider } from '../../components/common/AnimatedDeliveryRider';
+import { FloatingDeliveryRider } from '../../components/common/FloatingDeliveryRider';
 import { 
   ArrowRight, 
   Sparkles, 
@@ -316,81 +317,51 @@ export const Home = () => {
 
             </div>
 
-            {/* Right Column: Animated Scooter Delivery Rider Live Card */}
-            <div style={{ display: 'flex', justifyContent: 'center' }}>
+            {/* Right Column: Transparent Floating Delivery Scooter Rider */}
+            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', position: 'relative' }}>
+              
+              {/* Floating Scooter Rider with exact silhouette and transparent background */}
+              <FloatingDeliveryRider
+                width={360}
+                height={300}
+                brandText="Foodiez"
+              />
+
+              {/* Floating Live Status Frosted Pill */}
               <div style={{
-                background: 'rgba(15, 23, 42, 0.65)',
-                backdropFilter: 'blur(20px)',
-                WebkitBackdropFilter: 'blur(20px)',
-                border: '1.5px solid rgba(255, 255, 255, 0.2)',
-                borderRadius: 'var(--radius-2xl)',
-                padding: '24px 28px',
-                boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.6)',
-                maxWidth: '420px',
-                width: '100%',
+                marginTop: '12px',
+                background: 'rgba(15, 23, 42, 0.75)',
+                backdropFilter: 'blur(16px)',
+                WebkitBackdropFilter: 'blur(16px)',
+                border: '1.5px solid rgba(255, 255, 255, 0.25)',
+                borderRadius: 'var(--radius-full)',
+                padding: '10px 22px',
                 display: 'flex',
-                flexDirection: 'column',
                 alignItems: 'center',
-                textAlign: 'center',
-                position: 'relative'
+                gap: '14px',
+                boxShadow: '0 20px 40px -10px rgba(0, 0, 0, 0.5), 0 0 20px rgba(255, 75, 43, 0.25)'
               }}>
-                
-                {/* Live GPS Pulse Indicator */}
-                <div style={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'space-between',
-                  width: '100%',
-                  marginBottom: '14px',
-                  paddingBottom: '12px',
-                  borderBottom: '1px solid rgba(255, 255, 255, 0.12)'
-                }}>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                    <span style={{
-                      width: '10px',
-                      height: '10px',
-                      borderRadius: '50%',
-                      background: '#10B981',
-                      boxShadow: '0 0 10px #10B981',
-                      display: 'inline-block'
-                    }} />
-                    <span style={{ fontSize: '0.78rem', fontWeight: '800', color: '#E2E8F0', letterSpacing: '0.5px', textTransform: 'uppercase' }}>
-                      LIVE FLEET TRACKING
-                    </span>
-                  </div>
-                  <Badge variant="primary" style={{ fontSize: '0.72rem', background: '#FF4B2B', color: '#FFF' }}>
-                    ON SCOOTER
-                  </Badge>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                  <span style={{
+                    width: '10px',
+                    height: '10px',
+                    borderRadius: '50%',
+                    background: '#10B981',
+                    boxShadow: '0 0 10px #10B981'
+                  }} />
+                  <span style={{ fontWeight: '800', fontSize: '0.85rem', color: '#FFFFFF' }}>
+                    Live Courier En Route
+                  </span>
                 </div>
 
-                {/* Animated Scooter Rider Component */}
-                <AnimatedDeliveryRider size="medium" showRoad={true} />
+                <div style={{ height: '14px', width: '1px', background: 'rgba(255, 255, 255, 0.25)' }} />
 
-                {/* Rider Status Details */}
-                <div style={{ marginTop: '16px', width: '100%', textAlign: 'left' }}>
-                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '6px' }}>
-                    <div style={{ fontWeight: '800', fontSize: '0.95rem', color: '#FFFFFF' }}>
-                      Vikram S. • Express Courier
-                    </div>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '4px', background: 'rgba(16, 185, 129, 0.25)', color: '#6EE7B7', padding: '2px 8px', borderRadius: 'var(--radius-sm)', fontSize: '0.75rem', fontWeight: '800' }}>
-                      <Zap size={12} /> {currentSlide.deliveryTime}
-                    </div>
-                  </div>
-                  <div style={{ fontSize: '0.78rem', color: '#94A3B8', display: 'flex', alignItems: 'center', gap: '6px' }}>
-                    <ShieldCheck size={14} color="#10B981" />
-                    <span>Holding insulated Foodiez bag • Contactless & Insulated</span>
-                  </div>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '0.82rem', color: '#FFD166', fontWeight: '800' }}>
+                  <Zap size={14} color="#FFD166" />
+                  <span>{currentSlide.deliveryTime}</span>
                 </div>
-
-                <Link 
-                  to={`/category/${currentSlide.slug}`}
-                  className="btn btn-primary btn-sm"
-                  style={{ width: '100%', marginTop: '16px', borderRadius: 'var(--radius-lg)' }}
-                >
-                  Order {currentSlide.categoryName} Now &rarr;
-                </Link>
-
               </div>
+
             </div>
 
           </div>

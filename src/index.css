@@ -552,6 +552,55 @@ button, input, select, textarea {
 /* ===================================================
    ANIMATED DELIVERY SCOOTER & RIDER
    =================================================== */
+.floating-rider-wrapper {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  animation: riderFloat 3.4s ease-in-out infinite alternate;
+  will-change: transform;
+}
+
+@keyframes riderFloat {
+  0% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-18px) rotate(-1.5deg);
+  }
+  100% {
+    transform: translateY(6px) rotate(1deg);
+  }
+}
+
+.floating-rider-motion-lines {
+  position: absolute;
+  left: -35px;
+  top: 42%;
+  width: 80px;
+  height: 60px;
+  pointer-events: none;
+}
+
+.rider-speed-line {
+  position: absolute;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, rgba(255, 75, 43, 0.85), transparent);
+  border-radius: 3px;
+  opacity: 0;
+  animation: windSpeed 0.8s ease-in-out infinite;
+}
+
+.rider-speed-line.line-top { top: 12px; width: 65px; animation-delay: 0s; }
+.rider-speed-line.line-mid { top: 30px; width: 85px; animation-delay: 0.3s; }
+.rider-speed-line.line-bot { top: 48px; width: 50px; animation-delay: 0.6s; }
+
+.scooter-spin-wheel {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: spinWheel 0.5s linear infinite;
+}
+
 .animated-scooter-container {
   position: relative;
   display: inline-flex;
