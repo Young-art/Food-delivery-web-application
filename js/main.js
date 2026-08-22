@@ -90,16 +90,60 @@ const FoodApp = {
     });
   },
 
+  // Delivery Map & Location State
+  deliveryMap: null,
+  deliveryMarker: null,
+  currentSelectedCoords: { lat: 12.9784, lng: 77.6408 },
+  currentSelectedAddress: "Bangalore, Indiranagar",
+  currentFullAddress: "100 Feet Road, Indiranagar, Bangalore, Karnataka 560038",
+  isGpsActive: false,
+  geocodeDebounceTimer: null,
+  searchDebounceTimer: null,
+
   // Location Selector System
   bindLocationModal: function() {
     const currentLoc = localStorage.getItem("food_app_location") || "Bangalore, Indiranagar";
+    this.currentSelectedAddress = currentLoc;
     const locElements = document.querySelectorAll(".current-location-text");
     locElements.forEach(el => el.textContent = currentLoc);
+
+    const savedCoords = localStorage.getItem("food_app_coords");
+    if (savedCoords) {
+      try {
+        this.currentSelectedCoords = JSON.parse(savedCoords);
+      } catch (e) {}
+    }
 
     const triggerBtns = document.querySelectorAll(".location-selector");
     triggerBtns.forEach(btn => {
       btn.addEventListener("click", () => this.openLocationModal());
     });
+  },
+
+  ensureLeafletLoaded: function(callback) {
+    if (typeof window.L !== "undefined") {
+      callback();
+      return;
+    }
+
+    if (!document.getElementById("leaflet-css-bundle")) {
+      const link = document.createElement("link");
+      link.id = "leaflet-css-bundle";
+      link.rel = "stylesheet";
+      link.href = "https://unpkg.com/leaflet@1.9.4/dist/leaflet.css";
+      document.head.appendChild(link);
+    }
+
+    const existingScript = document.getElementById("leaflet-js-bundle");
+    if (existingScript) {
+      existingScript.addEventListener("load", callback);
+    } else {
+      const script = document.createElement("script");
+      script.id = "leaflet-js-bundle";
+      script.src = "https://unpkg.com/leaflet@1.9.4/dist/leaflet.js";
+      script.onload = callback;
+      document.head.appendChild(script);
+    }
   },
 
   openLocationModal: function() {
@@ -109,29 +153,427 @@ const FoodApp = {
       modal.id = "location-modal";
       modal.className = "modal-overlay";
       modal.innerHTML = `
-        <div class="modal-box" style="max-width: 480px;">
+        <div class="modal-box">
           <div class="modal-header">
-            <h3 class="modal-title">Select Delivery Location</h3>
+            <div style="display:flex; align-items:center; gap:10px;">
+              <h3 class="modal-title">Select Delivery Location</h3>
+              <span class="badge badge-primary" style="font-size:0.75rem; padding:3px 8px;">LIVE GPS & MAP</span>
+            </div>
             <button class="modal-close" onclick="FoodApp.closeModal('location-modal')">&times;</button>
           </div>
-          <div class="modal-body">
-            <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 16px;">
-              Choose your city to discover restaurants & top dishes delivering to you.
-            </p>
-            <div style="display: flex; flex-direction: column; gap: 10px;">
-              <button class="city-opt-btn chip active" onclick="FoodApp.selectLocation('Bangalore, Indiranagar')" style="display:inline-flex; align-items:center; gap:8px;"><span class="badge badge-primary" style="font-size:0.7rem; padding:2px 6px;">BLR</span> Bangalore, Indiranagar</button>
-              <button class="city-opt-btn chip" onclick="FoodApp.selectLocation('Bangalore, Koramangala')" style="display:inline-flex; align-items:center; gap:8px;"><span class="badge badge-primary" style="font-size:0.7rem; padding:2px 6px;">BLR</span> Bangalore, Koramangala</button>
-              <button class="city-opt-btn chip" onclick="FoodApp.selectLocation('Mumbai, Bandra West')" style="display:inline-flex; align-items:center; gap:8px;"><span class="badge badge-primary" style="font-size:0.7rem; padding:2px 6px;">BOM</span> Mumbai, Bandra West</button>
-              <button class="city-opt-btn chip" onclick="FoodApp.selectLocation('Delhi NCR, Connaught Place')" style="display:inline-flex; align-items:center; gap:8px;"><span class="badge badge-primary" style="font-size:0.7rem; padding:2px 6px;">DEL</span> Delhi NCR, Connaught Place</button>
-              <button class="city-opt-btn chip" onclick="FoodApp.selectLocation('Hyderabad, Hitec City')" style="display:inline-flex; align-items:center; gap:8px;"><span class="badge badge-primary" style="font-size:0.7rem; padding:2px 6px;">HYD</span> Hyderabad, Hitec City</button>
-              <button class="city-opt-btn chip" onclick="FoodApp.selectLocation('Pune, Koregaon Park')" style="display:inline-flex; align-items:center; gap:8px;"><span class="badge badge-primary" style="font-size:0.7rem; padding:2px 6px;">PNQ</span> Pune, Koregaon Park</button>
+          <div class="modal-body" style="padding:18px 22px;">
+            
+            <!-- Real-time GPS Location Permission Card -->
+            <div class="gps-permission-card" id="gps-permission-card">
+              <div>
+                <div style="font-weight:700; font-size:0.95rem; color:var(--text-main); margin-bottom:2px; display:flex; align-items:center; gap:6px;">
+                  <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg>
+                  Real-Time Location Access
+                </div>
+                <div class="gps-status-text" id="gps-status-text">
+                  Turn on your GPS location to pinpoint your exact delivery address in real time.
+                </div>
+              </div>
+              <button class="gps-action-btn" id="request-gps-btn" onclick="FoodApp.requestUserLiveLocation()">
+                <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2a8 8 0 0 0-8 8c0 5.25 8 12 8 12s8-6.75 8-12a8 8 0 0 0-8-8z"/><circle cx="12" cy="10" r="3"/></svg>
+                <span>Use Current Location</span>
+              </button>
             </div>
+
+            <!-- Address Search Bar with Autocomplete -->
+            <div class="map-search-box">
+              <span class="map-search-icon">
+                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+              </span>
+              <input type="text" id="map-location-search" class="map-search-input" placeholder="Search street, area, landmark, or apartment..." oninput="FoodApp.handleSearchInput(this.value)">
+              <button type="button" class="map-search-clear" id="map-search-clear-btn" onclick="FoodApp.clearMapSearch()">
+                <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+              </button>
+              <div class="map-search-results-dropdown" id="map-search-results"></div>
+            </div>
+
+            <!-- Real-Time Interactive Delivery Map -->
+            <div class="delivery-map-wrapper">
+              <div id="delivery-map-container"></div>
+              <button class="map-recenter-btn" id="map-recenter-btn" title="Recenter to current location" onclick="FoodApp.recenterMapOnCurrentPin()">
+                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="22" y1="12" x2="18" y2="12"/><line x1="6" y1="12" x2="2" y2="12"/><line x1="12" y1="6" x2="12" y2="2"/><line x1="12" y1="22" x2="12" y2="18"/></svg>
+              </button>
+            </div>
+
+            <!-- Selected Address Details Preview Card -->
+            <div class="selected-address-card" id="selected-address-preview">
+              <div class="selected-address-icon">
+                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a8 8 0 0 0-8 8c0 5.25 8 12 8 12s8-6.75 8-12a8 8 0 0 0-8-8z"/><circle cx="12" cy="10" r="3"/></svg>
+              </div>
+              <div class="selected-address-details">
+                <div class="selected-address-title" id="selected-address-title">${this.currentSelectedAddress}</div>
+                <div class="selected-address-subtext" id="selected-address-subtext">${this.currentFullAddress}</div>
+                <div style="display:flex; align-items:center; gap:8px; flex-wrap:wrap;">
+                  <span class="badge badge-warning" id="selected-coords-badge" style="font-size:0.72rem; padding:2px 7px;">${this.currentSelectedCoords.lat.toFixed(4)}° N, ${this.currentSelectedCoords.lng.toFixed(4)}° E</span>
+                  <span class="badge badge-success" style="font-size:0.72rem; padding:2px 7px;">30 MINS EXPRESS</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Quick City / Hubs Selection -->
+            <div style="margin-top: 10px;">
+              <div style="font-size:0.82rem; font-weight:700; color:var(--text-muted); margin-bottom:8px; text-transform:uppercase;">Popular Delivery Hubs</div>
+              <div style="display: flex; flex-wrap: wrap; gap: 8px;">
+                <button class="chip city-hub-btn active" onclick="FoodApp.selectQuickCity('Bangalore, Indiranagar', 12.9784, 77.6408, '100 Feet Road, Indiranagar, Bangalore, 560038', this)"><span class="badge badge-primary" style="font-size:0.68rem; padding:1px 5px;">BLR</span> Indiranagar</button>
+                <button class="chip city-hub-btn" onclick="FoodApp.selectQuickCity('Bangalore, Koramangala', 12.9352, 77.6245, '80 Feet Road, 4th Block, Koramangala, Bangalore, 560034', this)"><span class="badge badge-primary" style="font-size:0.68rem; padding:1px 5px;">BLR</span> Koramangala</button>
+                <button class="chip city-hub-btn" onclick="FoodApp.selectQuickCity('Mumbai, Bandra West', 19.0596, 72.8295, 'Hill Road, Bandra West, Mumbai, Maharashtra 400050', this)"><span class="badge badge-primary" style="font-size:0.68rem; padding:1px 5px;">BOM</span> Bandra West</button>
+                <button class="chip city-hub-btn" onclick="FoodApp.selectQuickCity('Delhi NCR, Connaught Place', 28.6315, 77.2167, 'Inner Circle, Connaught Place, New Delhi 110001', this)"><span class="badge badge-primary" style="font-size:0.68rem; padding:1px 5px;">DEL</span> Connaught Place</button>
+                <button class="chip city-hub-btn" onclick="FoodApp.selectQuickCity('Hyderabad, Hitec City', 17.4435, 78.3772, 'Madhapur Main Road, Hitec City, Hyderabad, 500081', this)"><span class="badge badge-primary" style="font-size:0.68rem; padding:1px 5px;">HYD</span> Hitec City</button>
+                <button class="chip city-hub-btn" onclick="FoodApp.selectQuickCity('Pune, Koregaon Park', 18.5362, 73.8940, 'North Main Road, Koregaon Park, Pune, 411001', this)"><span class="badge badge-primary" style="font-size:0.68rem; padding:1px 5px;">PNQ</span> Koregaon Park</button>
+              </div>
+            </div>
+
+          </div>
+          <div class="modal-footer" style="padding:14px 22px;">
+            <button class="btn btn-secondary btn-sm" onclick="FoodApp.closeModal('location-modal')">Cancel</button>
+            <button class="btn btn-primary" onclick="FoodApp.confirmDeliveryLocation()" style="font-weight:700;">
+              Confirm Delivery Location &rarr;
+            </button>
           </div>
         </div>
       `;
       document.body.appendChild(modal);
     }
     modal.classList.add("active");
+
+    // Initialize interactive Leaflet Map
+    this.ensureLeafletLoaded(() => {
+      setTimeout(() => {
+        this.initDeliveryMap();
+      }, 150);
+    });
+  },
+
+  initDeliveryMap: function() {
+    const container = document.getElementById("delivery-map-container");
+    if (!container || typeof window.L === "undefined") return;
+
+    const lat = this.currentSelectedCoords.lat;
+    const lng = this.currentSelectedCoords.lng;
+
+    if (this.deliveryMap) {
+      this.deliveryMap.remove();
+      this.deliveryMap = null;
+    }
+
+    this.deliveryMap = L.map('delivery-map-container', {
+      zoomControl: true,
+      attributionControl: false
+    }).setView([lat, lng], 16);
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      maxZoom: 19
+    }).addTo(this.deliveryMap);
+
+    const pinIcon = L.divIcon({
+      className: 'custom-map-marker',
+      html: `
+        <div class="marker-pulse-ring"></div>
+        <svg class="marker-pin-svg" viewBox="0 0 24 24" width="34" height="34" fill="#FF4B2B">
+          <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+        </svg>
+      `,
+      iconSize: [34, 34],
+      iconAnchor: [17, 34]
+    });
+
+    this.deliveryMarker = L.marker([lat, lng], {
+      icon: pinIcon,
+      draggable: true
+    }).addTo(this.deliveryMap);
+
+    this.deliveryMarker.on('dragend', (e) => {
+      const pos = e.target.getLatLng();
+      this.handleMapPositionChange(pos.lat, pos.lng);
+    });
+
+    this.deliveryMap.on('click', (e) => {
+      this.deliveryMarker.setLatLng(e.latlng);
+      this.handleMapPositionChange(e.latlng.lat, e.latlng.lng);
+    });
+
+    this.deliveryMap.invalidateSize();
+  },
+
+  requestUserLiveLocation: function() {
+    const btn = document.getElementById("request-gps-btn");
+    const statusText = document.getElementById("gps-status-text");
+
+    if (!navigator.geolocation) {
+      FoodApp.showToast("Geolocation is not supported by your browser.", "error");
+      return;
+    }
+
+    if (btn) {
+      btn.innerHTML = `<span class="gps-pulse-dot" style="background:#FFF;"></span> <span>Locating GPS...</span>`;
+      btn.disabled = true;
+    }
+    if (statusText) {
+      statusText.innerHTML = `<em>Requesting location permission from browser...</em>`;
+    }
+
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        const lat = position.coords.latitude;
+        const lng = position.coords.longitude;
+        const accuracy = Math.round(position.coords.accuracy || 10);
+
+        this.isGpsActive = true;
+        this.currentSelectedCoords = { lat, lng };
+
+        if (btn) {
+          btn.innerHTML = `<span class="gps-pulse-dot"></span> <span>GPS Active</span>`;
+          btn.style.background = "#10B981";
+          btn.disabled = false;
+        }
+        if (statusText) {
+          statusText.innerHTML = `<strong style="color:var(--veg-color);">Live Location Detected</strong> (Accuracy: ±${accuracy}m)`;
+        }
+
+        if (this.deliveryMap) {
+          this.deliveryMap.flyTo([lat, lng], 17, { animate: true, duration: 1.2 });
+          if (this.deliveryMarker) {
+            this.deliveryMarker.setLatLng([lat, lng]);
+          }
+        }
+
+        this.reverseGeocode(lat, lng);
+        FoodApp.showToast("Live GPS Location detected successfully!", "success");
+      },
+      (error) => {
+        if (btn) {
+          btn.innerHTML = `<span>Retry GPS</span>`;
+          btn.style.background = "var(--primary)";
+          btn.disabled = false;
+        }
+        if (statusText) {
+          if (error.code === error.PERMISSION_DENIED) {
+            statusText.innerHTML = `<span style="color:var(--nonveg-color); font-weight:600;">Location permission was denied.</span> Please allow permission in your browser or drag the map pin.`;
+          } else {
+            statusText.innerHTML = `<span style="color:var(--nonveg-color); font-weight:600;">Unable to retrieve GPS.</span> Please drag the map pin or select an area below.`;
+          }
+        }
+        FoodApp.showToast("Location permission was denied or unavailable. Please pick on the map.", "info");
+      },
+      {
+        enableHighAccuracy: true,
+        timeout: 10000,
+        maximumAge: 0
+      }
+    );
+  },
+
+  handleMapPositionChange: function(lat, lng) {
+    this.currentSelectedCoords = { lat, lng };
+    const coordsBadge = document.getElementById("selected-coords-badge");
+    if (coordsBadge) {
+      coordsBadge.textContent = `${lat.toFixed(4)}° N, ${lng.toFixed(4)}° E`;
+    }
+
+    clearTimeout(this.geocodeDebounceTimer);
+    this.geocodeDebounceTimer = setTimeout(() => {
+      this.reverseGeocode(lat, lng);
+    }, 400);
+  },
+
+  reverseGeocode: function(lat, lng) {
+    const titleEl = document.getElementById("selected-address-title");
+    const subtextEl = document.getElementById("selected-address-subtext");
+    if (subtextEl) subtextEl.textContent = "Fetching street address details...";
+
+    fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lng}&zoom=18&addressdetails=1`)
+      .then(res => res.json())
+      .then(data => {
+        if (data && data.address) {
+          const addr = data.address;
+          const road = addr.road || addr.street || addr.pedestrian || addr.suburb || "Main Road";
+          const locality = addr.suburb || addr.neighbourhood || addr.city_district || addr.residential || "";
+          const city = addr.city || addr.town || addr.state_district || "Bangalore";
+          const state = addr.state || "";
+          const postcode = addr.postcode || "";
+
+          const formattedTitle = locality ? `${city}, ${locality}` : (road ? `${city}, ${road}` : city);
+          const fullFormatted = [road, locality, city, state, postcode].filter(Boolean).join(", ");
+
+          this.currentSelectedAddress = formattedTitle;
+          this.currentFullAddress = fullFormatted || data.display_name;
+
+          if (titleEl) titleEl.textContent = this.currentSelectedAddress;
+          if (subtextEl) subtextEl.textContent = this.currentFullAddress;
+        } else {
+          this.fallbackLocationName(lat, lng);
+        }
+      })
+      .catch(() => {
+        this.fallbackLocationName(lat, lng);
+      });
+  },
+
+  fallbackLocationName: function(lat, lng) {
+    const titleEl = document.getElementById("selected-address-title");
+    const subtextEl = document.getElementById("selected-address-subtext");
+    const nearest = this.getNearestCity(lat, lng);
+    this.currentSelectedAddress = nearest.name;
+    this.currentFullAddress = nearest.full;
+    if (titleEl) titleEl.textContent = this.currentSelectedAddress;
+    if (subtextEl) subtextEl.textContent = this.currentFullAddress;
+  },
+
+  getNearestCity: function(lat, lng) {
+    const hubs = [
+      { name: "Bangalore, Indiranagar", full: "100 Feet Road, Indiranagar, Bangalore, Karnataka 560038", lat: 12.9784, lng: 77.6408 },
+      { name: "Bangalore, Koramangala", full: "80 Feet Road, 4th Block, Koramangala, Bangalore, Karnataka 560034", lat: 12.9352, lng: 77.6245 },
+      { name: "Mumbai, Bandra West", full: "Hill Road, Bandra West, Mumbai, Maharashtra 400050", lat: 19.0596, lng: 72.8295 },
+      { name: "Delhi NCR, Connaught Place", full: "Inner Circle, Connaught Place, New Delhi 110001", lat: 28.6315, lng: 77.2167 },
+      { name: "Hyderabad, Hitec City", full: "Madhapur Main Road, Hitec City, Hyderabad, Telangana 500081", lat: 17.4435, lng: 78.3772 },
+      { name: "Pune, Koregaon Park", full: "North Main Road, Koregaon Park, Pune, Maharashtra 411001", lat: 18.5362, lng: 73.8940 }
+    ];
+
+    let closest = hubs[0];
+    let minDist = Infinity;
+    hubs.forEach(hub => {
+      const dist = Math.hypot(hub.lat - lat, hub.lng - lng);
+      if (dist < minDist) {
+        minDist = dist;
+        closest = hub;
+      }
+    });
+    return closest;
+  },
+
+  handleSearchInput: function(query) {
+    const clearBtn = document.getElementById("map-search-clear-btn");
+    const resultsDropdown = document.getElementById("map-search-results");
+    
+    if (clearBtn) clearBtn.style.display = query ? "flex" : "none";
+    if (!query || query.length < 2) {
+      if (resultsDropdown) resultsDropdown.style.display = "none";
+      return;
+    }
+
+    clearTimeout(this.searchDebounceTimer);
+    this.searchDebounceTimer = setTimeout(() => {
+      this.searchLocations(query);
+    }, 350);
+  },
+
+  clearMapSearch: function() {
+    const input = document.getElementById("map-location-search");
+    const clearBtn = document.getElementById("map-search-clear-btn");
+    const resultsDropdown = document.getElementById("map-search-results");
+    if (input) input.value = "";
+    if (clearBtn) clearBtn.style.display = "none";
+    if (resultsDropdown) resultsDropdown.style.display = "none";
+  },
+
+  searchLocations: function(query) {
+    const resultsDropdown = document.getElementById("map-search-results");
+    if (!resultsDropdown) return;
+
+    resultsDropdown.innerHTML = `<div style="padding:12px; font-size:0.85rem; color:var(--text-muted); text-align:center;">Searching places...</div>`;
+    resultsDropdown.style.display = "block";
+
+    fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(query)}&limit=5&countrycodes=in`)
+      .then(res => res.json())
+      .then(results => {
+        if (!results || results.length === 0) {
+          resultsDropdown.innerHTML = `<div style="padding:12px; font-size:0.85rem; color:var(--text-muted); text-align:center;">No matching delivery locations found. Try another term.</div>`;
+          return;
+        }
+
+        resultsDropdown.innerHTML = results.map(place => `
+          <div class="map-search-result-item" onclick="FoodApp.selectSearchResult(${place.lat}, ${place.lon}, '${place.display_name.replace(/'/g, "\\'")}')">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" style="flex-shrink:0; margin-top:2px; color:var(--primary);"><path d="M12 2a8 8 0 0 0-8 8c0 5.25 8 12 8 12s8-6.75 8-12a8 8 0 0 0-8-8z"/><circle cx="12" cy="10" r="3"/></svg>
+            <div>
+              <div style="font-weight:700; color:var(--text-main); font-size:0.88rem;">${place.display_name.split(',')[0]}</div>
+              <div style="font-size:0.78rem; color:var(--text-muted); line-height:1.3;">${place.display_name}</div>
+            </div>
+          </div>
+        `).join('');
+      })
+      .catch(() => {
+        resultsDropdown.innerHTML = `<div style="padding:12px; font-size:0.85rem; color:var(--text-muted); text-align:center;">Search unavailable offline. Please pick directly on map.</div>`;
+      });
+  },
+
+  selectSearchResult: function(lat, lng, displayName) {
+    const latNum = parseFloat(lat);
+    const lngNum = parseFloat(lng);
+    this.currentSelectedCoords = { lat: latNum, lng: lngNum };
+    
+    const parts = displayName.split(',');
+    this.currentSelectedAddress = parts.slice(0, 2).join(', ').trim();
+    this.currentFullAddress = displayName;
+
+    const titleEl = document.getElementById("selected-address-title");
+    const subtextEl = document.getElementById("selected-address-subtext");
+    const coordsBadge = document.getElementById("selected-coords-badge");
+    const resultsDropdown = document.getElementById("map-search-results");
+
+    if (titleEl) titleEl.textContent = this.currentSelectedAddress;
+    if (subtextEl) subtextEl.textContent = this.currentFullAddress;
+    if (coordsBadge) coordsBadge.textContent = `${latNum.toFixed(4)}° N, ${lngNum.toFixed(4)}° E`;
+    if (resultsDropdown) resultsDropdown.style.display = "none";
+
+    if (this.deliveryMap) {
+      this.deliveryMap.flyTo([latNum, lngNum], 16, { animate: true, duration: 1.2 });
+      if (this.deliveryMarker) {
+        this.deliveryMarker.setLatLng([latNum, lngNum]);
+      }
+    }
+  },
+
+  selectQuickCity: function(cityName, lat, lng, fullAddress, btn) {
+    this.currentSelectedCoords = { lat, lng };
+    this.currentSelectedAddress = cityName;
+    this.currentFullAddress = fullAddress;
+
+    const titleEl = document.getElementById("selected-address-title");
+    const subtextEl = document.getElementById("selected-address-subtext");
+    const coordsBadge = document.getElementById("selected-coords-badge");
+
+    if (titleEl) titleEl.textContent = cityName;
+    if (subtextEl) subtextEl.textContent = fullAddress;
+    if (coordsBadge) coordsBadge.textContent = `${lat.toFixed(4)}° N, ${lng.toFixed(4)}° E`;
+
+    if (btn) {
+      document.querySelectorAll(".city-hub-btn").forEach(b => b.classList.remove("active"));
+      btn.classList.add("active");
+    }
+
+    if (this.deliveryMap) {
+      this.deliveryMap.flyTo([lat, lng], 16, { animate: true, duration: 1.2 });
+      if (this.deliveryMarker) {
+        this.deliveryMarker.setLatLng([lat, lng]);
+      }
+    }
+  },
+
+  recenterMapOnCurrentPin: function() {
+    if (this.deliveryMap && this.currentSelectedCoords) {
+      this.deliveryMap.flyTo([this.currentSelectedCoords.lat, this.currentSelectedCoords.lng], 17, {
+        animate: true,
+        duration: 0.8
+      });
+    }
+  },
+
+  confirmDeliveryLocation: function() {
+    const locName = this.currentSelectedAddress;
+    localStorage.setItem("food_app_location", locName);
+    localStorage.setItem("food_app_coords", JSON.stringify(this.currentSelectedCoords));
+    localStorage.setItem("food_app_full_address", this.currentFullAddress);
+
+    const locElements = document.querySelectorAll(".current-location-text");
+    locElements.forEach(el => el.textContent = locName);
+
+    this.closeModal("location-modal");
+    this.showToast(`Delivery location set to: ${locName}`, "success");
   },
 
   selectLocation: function(locName) {
