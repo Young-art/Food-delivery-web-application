@@ -1,11 +1,28 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Badge } from '../common/Badge';
-import { Shield, ChefHat, Bike, Store, Sparkles, ChevronUp } from 'lucide-react';
+import { Shield, ChefHat, Bike, Store, ChevronUp } from 'lucide-react';
 
 export const PortalSwitcher = () => {
   const [isOpen, setIsOpen] = useState(false);
   const location = useLocation();
+  const switcherRef = useRef(null);
+
+  useEffect(() => {
+    const handleOutsideClick = (event) => {
+      if (switcherRef.current && !switcherRef.current.contains(event.target)) {
+        setIsOpen(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleOutsideClick);
+    document.addEventListener('touchstart', handleOutsideClick);
+
+    return () => {
+      document.removeEventListener('mousedown', handleOutsideClick);
+      document.removeEventListener('touchstart', handleOutsideClick);
+    };
+  }, []);
 
   const getCurrentPortalName = () => {
     if (location.pathname.startsWith('/admin')) return 'Admin Portal';
@@ -15,7 +32,7 @@ export const PortalSwitcher = () => {
   };
 
   return (
-    <div className="portal-switcher-floating">
+    <div className="portal-switcher-floating" ref={switcherRef}>
       <button className="portal-switcher-btn" onClick={() => setIsOpen(!isOpen)}>
         <Badge variant="primary" style={{ fontSize: '0.7rem', padding: '2px 6px' }}>PORTALS</Badge>
         <span style={{ fontSize: '0.85rem' }}>{getCurrentPortalName()}</span>

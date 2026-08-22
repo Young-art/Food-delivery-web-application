@@ -31,6 +31,23 @@ export const LocationMapModal = () => {
   const mapContainerRef = useRef(null);
   const mapInstanceRef = useRef(null);
   const markerRef = useRef(null);
+  const mapSearchBoxRef = useRef(null);
+  const [showSearchDropdown, setShowSearchDropdown] = useState(false);
+
+  // Close search dropdown on click outside
+  useEffect(() => {
+    const handleOutsideClick = (event) => {
+      if (mapSearchBoxRef.current && !mapSearchBoxRef.current.contains(event.target)) {
+        setShowSearchDropdown(false);
+      }
+    };
+    document.addEventListener('mousedown', handleOutsideClick);
+    document.addEventListener('touchstart', handleOutsideClick);
+    return () => {
+      document.removeEventListener('mousedown', handleOutsideClick);
+      document.removeEventListener('touchstart', handleOutsideClick);
+    };
+  }, []);
 
   // Sync state on open
   useEffect(() => {
@@ -154,6 +171,7 @@ export const LocationMapModal = () => {
     if (!val.trim()) {
       setSearchResults([]);
       setIsSearching(false);
+      setShowSearchDropdown(false);
       return;
     }
 
@@ -161,6 +179,7 @@ export const LocationMapModal = () => {
     const results = await searchLocations(val);
     setSearchResults(results);
     setIsSearching(false);
+    setShowSearchDropdown(results.length > 0);
   };
 
   const handleSelectSearchResult = (place) => {
@@ -169,6 +188,7 @@ export const LocationMapModal = () => {
     setActiveFullAddress(place.sub);
     setSearchQuery(place.title);
     setSearchResults([]);
+    setShowSearchDropdown(false);
 
     if (mapInstanceRef.current) {
       mapInstanceRef.current.flyTo([place.lat, place.lng], 16, { animate: true, duration: 1.2 });
@@ -283,7 +303,7 @@ export const LocationMapModal = () => {
           </div>
 
           {/* Google Maps style Search Bar */}
-          <div className="map-search-box" style={{ position: 'relative', marginBottom: '12px' }}>
+          <div className="map-search-box" ref={mapSearchBoxRef} style={{ position: 'relative', marginBottom: '12px' }}>
             <span className="map-search-icon" style={{ position: 'absolute', left: '14px', top: '50%', transform: 'translateY(-50%)', color: 'var(--text-muted)' }}>
               <Search size={16} />
             </span>
@@ -293,6 +313,9 @@ export const LocationMapModal = () => {
               placeholder="Search street, area, landmark, or apartment..."
               value={searchQuery}
               onChange={e => handleSearchChange(e.target.value)}
+              onFocus={() => {
+                if (searchResults.length > 0) setShowSearchDropdown(true);
+              }}
               style={{
                 width: '100%',
                 padding: '11px 38px 11px 40px',
@@ -305,7 +328,7 @@ export const LocationMapModal = () => {
             />
             {searchQuery && (
               <button
-                onClick={() => { setSearchQuery(''); setSearchResults([]); }}
+                onClick={() => { setSearchQuery(''); setSearchResults([]); setShowSearchDropdown(false); }}
                 style={{
                   position: 'absolute',
                   right: '12px',
@@ -322,7 +345,7 @@ export const LocationMapModal = () => {
             )}
 
             {/* Results Dropdown */}
-            {searchResults.length > 0 && (
+            {showSearchDropdown && searchResults.length > 0 && (
               <div className="map-search-results-dropdown" style={{
                 position: 'absolute',
                 top: 'calc(100% + 6px)',
