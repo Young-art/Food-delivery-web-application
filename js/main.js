@@ -446,20 +446,94 @@ const FoodApp = {
     return closest;
   },
 
+  // Curated Comprehensive Indian Cities, Streets, Landmarks & Transit Database
+  indianLandmarksDB: [
+    // Andhra Pradesh / Visakhapatnam / Vizianagaram / Amaravati
+    { title: "Main Road, Vizianagaram", sub: "Main Road, Near RTC Complex, Vizianagaram, Andhra Pradesh 535002", type: "STREET", lat: 18.1124, lng: 83.4074 },
+    { title: "Vizianagaram Fort", sub: "Fort Area, Cantonment, Vizianagaram, Andhra Pradesh 535003", type: "LANDMARK", lat: 18.1171, lng: 83.4150 },
+    { title: "RTC Complex, Vizianagaram", sub: "RTC Bus Stand, Vizianagaram, Andhra Pradesh 535002", type: "TRANSIT", lat: 18.1142, lng: 83.3985 },
+    { title: "Balaji Nagar, Vizianagaram", sub: "Balaji Nagar, Vizianagaram, Andhra Pradesh 535003", type: "AREA", lat: 18.1210, lng: 83.4020 },
+    { title: "Cantonment, Vizianagaram", sub: "Cantonment Area, Vizianagaram, Andhra Pradesh 535003", type: "AREA", lat: 18.1180, lng: 83.4190 },
+    { title: "Phool Bagh, Vizianagaram", sub: "Phool Bagh Colony, Vizianagaram, Andhra Pradesh 535002", type: "AREA", lat: 18.1090, lng: 83.4010 },
+    { title: "Gooty Petrol Bunk Junction, Vizianagaram", sub: "Kothavalasa Road, Vizianagaram, AP 535002", type: "STREET", lat: 18.1150, lng: 83.4050 },
+    { title: "RK Beach, Visakhapatnam", sub: "Ramakrishna Beach Road, Pandurangapuram, Visakhapatnam, AP 530003", type: "LANDMARK", lat: 17.7126, lng: 83.3242 },
+    { title: "Jagadamba Junction, Visakhapatnam", sub: "Jagadamba Centre, Visakhapatnam, Andhra Pradesh 530020", type: "LANDMARK", lat: 17.7118, lng: 83.3005 },
+    { title: "MVP Colony, Visakhapatnam", sub: "MVP Colony Sector 1 to 12, Visakhapatnam, Andhra Pradesh 530017", type: "AREA", lat: 17.7420, lng: 83.3364 },
+    { title: "Gajuwaka, Visakhapatnam", sub: "High School Road, Gajuwaka, Visakhapatnam, Andhra Pradesh 530026", type: "AREA", lat: 17.6904, lng: 83.2185 },
+    { title: "Madhurawada, Visakhapatnam", sub: "IT SEZ Road, Madhurawada, Visakhapatnam, Andhra Pradesh 530048", type: "AREA", lat: 17.8016, lng: 83.3512 },
+    { title: "Dwaraka Nagar, Visakhapatnam", sub: "Dwaraka Bus Station, Dwaraka Nagar, Visakhapatnam, AP 530016", type: "COMMERCIAL", lat: 17.7289, lng: 83.3101 },
+    { title: "Rushikonda Beach, Visakhapatnam", sub: "Rushikonda IT Park Road, Visakhapatnam, AP 530045", type: "LANDMARK", lat: 17.7818, lng: 83.3853 },
+    { title: "Benz Circle, Vijayawada", sub: "MG Road, Benz Circle, Vijayawada, Andhra Pradesh 520010", type: "LANDMARK", lat: 16.5003, lng: 80.6508 },
+    { title: "Arundelpet, Guntur", sub: "Main Road, Arundelpet, Guntur, Andhra Pradesh 522002", type: "AREA", lat: 16.3067, lng: 80.4365 },
+
+    // Hyderabad & Telangana
+    { title: "Cyber Towers, Hitec City", sub: "Hitec City Main Road, Madhapur, Hyderabad, Telangana 500081", type: "COMMERCIAL", lat: 17.4504, lng: 78.3808 },
+    { title: "Inorbit Mall, Hyderabad", sub: "Mindspace Road, Vittal Rao Nagar, Madhapur, Hyderabad 500081", type: "MALL", lat: 17.4344, lng: 78.3866 },
+    { title: "Gachibowli Financial District", sub: "ISB Road, Financial District, Nanakramguda, Hyderabad 500032", type: "COMMERCIAL", lat: 17.4190, lng: 78.3486 },
+    { title: "Jubilee Hills Check Post", sub: "Road No. 36, Jubilee Hills, Hyderabad, Telangana 500033", type: "LANDMARK", lat: 17.4299, lng: 78.4116 },
+    { title: "Banjara Hills Road No. 12", sub: "Ministers Colony, Banjara Hills, Hyderabad, Telangana 500034", type: "STREET", lat: 17.4123, lng: 78.4418 },
+    { title: "Kukatpally KPHB Colony", sub: "JNTU Road, KPHB Phase 1 to 9, Hyderabad, Telangana 500072", type: "AREA", lat: 17.4933, lng: 78.3995 },
+    { title: "Charminar", sub: "Char Kaman, Ghansi Bazaar, Hyderabad, Telangana 500002", type: "LANDMARK", lat: 17.3616, lng: 78.4747 },
+    { title: "Madhapur Metro Station", sub: "Hitec City Road, Ayyappa Society, Madhapur, Hyderabad 500081", type: "TRANSIT", lat: 17.4390, lng: 78.3900 },
+    { title: "Ameerpet Junction", sub: "Greenlands Road, Ameerpet, Hyderabad, Telangana 500016", type: "COMMERCIAL", lat: 17.4375, lng: 78.4483 },
+    { title: "Kondapur", sub: "Botanical Garden Road, Kondapur, Hyderabad, Telangana 500084", type: "AREA", lat: 17.4699, lng: 78.3578 },
+
+    // Bangalore
+    { title: "100 Feet Road, Indiranagar", sub: "100 Feet Road, HAL 2nd Stage, Indiranagar, Bangalore 560038", type: "STREET", lat: 12.9784, lng: 77.6408 },
+    { title: "80 Feet Road, Koramangala", sub: "80 Feet Road, 4th Block, Koramangala, Bangalore 560034", type: "STREET", lat: 12.9352, lng: 77.6245 },
+    { title: "Church Street, Bangalore", sub: "Church Street, Off Brigade Road, Shanthala Nagar, Bangalore 560001", type: "STREET", lat: 12.9749, lng: 77.6045 },
+    { title: "MG Road Metro Station", sub: "Mahatma Gandhi Road, Bangalore, Karnataka 560001", type: "TRANSIT", lat: 12.9756, lng: 77.6066 },
+    { title: "Whitefield ITPL", sub: "International Tech Park, Whitefield Main Road, Bangalore 560066", type: "COMMERCIAL", lat: 12.9863, lng: 77.7377 },
+    { title: "Phoenix Marketcity Bangalore", sub: "Whitefield Main Road, Mahadevapura, Bangalore 560048", type: "MALL", lat: 12.9959, lng: 77.6965 },
+    { title: "HSR Layout Sector 1 to 7", sub: "27th Main Road, HSR Layout, Bangalore, Karnataka 560102", type: "AREA", lat: 12.9121, lng: 77.6446 },
+    { title: "Marathahalli Bridge", sub: "Outer Ring Road, Marathahalli, Bangalore, Karnataka 560037", type: "LANDMARK", lat: 12.9554, lng: 77.7011 },
+    { title: "Electronic City Phase 1", sub: "Hosur Road, Infosys Campus, Electronic City, Bangalore 560100", type: "COMMERCIAL", lat: 12.8452, lng: 77.6602 },
+    { title: "Jayanagar 4th Block Complex", sub: "9th Main Road, 4th Block, Jayanagar, Bangalore 560011", type: "COMMERCIAL", lat: 12.9298, lng: 77.5833 },
+    { title: "JP Nagar 6th Phase", sub: "24th Main Road, JP Nagar 6th Phase, Bangalore 560078", type: "AREA", lat: 12.9063, lng: 77.5857 },
+    { title: "Bellandur EcoSpace", sub: "Outer Ring Road, Bellandur, Bangalore, Karnataka 560103", type: "COMMERCIAL", lat: 12.9260, lng: 77.6762 },
+    { title: "Sarjapur Road", sub: "Sarjapur Main Road, Carmelaram, Bangalore 560035", type: "STREET", lat: 12.9110, lng: 77.6830 },
+    { title: "Orion Mall Rajajinagar", sub: "Dr Rajkumar Road, Malleshwaram West, Bangalore 560055", type: "MALL", lat: 13.0112, lng: 77.5550 },
+
+    // Mumbai & MMR
+    { title: "Hill Road, Bandra West", sub: "Hill Road, Bandra West, Mumbai, Maharashtra 400050", type: "STREET", lat: 19.0596, lng: 72.8295 },
+    { title: "Carter Road Promenade", sub: "Carter Road, Bandra West, Mumbai, Maharashtra 400050", type: "LANDMARK", lat: 19.0664, lng: 72.8258 },
+    { title: "Marine Drive Promenade", sub: "Netaji Subhash Chandra Bose Road, Nariman Point, Mumbai 400021", type: "LANDMARK", lat: 18.9438, lng: 72.8231 },
+    { title: "Lokhandwala Complex", sub: "Lokhandwala Market, Andheri West, Mumbai 400053", type: "COMMERCIAL", lat: 19.1417, lng: 72.8258 },
+    { title: "Juhu Beach", sub: "Juhu Tara Road, Juhu, Mumbai, Maharashtra 400049", type: "LANDMARK", lat: 19.0988, lng: 72.8264 },
+    { title: "Hiranandani Gardens, Powai", sub: "Central Avenue, Powai, Mumbai, Maharashtra 400076", type: "AREA", lat: 19.1197, lng: 72.9051 },
+    { title: "High Street Phoenix, Lower Parel", sub: "Senapati Bapat Marg, Lower Parel, Mumbai 400013", type: "MALL", lat: 18.9950, lng: 72.8242 },
+    { title: "Colaba Causeway", sub: "Shahid Bhagat Singh Road, Colaba, Mumbai 400005", type: "STREET", lat: 18.9220, lng: 72.8317 },
+
+    // Delhi NCR
+    { title: "Connaught Place Inner Circle", sub: "Connaught Place, New Delhi, Delhi 110001", type: "LANDMARK", lat: 28.6315, lng: 77.2167 },
+    { title: "Cyber Hub, Gurgaon", sub: "DLF Cyber City, Sector 24, Gurugram, Haryana 122002", type: "COMMERCIAL", lat: 28.4949, lng: 77.0895 },
+    { title: "Hauz Khas Village", sub: "Deer Park, Hauz Khas, New Delhi, Delhi 110016", type: "LANDMARK", lat: 28.5535, lng: 77.1945 },
+    { title: "Select Citywalk, Saket", sub: "District Centre, Sector 6, Pushp Vihar, Saket, New Delhi 110017", type: "MALL", lat: 28.5284, lng: 77.2195 },
+    { title: "Sector 18 Mall of India, Noida", sub: "Sector 18, Noida, Uttar Pradesh 201301", type: "MALL", lat: 28.5677, lng: 77.3210 },
+    { title: "Khan Market", sub: "Rabindra Nagar, New Delhi, Delhi 110003", type: "COMMERCIAL", lat: 28.6003, lng: 77.2270 },
+
+    // Pune
+    { title: "North Main Road, Koregaon Park", sub: "Koregaon Park, Pune, Maharashtra 411001", type: "STREET", lat: 18.5362, lng: 73.8940 },
+    { title: "FC Road, Pune", sub: "Fergusson College Road, Shivajinagar, Pune 411004", type: "STREET", lat: 18.5236, lng: 73.8415 },
+    { title: "Phoenix Marketcity, Viman Nagar", sub: "Viman Nagar, Pune, Maharashtra 411014", type: "MALL", lat: 18.5620, lng: 73.9167 },
+    { title: "Hinjewadi IT Park Phase 1", sub: "Hinjewadi Main Road, Pune, Maharashtra 411057", type: "COMMERCIAL", lat: 18.5913, lng: 73.7389 },
+    { title: "Baner High Street", sub: "Baner Road, Baner, Pune, Maharashtra 411045", type: "STREET", lat: 18.5590, lng: 73.7793 }
+  ],
+
   handleSearchInput: function(query) {
     const clearBtn = document.getElementById("map-search-clear-btn");
     const resultsDropdown = document.getElementById("map-search-results");
     
     if (clearBtn) clearBtn.style.display = query ? "flex" : "none";
-    if (!query || query.length < 2) {
+    if (!query || query.trim().length < 1) {
       if (resultsDropdown) resultsDropdown.style.display = "none";
       return;
     }
 
     clearTimeout(this.searchDebounceTimer);
     this.searchDebounceTimer = setTimeout(() => {
-      this.searchLocations(query);
-    }, 350);
+      this.searchLocations(query.trim());
+    }, 250);
   },
 
   clearMapSearch: function() {
@@ -471,50 +545,201 @@ const FoodApp = {
     if (resultsDropdown) resultsDropdown.style.display = "none";
   },
 
+  getIconForType: function(type) {
+    switch (type) {
+      case "LANDMARK":
+        return `<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>`;
+      case "TRANSIT":
+        return `<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="3" width="16" height="16" rx="2"/><path d="M4 11h16"/><path d="M12 3v8"/><circle cx="8" cy="15" r="1"/><circle cx="16" cy="15" r="1"/></svg>`;
+      case "MALL":
+      case "COMMERCIAL":
+        return `<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="9" y1="3" x2="9" y2="21"/><line x1="15" y1="3" x2="15" y2="21"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="3" y1="15" x2="21" y2="15"/></svg>`;
+      case "STREET":
+        return `<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="2" x2="6" y2="22"/><line x1="12" y1="2" x2="12" y2="6"/><line x1="12" y1="10" x2="12" y2="14"/><line x1="12" y1="18" x2="12" y2="22"/></svg>`;
+      default:
+        return `<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a8 8 0 0 0-8 8c0 5.25 8 12 8 12s8-6.75 8-12a8 8 0 0 0-8-8z"/><circle cx="12" cy="10" r="3"/></svg>`;
+    }
+  },
+
+  getBadgeForType: function(type) {
+    switch (type) {
+      case "LANDMARK":
+        return `<span class="badge badge-warning" style="font-size:0.68rem; padding:1px 6px;">LANDMARK</span>`;
+      case "TRANSIT":
+        return `<span class="badge badge-primary" style="font-size:0.68rem; padding:1px 6px;">TRANSIT</span>`;
+      case "MALL":
+        return `<span class="badge badge-primary" style="font-size:0.68rem; padding:1px 6px;">MALL</span>`;
+      case "COMMERCIAL":
+        return `<span class="badge badge-primary" style="font-size:0.68rem; padding:1px 6px;">TECH PARK</span>`;
+      case "STREET":
+        return `<span class="badge badge-success" style="font-size:0.68rem; padding:1px 6px;">STREET</span>`;
+      default:
+        return `<span class="badge badge-primary" style="font-size:0.68rem; padding:1px 6px;">LOCATION</span>`;
+    }
+  },
+
   searchLocations: function(query) {
     const resultsDropdown = document.getElementById("map-search-results");
     if (!resultsDropdown) return;
 
-    resultsDropdown.innerHTML = `<div style="padding:12px; font-size:0.85rem; color:var(--text-muted); text-align:center;">Searching places...</div>`;
-    resultsDropdown.style.display = "block";
+    const qLower = query.toLowerCase();
 
-    fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(query)}&limit=5&countrycodes=in`)
+    // 1. Instant Local Matching (Tier 1)
+    const localMatches = this.indianLandmarksDB.filter(item => {
+      return item.title.toLowerCase().includes(qLower) || item.sub.toLowerCase().includes(qLower);
+    });
+
+    // Render local matches immediately if found
+    if (localMatches.length > 0) {
+      this.renderSearchResults(localMatches, query);
+    } else {
+      resultsDropdown.innerHTML = `<div style="padding:12px; font-size:0.85rem; color:var(--text-muted); text-align:center;">Searching all streets, landmarks & areas...</div>`;
+      resultsDropdown.style.display = "block";
+    }
+
+    // 2. Concurrently Query OpenStreetMap Geocoding (Photon & Nominatim)
+    const photonUrl = `https://photon.komoot.io/api/?q=${encodeURIComponent(query)}&limit=8&lang=en`;
+    const nominatimUrl = `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(query)}&limit=8&countrycodes=in&addressdetails=1`;
+
+    fetch(photonUrl)
       .then(res => res.json())
-      .then(results => {
-        if (!results || results.length === 0) {
-          resultsDropdown.innerHTML = `<div style="padding:12px; font-size:0.85rem; color:var(--text-muted); text-align:center;">No matching delivery locations found. Try another term.</div>`;
-          return;
+      .then(data => {
+        let externalMatches = [];
+        if (data && data.features && data.features.length > 0) {
+          externalMatches = data.features.map(f => {
+            const props = f.properties || {};
+            const name = props.name || props.street || props.city || "Location";
+            const street = props.street || "";
+            const locality = props.district || props.suburb || props.locality || "";
+            const city = props.city || props.state || "";
+            const state = props.state || "";
+            const postcode = props.postcode || "";
+            const fullDesc = [street, locality, city, state, postcode].filter(Boolean).join(", ") || props.formatted || name;
+
+            let cat = "LOCATION";
+            if (props.osm_key === "highway") cat = "STREET";
+            else if (props.osm_key === "amenity" || props.osm_key === "tourism" || props.osm_key === "historic") cat = "LANDMARK";
+            else if (props.osm_key === "railway" || props.osm_key === "public_transport") cat = "TRANSIT";
+            else if (props.osm_key === "shop" || props.osm_key === "building") cat = "COMMERCIAL";
+
+            return {
+              title: name,
+              sub: fullDesc,
+              type: cat,
+              lat: f.geometry.coordinates[1],
+              lng: f.geometry.coordinates[0]
+            };
+          });
         }
 
-        resultsDropdown.innerHTML = results.map(place => `
-          <div class="map-search-result-item" onclick="FoodApp.selectSearchResult(${place.lat}, ${place.lon}, '${place.display_name.replace(/'/g, "\\'")}')">
-            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" style="flex-shrink:0; margin-top:2px; color:var(--primary);"><path d="M12 2a8 8 0 0 0-8 8c0 5.25 8 12 8 12s8-6.75 8-12a8 8 0 0 0-8-8z"/><circle cx="12" cy="10" r="3"/></svg>
-            <div>
-              <div style="font-weight:700; color:var(--text-main); font-size:0.88rem;">${place.display_name.split(',')[0]}</div>
-              <div style="font-size:0.78rem; color:var(--text-muted); line-height:1.3;">${place.display_name}</div>
-            </div>
-          </div>
-        `).join('');
+        // Merge local and external matches (deduplicate)
+        const combined = [...localMatches];
+        externalMatches.forEach(em => {
+          if (!combined.some(c => Math.abs(c.lat - em.lat) < 0.002 && Math.abs(c.lng - em.lng) < 0.002)) {
+            combined.push(em);
+          }
+        });
+
+        if (combined.length > 0) {
+          this.renderSearchResults(combined, query);
+        } else {
+          // Fallback to Nominatim if Photon returned no results
+          this.fetchNominatimFallback(nominatimUrl, query, localMatches);
+        }
       })
       .catch(() => {
-        resultsDropdown.innerHTML = `<div style="padding:12px; font-size:0.85rem; color:var(--text-muted); text-align:center;">Search unavailable offline. Please pick directly on map.</div>`;
+        this.fetchNominatimFallback(nominatimUrl, query, localMatches);
       });
   },
 
-  selectSearchResult: function(lat, lng, displayName) {
+  fetchNominatimFallback: function(url, query, localMatches) {
+    const resultsDropdown = document.getElementById("map-search-results");
+    fetch(url)
+      .then(res => res.json())
+      .then(data => {
+        let matches = [...localMatches];
+        if (data && data.length > 0) {
+          data.forEach(item => {
+            const parts = item.display_name.split(',');
+            const title = parts[0].trim();
+            const sub = item.display_name;
+            const lat = parseFloat(item.lat);
+            const lng = parseFloat(item.lon);
+            if (!matches.some(m => Math.abs(m.lat - lat) < 0.002 && Math.abs(m.lng - lng) < 0.002)) {
+              matches.push({
+                title: title,
+                sub: sub,
+                type: item.type === "highway" ? "STREET" : (item.type === "administrative" ? "AREA" : "LANDMARK"),
+                lat: lat,
+                lng: lng
+              });
+            }
+          });
+        }
+
+        if (matches.length > 0) {
+          this.renderSearchResults(matches, query);
+        } else {
+          if (resultsDropdown) {
+            resultsDropdown.innerHTML = `<div style="padding:14px; font-size:0.85rem; color:var(--text-muted); text-align:center;">No matching locations found for "${query}". Try searching an area or city name.</div>`;
+            resultsDropdown.style.display = "block";
+          }
+        }
+      })
+      .catch(() => {
+        if (localMatches.length > 0) {
+          this.renderSearchResults(localMatches, query);
+        } else if (resultsDropdown) {
+          resultsDropdown.innerHTML = `<div style="padding:14px; font-size:0.85rem; color:var(--text-muted); text-align:center;">Pick directly on map or select a delivery hub below.</div>`;
+          resultsDropdown.style.display = "block";
+        }
+      });
+  },
+
+  renderSearchResults: function(results, query) {
+    const resultsDropdown = document.getElementById("map-search-results");
+    if (!resultsDropdown) return;
+
+    resultsDropdown.innerHTML = results.slice(0, 10).map(place => {
+      const icon = this.getIconForType(place.type);
+      const badge = this.getBadgeForType(place.type);
+      const cleanSub = place.sub.replace(/'/g, "\\'");
+      const cleanTitle = place.title.replace(/'/g, "\\'");
+
+      return `
+        <div class="map-search-result-item" onclick="FoodApp.selectSearchResult(${place.lat}, ${place.lng}, '${cleanTitle}', '${cleanSub}')">
+          <div class="map-search-result-icon-box">
+            ${icon}
+          </div>
+          <div class="map-search-result-content">
+            <div class="map-search-result-heading">
+              <span>${place.title}</span>
+              ${badge}
+            </div>
+            <div class="map-search-result-desc">${place.sub}</div>
+          </div>
+        </div>
+      `;
+    }).join('');
+
+    resultsDropdown.style.display = "block";
+  },
+
+  selectSearchResult: function(lat, lng, title, fullAddress) {
     const latNum = parseFloat(lat);
     const lngNum = parseFloat(lng);
     this.currentSelectedCoords = { lat: latNum, lng: lngNum };
     
-    const parts = displayName.split(',');
-    this.currentSelectedAddress = parts.slice(0, 2).join(', ').trim();
-    this.currentFullAddress = displayName;
+    this.currentSelectedAddress = title || "Selected Delivery Location";
+    this.currentFullAddress = fullAddress || title;
 
     const titleEl = document.getElementById("selected-address-title");
     const subtextEl = document.getElementById("selected-address-subtext");
     const coordsBadge = document.getElementById("selected-coords-badge");
     const resultsDropdown = document.getElementById("map-search-results");
+    const searchInput = document.getElementById("map-location-search");
 
+    if (searchInput) searchInput.value = title;
     if (titleEl) titleEl.textContent = this.currentSelectedAddress;
     if (subtextEl) subtextEl.textContent = this.currentFullAddress;
     if (coordsBadge) coordsBadge.textContent = `${latNum.toFixed(4)}° N, ${lngNum.toFixed(4)}° E`;
