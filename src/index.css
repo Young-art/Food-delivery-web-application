@@ -550,6 +550,175 @@ button, input, select, textarea {
 }
 
 /* ===================================================
+   ANIMATED DELIVERY SCOOTER & RIDER
+   =================================================== */
+.animated-scooter-container {
+  position: relative;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.scooter-bike-wrapper {
+  animation: scooterBobbing 1.2s ease-in-out infinite alternate;
+  transform-origin: bottom center;
+}
+
+@keyframes scooterBobbing {
+  0% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-4px) rotate(-0.5deg);
+  }
+  100% {
+    transform: translateY(1px) rotate(0.5deg);
+  }
+}
+
+/* Spinning Wheels */
+.scooter-wheel {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: spinWheel 0.5s linear infinite;
+}
+
+@keyframes spinWheel {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* Bag Shake */
+.scooter-delivery-bag {
+  animation: bagBounce 0.6s ease-in-out infinite alternate;
+  transform-origin: bottom left;
+}
+
+@keyframes bagBounce {
+  0% {
+    transform: translate(48px, 48px) rotate(0deg);
+  }
+  100% {
+    transform: translate(48px, 46px) rotate(-1.5deg);
+  }
+}
+
+/* Rider Head Nod */
+.scooter-rider-head {
+  animation: headNod 1.4s ease-in-out infinite alternate;
+  transform-origin: 140px 45px;
+}
+
+@keyframes headNod {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(2.5deg);
+  }
+}
+
+/* Speed Lines & Wind Particles */
+.scooter-wind-trails {
+  position: absolute;
+  left: -25px;
+  top: 35%;
+  width: 60px;
+  height: 50px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.wind-line {
+  position: absolute;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(255, 75, 43, 0.7), transparent);
+  border-radius: 2px;
+  opacity: 0;
+  animation: windSpeed 0.75s cubic-bezier(0.25, 1, 0.5, 1) infinite;
+}
+
+.wind-line-1 {
+  top: 10px;
+  width: 45px;
+  animation-delay: 0s;
+}
+
+.wind-line-2 {
+  top: 25px;
+  width: 60px;
+  animation-delay: 0.25s;
+}
+
+.wind-line-3 {
+  top: 40px;
+  width: 35px;
+  animation-delay: 0.5s;
+}
+
+@keyframes windSpeed {
+  0% {
+    transform: translateX(30px);
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(-40px);
+    opacity: 0;
+  }
+}
+
+/* Speeding Road Surface */
+.scooter-road-track {
+  width: 100%;
+  max-width: 280px;
+  height: 12px;
+  position: relative;
+  overflow: hidden;
+  margin-top: -6px;
+}
+
+.road-line-solid {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.road-dashes-container {
+  display: flex;
+  gap: 24px;
+  width: 200%;
+  animation: roadRun 0.45s linear infinite;
+}
+
+.road-dash {
+  width: 32px;
+  height: 3px;
+  background: var(--primary);
+  border-radius: 2px;
+  box-shadow: 0 0 6px rgba(255, 75, 43, 0.6);
+}
+
+@keyframes roadRun {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-56px);
+  }
+}
+
+/* ===================================================
    FOOD & RESTAURANT CARDS
    =================================================== */
 .food-card {

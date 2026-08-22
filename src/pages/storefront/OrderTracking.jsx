@@ -3,6 +3,7 @@ import { useParams, Link } from 'react-router-dom';
 import { useOrders, ORDER_STAGES } from '../../context/OrderContext';
 import { useToast } from '../../components/common/Toast';
 import { Badge } from '../../components/common/Badge';
+import { AnimatedDeliveryRider } from '../../components/common/AnimatedDeliveryRider';
 import { RatingReviewModal } from '../../components/modals/RatingReviewModal';
 import { CheckCircle2, Clock, MapPin, Phone, ChefHat, Bike, ShieldCheck, ChevronRight, Star, RefreshCw } from 'lucide-react';
 
@@ -188,30 +189,57 @@ export const OrderTracking = () => {
             background: 'var(--surface)',
             border: '1px solid var(--border)',
             borderRadius: 'var(--radius-xl)',
-            padding: '20px 24px',
+            padding: '24px',
+            boxShadow: 'var(--shadow-sm)',
             display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'space-between'
+            flexDirection: 'column',
+            gap: '16px'
           }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
-              <div style={{ width: '48px', height: '48px', borderRadius: '50%', background: 'var(--primary-light)', color: 'var(--primary)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                <Bike size={24} />
+            {/* Animated Delivery Scooter Live Banner */}
+            <div style={{
+              background: 'linear-gradient(135deg, #0F172A 0%, #1E293B 100%)',
+              borderRadius: 'var(--radius-lg)',
+              padding: '16px 20px',
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              justifyContent: 'center',
+              overflow: 'hidden',
+              position: 'relative'
+            }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', width: '100%', marginBottom: '8px' }}>
+                <span style={{ fontSize: '0.75rem', fontWeight: '800', color: '#10B981', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
+                  ● LIVE COURIER TRACKING
+                </span>
+                <span style={{ fontSize: '0.75rem', color: '#94A3B8' }}>
+                  Speed: 35 km/h
+                </span>
               </div>
-              <div>
-                <div style={{ fontWeight: '800', fontSize: '1rem' }}>{order.driver?.name || 'Vikram S.'}</div>
-                <div style={{ fontSize: '0.82rem', color: 'var(--text-muted)' }}>
-                  Delivery Partner • {order.driver?.vehicle || 'Honda Activa'}
-                </div>
-              </div>
+
+              <AnimatedDeliveryRider size="small" showRoad={true} />
             </div>
 
-            <a
-              href={`tel:${order.driver?.phone || '+919876543210'}`}
-              className="btn btn-secondary btn-sm"
-              style={{ borderRadius: 'var(--radius-full)' }}
-            >
-              <Phone size={14} /> Call Partner
-            </a>
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
+                <div style={{ width: '48px', height: '48px', borderRadius: '50%', background: 'var(--primary-light)', color: 'var(--primary)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                  <Bike size={24} />
+                </div>
+                <div>
+                  <div style={{ fontWeight: '800', fontSize: '1rem' }}>{order.driver?.name || 'Vikram S.'}</div>
+                  <div style={{ fontSize: '0.82rem', color: 'var(--text-muted)' }}>
+                    Delivery Partner • {order.driver?.vehicle || 'Electric Scooter'} • Holding Foodiez Bag
+                  </div>
+                </div>
+              </div>
+
+              <a
+                href={`tel:${order.driver?.phone || '+919876543210'}`}
+                className="btn btn-secondary btn-sm"
+                style={{ borderRadius: 'var(--radius-full)' }}
+              >
+                <Phone size={14} /> Call Partner
+              </a>
+            </div>
           </div>
 
         </div>

@@ -4,6 +4,7 @@ import { CATEGORIES, FOOD_ITEMS, RESTAURANTS } from '../../data/mockData';
 import { FoodCard } from '../../components/common/FoodCard';
 import { RestaurantCard } from '../../components/common/RestaurantCard';
 import { Badge } from '../../components/common/Badge';
+import { AnimatedDeliveryRider } from '../../components/common/AnimatedDeliveryRider';
 import { 
   ArrowRight, 
   Sparkles, 
@@ -16,7 +17,8 @@ import {
   ChevronRight, 
   TrendingUp,
   Clock,
-  Award
+  Award,
+  Navigation
 } from 'lucide-react';
 
 const HERO_CAROUSEL_SLIDES = [
@@ -184,123 +186,210 @@ export const Home = () => {
 
         {/* Text & Content Layer Overlaid Directly on Full-Screen Background */}
         <div className="container hero-fullscreen-content">
-          <div style={{ maxWidth: '780px' }}>
+          <div style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
+            alignItems: 'center',
+            gap: '40px'
+          }}>
             
-            {/* Badges Row */}
-            <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '20px', flexWrap: 'wrap' }}>
-              <Badge variant="primary" style={{ padding: '6px 14px', fontSize: '0.78rem', background: '#FF4B2B', color: '#FFF', borderColor: 'transparent' }}>
-                EXPRESS 30 MIN DELIVERY
-              </Badge>
-              <Badge variant="warning" style={{ padding: '6px 14px', fontSize: '0.78rem', background: 'rgba(245, 158, 11, 0.25)', color: '#FCD34D', borderColor: 'rgba(245, 158, 11, 0.5)' }}>
-                {currentSlide.tag}
-              </Badge>
-              <Badge variant="success" style={{ padding: '6px 14px', fontSize: '0.78rem', background: 'rgba(16, 185, 129, 0.25)', color: '#6EE7B7', borderColor: 'rgba(16, 185, 129, 0.5)' }}>
-                {currentSlide.offer}
-              </Badge>
-            </div>
+            {/* Left Content Column */}
+            <div style={{ maxWidth: '680px' }}>
+              
+              {/* Badges Row */}
+              <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '20px', flexWrap: 'wrap' }}>
+                <Badge variant="primary" style={{ padding: '6px 14px', fontSize: '0.78rem', background: '#FF4B2B', color: '#FFF', borderColor: 'transparent' }}>
+                  EXPRESS 30 MIN DELIVERY
+                </Badge>
+                <Badge variant="warning" style={{ padding: '6px 14px', fontSize: '0.78rem', background: 'rgba(245, 158, 11, 0.25)', color: '#FCD34D', borderColor: 'rgba(245, 158, 11, 0.5)' }}>
+                  {currentSlide.tag}
+                </Badge>
+                <Badge variant="success" style={{ padding: '6px 14px', fontSize: '0.78rem', background: 'rgba(16, 185, 129, 0.25)', color: '#6EE7B7', borderColor: 'rgba(16, 185, 129, 0.5)' }}>
+                  {currentSlide.offer}
+                </Badge>
+              </div>
 
-            {/* Main Headline */}
-            <h1 style={{
-              fontFamily: 'Outfit, sans-serif',
-              fontSize: 'clamp(2.4rem, 5.5vw, 4.2rem)',
-              fontWeight: '900',
-              lineHeight: '1.12',
-              color: '#FFFFFF',
-              marginBottom: '18px',
-              textShadow: '0 4px 20px rgba(0, 0, 0, 0.5)'
-            }}>
-              Hot, Fresh <span style={{ color: '#FF4B2B' }}>{currentSlide.categoryName}</span> Delivered to Your Doorstep.
-            </h1>
+              {/* Main Headline */}
+              <h1 style={{
+                fontFamily: 'Outfit, sans-serif',
+                fontSize: 'clamp(2.4rem, 5.2vw, 3.8rem)',
+                fontWeight: '900',
+                lineHeight: '1.12',
+                color: '#FFFFFF',
+                marginBottom: '18px',
+                textShadow: '0 4px 20px rgba(0, 0, 0, 0.5)'
+              }}>
+                Hot, Fresh <span style={{ color: '#FF4B2B' }}>{currentSlide.categoryName}</span> Delivered to Your Doorstep.
+              </h1>
 
-            {/* Description Subtext */}
-            <p style={{
-              fontSize: '1.15rem',
-              color: '#E2E8F0',
-              lineHeight: '1.6',
-              marginBottom: '32px',
-              maxWidth: '680px',
-              textShadow: '0 2px 10px rgba(0, 0, 0, 0.4)'
-            }}>
-              {currentSlide.subtext}
-            </p>
+              {/* Description Subtext */}
+              <p style={{
+                fontSize: '1.1rem',
+                color: '#E2E8F0',
+                lineHeight: '1.6',
+                marginBottom: '28px',
+                maxWidth: '620px',
+                textShadow: '0 2px 10px rgba(0, 0, 0, 0.4)'
+              }}>
+                {currentSlide.subtext}
+              </p>
 
-            {/* Action Buttons */}
-            <div style={{ display: 'flex', gap: '16px', flexWrap: 'wrap', marginBottom: '40px' }}>
-              <Link to={`/category/${currentSlide.slug}`} className="btn btn-primary btn-lg" style={{ padding: '14px 32px', fontSize: '1.05rem', boxShadow: '0 8px 25px rgba(255, 75, 43, 0.5)' }}>
-                Explore {currentSlide.categoryName} <ArrowRight size={18} />
-              </Link>
-              <Link 
-                to="/restaurants" 
-                className="btn btn-secondary btn-lg" 
-                style={{
-                  background: 'rgba(255, 255, 255, 0.15)',
+              {/* Action Buttons */}
+              <div style={{ display: 'flex', gap: '16px', flexWrap: 'wrap', marginBottom: '36px' }}>
+                <Link to={`/category/${currentSlide.slug}`} className="btn btn-primary btn-lg" style={{ padding: '14px 32px', fontSize: '1.05rem', boxShadow: '0 8px 25px rgba(255, 75, 43, 0.5)' }}>
+                  Explore {currentSlide.categoryName} <ArrowRight size={18} />
+                </Link>
+                <Link 
+                  to="/restaurants" 
+                  className="btn btn-secondary btn-lg" 
+                  style={{
+                    background: 'rgba(255, 255, 255, 0.15)',
+                    backdropFilter: 'blur(10px)',
+                    color: '#FFFFFF',
+                    borderColor: 'rgba(255, 255, 255, 0.3)',
+                    padding: '14px 28px'
+                  }}
+                >
+                  Browse Restaurants
+                </Link>
+              </div>
+
+              {/* KPIs & Live Feature Chips */}
+              <div style={{ display: 'flex', gap: '16px', flexWrap: 'wrap', paddingTop: '20px', borderTop: '1px solid rgba(255, 255, 255, 0.15)' }}>
+                <div style={{
+                  background: 'rgba(255, 255, 255, 0.08)',
                   backdropFilter: 'blur(10px)',
-                  color: '#FFFFFF',
-                  borderColor: 'rgba(255, 255, 255, 0.3)',
-                  padding: '14px 28px'
-                }}
-              >
-                Browse Restaurants
-              </Link>
+                  border: '1px solid rgba(255, 255, 255, 0.15)',
+                  borderRadius: 'var(--radius-lg)',
+                  padding: '10px 16px',
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '10px'
+                }}>
+                  <div style={{ width: '32px', height: '32px', borderRadius: '50%', background: 'rgba(255, 75, 43, 0.25)', color: '#FF4B2B', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                    <Flame size={16} />
+                  </div>
+                  <div>
+                    <div style={{ fontFamily: 'Outfit, sans-serif', fontSize: '1.15rem', fontWeight: '800', color: '#FFF' }}>50+ Dishes</div>
+                    <div style={{ fontSize: '0.72rem', color: '#CBD5E1' }}>10 Fresh Categories</div>
+                  </div>
+                </div>
+
+                <div style={{
+                  background: 'rgba(255, 255, 255, 0.08)',
+                  backdropFilter: 'blur(10px)',
+                  border: '1px solid rgba(255, 255, 255, 0.15)',
+                  borderRadius: 'var(--radius-lg)',
+                  padding: '10px 16px',
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '10px'
+                }}>
+                  <div style={{ width: '32px', height: '32px', borderRadius: '50%', background: 'rgba(16, 185, 129, 0.25)', color: '#10B981', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                    <Zap size={16} />
+                  </div>
+                  <div>
+                    <div style={{ fontFamily: 'Outfit, sans-serif', fontSize: '1.15rem', fontWeight: '800', color: '#FFF' }}>30 Mins</div>
+                    <div style={{ fontSize: '0.72rem', color: '#CBD5E1' }}>Express Delivery Guarantee</div>
+                  </div>
+                </div>
+
+                <div style={{
+                  background: 'rgba(255, 255, 255, 0.08)',
+                  backdropFilter: 'blur(10px)',
+                  border: '1px solid rgba(255, 255, 255, 0.15)',
+                  borderRadius: 'var(--radius-lg)',
+                  padding: '10px 16px',
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '10px'
+                }}>
+                  <div style={{ width: '32px', height: '32px', borderRadius: '50%', background: 'rgba(245, 158, 11, 0.25)', color: '#F59E0B', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                    <Star size={16} />
+                  </div>
+                  <div>
+                    <div style={{ fontFamily: 'Outfit, sans-serif', fontSize: '1.15rem', fontWeight: '800', color: '#FFF' }}>4.9 / 5.0</div>
+                    <div style={{ fontSize: '0.72rem', color: '#CBD5E1' }}>Verified Customer Reviews</div>
+                  </div>
+                </div>
+              </div>
+
             </div>
 
-            {/* KPIs & Live Feature Chips */}
-            <div style={{ display: 'flex', gap: '20px', flexWrap: 'wrap', paddingTop: '24px', borderTop: '1px solid rgba(255, 255, 255, 0.15)' }}>
+            {/* Right Column: Animated Scooter Delivery Rider Live Card */}
+            <div style={{ display: 'flex', justifyContent: 'center' }}>
               <div style={{
-                background: 'rgba(255, 255, 255, 0.08)',
-                backdropFilter: 'blur(10px)',
-                border: '1px solid rgba(255, 255, 255, 0.15)',
-                borderRadius: 'var(--radius-lg)',
-                padding: '10px 18px',
+                background: 'rgba(15, 23, 42, 0.65)',
+                backdropFilter: 'blur(20px)',
+                WebkitBackdropFilter: 'blur(20px)',
+                border: '1.5px solid rgba(255, 255, 255, 0.2)',
+                borderRadius: 'var(--radius-2xl)',
+                padding: '24px 28px',
+                boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.6)',
+                maxWidth: '420px',
+                width: '100%',
                 display: 'flex',
+                flexDirection: 'column',
                 alignItems: 'center',
-                gap: '12px'
+                textAlign: 'center',
+                position: 'relative'
               }}>
-                <div style={{ width: '36px', height: '36px', borderRadius: '50%', background: 'rgba(255, 75, 43, 0.25)', color: '#FF4B2B', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                  <Flame size={18} />
+                
+                {/* Live GPS Pulse Indicator */}
+                <div style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'space-between',
+                  width: '100%',
+                  marginBottom: '14px',
+                  paddingBottom: '12px',
+                  borderBottom: '1px solid rgba(255, 255, 255, 0.12)'
+                }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                    <span style={{
+                      width: '10px',
+                      height: '10px',
+                      borderRadius: '50%',
+                      background: '#10B981',
+                      boxShadow: '0 0 10px #10B981',
+                      display: 'inline-block'
+                    }} />
+                    <span style={{ fontSize: '0.78rem', fontWeight: '800', color: '#E2E8F0', letterSpacing: '0.5px', textTransform: 'uppercase' }}>
+                      LIVE FLEET TRACKING
+                    </span>
+                  </div>
+                  <Badge variant="primary" style={{ fontSize: '0.72rem', background: '#FF4B2B', color: '#FFF' }}>
+                    ON SCOOTER
+                  </Badge>
                 </div>
-                <div>
-                  <div style={{ fontFamily: 'Outfit, sans-serif', fontSize: '1.25rem', fontWeight: '800', color: '#FFF' }}>50+ Dishes</div>
-                  <div style={{ fontSize: '0.75rem', color: '#CBD5E1' }}>10 Curated Categories</div>
-                </div>
-              </div>
 
-              <div style={{
-                background: 'rgba(255, 255, 255, 0.08)',
-                backdropFilter: 'blur(10px)',
-                border: '1px solid rgba(255, 255, 255, 0.15)',
-                borderRadius: 'var(--radius-lg)',
-                padding: '10px 18px',
-                display: 'flex',
-                alignItems: 'center',
-                gap: '12px'
-              }}>
-                <div style={{ width: '36px', height: '36px', borderRadius: '50%', background: 'rgba(16, 185, 129, 0.25)', color: '#10B981', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                  <Zap size={18} />
-                </div>
-                <div>
-                  <div style={{ fontFamily: 'Outfit, sans-serif', fontSize: '1.25rem', fontWeight: '800', color: '#FFF' }}>30 Mins</div>
-                  <div style={{ fontSize: '0.75rem', color: '#CBD5E1' }}>Express Delivery Guarantee</div>
-                </div>
-              </div>
+                {/* Animated Scooter Rider Component */}
+                <AnimatedDeliveryRider size="medium" showRoad={true} />
 
-              <div style={{
-                background: 'rgba(255, 255, 255, 0.08)',
-                backdropFilter: 'blur(10px)',
-                border: '1px solid rgba(255, 255, 255, 0.15)',
-                borderRadius: 'var(--radius-lg)',
-                padding: '10px 18px',
-                display: 'flex',
-                alignItems: 'center',
-                gap: '12px'
-              }}>
-                <div style={{ width: '36px', height: '36px', borderRadius: '50%', background: 'rgba(245, 158, 11, 0.25)', color: '#F59E0B', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                  <Star size={18} />
+                {/* Rider Status Details */}
+                <div style={{ marginTop: '16px', width: '100%', textAlign: 'left' }}>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '6px' }}>
+                    <div style={{ fontWeight: '800', fontSize: '0.95rem', color: '#FFFFFF' }}>
+                      Vikram S. • Express Courier
+                    </div>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '4px', background: 'rgba(16, 185, 129, 0.25)', color: '#6EE7B7', padding: '2px 8px', borderRadius: 'var(--radius-sm)', fontSize: '0.75rem', fontWeight: '800' }}>
+                      <Zap size={12} /> {currentSlide.deliveryTime}
+                    </div>
+                  </div>
+                  <div style={{ fontSize: '0.78rem', color: '#94A3B8', display: 'flex', alignItems: 'center', gap: '6px' }}>
+                    <ShieldCheck size={14} color="#10B981" />
+                    <span>Holding insulated Foodiez bag • Contactless & Insulated</span>
+                  </div>
                 </div>
-                <div>
-                  <div style={{ fontFamily: 'Outfit, sans-serif', fontSize: '1.25rem', fontWeight: '800', color: '#FFF' }}>4.9 / 5.0</div>
-                  <div style={{ fontSize: '0.75rem', color: '#CBD5E1' }}>Verified Customer Reviews</div>
-                </div>
+
+                <Link 
+                  to={`/category/${currentSlide.slug}`}
+                  className="btn btn-primary btn-sm"
+                  style={{ width: '100%', marginTop: '16px', borderRadius: 'var(--radius-lg)' }}
+                >
+                  Order {currentSlide.categoryName} Now &rarr;
+                </Link>
+
               </div>
             </div>
 
