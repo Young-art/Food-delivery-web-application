@@ -37,6 +37,19 @@ const TRENDING_SEARCHES = [
   "Cold Coffee"
 ];
 
+const CAROUSEL_CRAVINGS = [
+  "\"pizza\"",
+  "\"hyderabadi biryani\"",
+  "\"smash burger\"",
+  "\"crispy chicken wings\"",
+  "\"schezwan noodles\"",
+  "\"paneer tikka\"",
+  "\"choco lava cake\"",
+  "\"iced cold coffee\"",
+  "\"gelato naturals\"",
+  "\"tacos & burritos\""
+];
+
 export const Navbar = () => {
   const { user } = useAuth();
   const { count, favorites } = useCart();
@@ -50,10 +63,19 @@ export const Navbar = () => {
   const [showSearchDropdown, setShowSearchDropdown] = useState(false);
   const [showUserDropdown, setShowUserDropdown] = useState(false);
   const [showCategoriesDropdown, setShowCategoriesDropdown] = useState(false);
+  const [carouselIdx, setCarouselIdx] = useState(0);
 
   const searchBoxRef = useRef(null);
   const userMenuRef = useRef(null);
   const categoriesMenuRef = useRef(null);
+
+  // Rotate placeholder carousel every 2.2s
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCarouselIdx(prev => (prev + 1) % CAROUSEL_CRAVINGS.length);
+    }, 2200);
+    return () => clearInterval(timer);
+  }, []);
 
   // Close popovers on click / tap outside
   useEffect(() => {
@@ -113,10 +135,9 @@ export const Navbar = () => {
   const handleKeyDown = (e) => {
     if (e.key === 'Enter') {
       e.preventDefault();
-      if (searchQuery.trim()) {
-        setShowSearchDropdown(false);
-        navigate(`/search?q=${encodeURIComponent(searchQuery.trim())}`);
-      }
+      const targetQuery = searchQuery.trim() || CAROUSEL_CRAVINGS[carouselIdx].replace(/"/g, '');
+      setShowSearchDropdown(false);
+      navigate(`/search?q=${encodeURIComponent(targetQuery)}`);
     }
   };
 
@@ -138,8 +159,9 @@ export const Navbar = () => {
   };
 
   const handleViewAllResults = () => {
+    const targetQuery = searchQuery.trim() || CAROUSEL_CRAVINGS[carouselIdx].replace(/"/g, '');
     setShowSearchDropdown(false);
-    navigate(`/search?q=${encodeURIComponent(searchQuery.trim())}`);
+    navigate(`/search?q=${encodeURIComponent(targetQuery)}`);
   };
 
   const isHomeActive = routerLocation.pathname === '/';
@@ -169,13 +191,23 @@ export const Navbar = () => {
           </button>
         </div>
 
-        {/* Global Live Search Bar */}
+        {/* Global Live Search Bar with Animated Text Carousel */}
         <div className="nav-search-bar" ref={searchBoxRef}>
           <Search size={17} className="nav-search-icon" />
+
+          {/* Animated Carousel Placeholder */}
+          {!searchQuery && (
+            <div className="search-carousel-wrapper">
+              <span>Search</span>
+              <span key={carouselIdx} className="search-carousel-animated-item">
+                {CAROUSEL_CRAVINGS[carouselIdx]}
+              </span>
+            </div>
+          )}
+
           <input
             type="text"
             className="nav-search-input"
-            placeholder="Search pizza, biryani, burgers, restaurants..."
             value={searchQuery}
             onChange={e => executeSearch(e.target.value)}
             onFocus={() => setShowSearchDropdown(true)}
@@ -199,7 +231,8 @@ export const Navbar = () => {
                 color: 'var(--text-muted)',
                 display: 'flex',
                 alignItems: 'center',
-                padding: '4px'
+                padding: '4px',
+                zIndex: 4
               }}
             >
               <X size={15} />
